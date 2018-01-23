@@ -27,6 +27,7 @@ public class Main extends Application {
 
         primaryStage.setScene( scene );
         primaryStage.show();
+        //Testing change 1.0
 
         AnimationTimer animator = new AnimationTimer() {
             long lastTime = System.nanoTime(); //This is called once
