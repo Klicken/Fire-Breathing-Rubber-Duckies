@@ -27,7 +27,6 @@ public class Main extends Application {
 
         primaryStage.setScene( scene );
         primaryStage.show();
-        //Testing change 1.0
 
         Hitbox h1 = new Hitbox(0,0, 10,10);
         Hitbox h2 = new Hitbox(11, 11, 10, 10);
