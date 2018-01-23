@@ -28,6 +28,10 @@ public class Main extends Application {
         primaryStage.setScene( scene );
         primaryStage.show();
 
+        Hitbox h1 = new Hitbox(0,0, 10,10);
+        Hitbox h2 = new Hitbox(11, 11, 10, 10);
+        System.out.println(h2.intersects(h1));
+
         AnimationTimer animator = new AnimationTimer() {
             long lastTime = System.nanoTime(); //This is called once
 
@@ -38,7 +42,7 @@ public class Main extends Application {
                 lastTime = now;
                 double fps = 1000000000 / elapsedTime;
 
-                System.out.println("FPS: " + fps);
+                //System.out.println("FPS: " + fps);
 
                 // UPDATE
 
