@@ -1,5 +1,3 @@
-package sample;
-
 import javafx.geometry.Point2D;
 import static java.lang.Math.abs;
 import javafx.scene.image.Image;
