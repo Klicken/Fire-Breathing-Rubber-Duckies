@@ -18,8 +18,8 @@ import javafx.scene.image.Image;
 public class Hitbox
 {
     private Point2D position;
-    int width;
-    int height;
+    private int width;
+    private int height;
 
     /*
     *   Constructor that takes an x- and y-coordinate to set the top left corner position
