@@ -13,7 +13,7 @@ public class DynamicGameObject extends GameObject
         this.speed = speed;
     }
 
-    public DynamicGameObject(Point2D position, Hitbox hitbox, Image image)
+    public DynamicGameObject(Point2D position, Hitbox hitbox, Image image, double speed)
     {
         super(position, hitbox, image);
         this.direction = direction;
