@@ -35,9 +35,9 @@ public class Hitbox
      *   of the hitbox. width and height are set according to loaded image-file.
      */
 
-    public Hitbox(int x, int y, Image img)
+    public Hitbox(Point2D position, Image img)
     {
-        position = new Point2D(x, y);
+        this.position = position;
         this.width = (int)img.getWidth();
         this.height = (int)img.getHeight();
     }
