@@ -1,6 +1,5 @@
-public class Highscore {
-
-
+public class Highscore
+{
     private int score;
     private String name;
 
