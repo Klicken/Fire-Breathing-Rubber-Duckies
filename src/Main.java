@@ -15,20 +15,23 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage){
-        primaryStage.setTitle("Basic JavaFX demo");
+        primaryStage.setTitle("Fire Breathing Rubber Duckies");
         primaryStage.setWidth(WIDTH);
         primaryStage.setHeight(HEIGHT);
         primaryStage.centerOnScreen();
+        primaryStage.setResizable(false);
 
         Group root = new Group();
-        Scene scene = new Scene( root );
+        Scene titleScene = new Scene(root);
 
-        primaryStage.setScene( scene );
+        primaryStage.setScene(titleScene);
         primaryStage.show();
 
-        Hitbox h1 = new Hitbox(0,0, 10,10);
-        Hitbox h2 = new Hitbox(11, 11, 10, 10);
-        System.out.println(h2.intersects(h1));
+
+
+        //Hitbox h1 = new Hitbox(0,0, 10,10);
+        //Hitbox h2 = new Hitbox(11, 11, 10, 10);
+        //System.out.println(h2.intersects(h1));
 
         AnimationTimer animator = new AnimationTimer() {
             long lastTime = System.nanoTime(); //This is called once
@@ -36,9 +39,9 @@ public class Main extends Application {
             @Override
             public void handle(long now) {
                 // FPS COUNTER
-                double elapsedTime = now - lastTime;
-                lastTime = now;
-                double fps = 1000000000 / elapsedTime;
+                //double elapsedTime = now - lastTime;
+                //lastTime = now;
+                //double fps = 1000000000 / elapsedTime;
 
                 //System.out.println("FPS: " + fps);
 

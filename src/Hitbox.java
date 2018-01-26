@@ -23,9 +23,9 @@ public class Hitbox
     *   Constructor that takes an x- and y-coordinate to set the top left corner position
     *   of the hitbox. width and height can be set manually.
     */
-    public Hitbox(int x, int y, int width, int height)
+    public Hitbox(Point2D position, int width, int height)
     {
-        position = new Point2D(x, y);
+        this.position = position;
         this.width = width;
         this.height = height;
     }
