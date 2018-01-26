@@ -7,33 +7,15 @@ public class MenuController
 {
 
     /*
-     *  source finds the source of the button that is clicked(Every button calls for a function).
-     *  With source it finds the scene and sets the root to a new Parent.
+     *  source finds the source of the button that is clicked.
+     *  With source it finds the scene and sets the root to a new Parent.(Parent is what's inside setRoot())
+     *  The Parent uses the id of a button to choose the correct fxml file to load.
      */
-    public void returnButton(ActionEvent event) throws Exception
+    public void menuButton(ActionEvent event) throws Exception
     {
         Node source = (Node) event.getSource();
-        source.getScene().setRoot(FXMLLoader.load(getClass().getResource("resources/Start.fxml")));
+        source.getScene().setRoot(FXMLLoader.load(getClass().getResource("resources/"+ source.getId() +".fxml")));
     }
-
-    public void playButton(ActionEvent event) throws Exception
-    {
-        Node source = (Node) event.getSource();
-        source.getScene().setRoot(FXMLLoader.load(getClass().getResource("resources/Game.fxml")));
-    }
-
-    public void controlsButton(ActionEvent event) throws Exception
-    {
-        Node source = (Node) event.getSource();
-        source.getScene().setRoot(FXMLLoader.load(getClass().getResource("resources/Controls.fxml")));
-    }
-
-    public void scoreButton(ActionEvent event) throws Exception
-    {
-        Node source = (Node) event.getSource();
-        source.getScene().setRoot(FXMLLoader.load(getClass().getResource("resources/Scoreboard.fxml")));
-    }
-
     /*
      *  quitButton is called when the quit button in the start menu is clicked.
      *  stage uses source to find the current scene and then finds the window to find the stage (primaryStage in Main.java).

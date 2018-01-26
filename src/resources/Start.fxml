@@ -22,12 +22,12 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button mnemonicParsing="false" onAction="#playButton" text="Play" GridPane.halignment="CENTER">
+            <Button fx:id="Game" mnemonicParsing="false" onAction="#menuButton" text="Play" GridPane.halignment="CENTER">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin></Button>
-            <Button mnemonicParsing="false" onAction="#controlsButton" text="Controls" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-            <Button mnemonicParsing="false" onAction="#scoreButton" text="Scoreboard" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+            <Button fx:id="Controls" mnemonicParsing="false" onAction="#menuButton" text="Controls" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+            <Button fx:id="Scoreboard" mnemonicParsing="false" onAction="#menuButton" text="Scoreboard" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
             <Button mnemonicParsing="false" onAction="#quitButton" text="Quit" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
          </children>
       </GridPane>

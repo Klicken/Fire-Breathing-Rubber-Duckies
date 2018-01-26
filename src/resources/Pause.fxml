@@ -13,7 +13,7 @@
       <children>
             <VBox alignment="CENTER" layoutY="160.0" prefHeight="480.0" prefWidth="1273.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#playButton" prefHeight="150.0" prefWidth="640.0" text="Resume">
+                  <Button fx:id="Game" mnemonicParsing="false" onAction="#menuButton" prefHeight="150.0" prefWidth="640.0" text="Resume">
                      <VBox.margin>
                         <Insets bottom="10.0" />
                      </VBox.margin>
@@ -37,7 +37,7 @@
                         <Font size="24.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#returnButton" prefHeight="150.0" prefWidth="640.0" text="Quit">
+                  <Button fx:id="Start" mnemonicParsing="false" onAction="#menuButton" prefHeight="150.0" prefWidth="640.0" text="Quit">
                      <font>
                         <Font size="24.0" />
                      </font></Button>

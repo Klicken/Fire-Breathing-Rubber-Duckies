@@ -33,6 +33,6 @@
             <Label text="ESC - Pause" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
          </children>
       </GridPane>
-      <Button layoutX="100.0" layoutY="70.0" mnemonicParsing="false" onAction="#returnButton" scaleX="2.0" scaleY="2.0" text="Return" />
+      <Button fx:id="Start" layoutX="100.0" layoutY="70.0" mnemonicParsing="false" onAction="#menuButton" scaleX="2.0" scaleY="2.0" text="Return" />
    </children>
 </Pane>

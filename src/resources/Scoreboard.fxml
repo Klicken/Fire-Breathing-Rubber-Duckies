@@ -128,7 +128,7 @@
                </opaqueInsets>
             </GridPane>
             <Label layoutX="603.0" layoutY="70.0" scaleX="5.0" scaleY="5.0" text="Scoreboard" underline="true" />
-            <Button layoutX="100.0" layoutY="70.0" mnemonicParsing="false" onAction="#returnButton" scaleX="2.0" scaleY="2.0" text="Return" />
+            <Button fx:id="Start" layoutX="100.0" layoutY="70.0" mnemonicParsing="false" onAction="#menuButton" scaleX="2.0" scaleY="2.0" text="Return" />
       </children>
     </AnchorPane>
   </children>
