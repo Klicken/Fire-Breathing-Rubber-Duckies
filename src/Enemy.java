@@ -5,9 +5,9 @@ public class Enemy extends DynamicGameObject
 {
     private int health;
 
-    public Enemy(Point2D position, Image image, Point2D direction, double speed, int health)
+    public Enemy(Point2D position, Image image, double speed, int health)
     {
-        super(position, image, direction, speed);
+        super(position, image, speed);
         this.health = health;
     }
 

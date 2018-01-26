@@ -9,7 +9,6 @@ public class Highscore
         this.name = name;
     }
 
-
     public void sortHighscore(Highscore[] obj)
     {
 

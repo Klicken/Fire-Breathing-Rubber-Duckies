@@ -7,19 +7,15 @@ public class Projectile extends DynamicGameObject
     private Point2D angle;
     private int damage;
 
-
-    public Projectile(Point2D position, Image image, Point2D direction, double speed, Point2D angle, int damage)
+    public Projectile(Point2D position, Image image, double speed, int damage)
     {
-        super(position, image, direction, speed);
-        this.angle = angle;
+        super(position, image, speed);
         this.damage = damage;
     }
 
-    public Projectile(Point2D position, Hitbox hitbox, Image image, Point2D angle, int damage,double speed)
+    public Projectile(Point2D position, Hitbox hitbox, Image image, double speed, int damage)
     {
         super(position, hitbox, image, speed);
-        this.angle = angle;
         this.damage = damage;
-
     }
 }
