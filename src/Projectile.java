@@ -9,9 +9,9 @@ public class Projectile extends DynamicGameObject
 
     /*
      *   Constructor that creates a Projectile object with a given damage value.
-     *   Position, dimensions and hitbox are set according to
-     *   the dimensions of the image-file.
-     *   speed is set independantly.
+     *    Dimensions and hitbox are set according to the dimensions of the image-file.
+     *    Position and speed are set independantly.
+     *    speed is used to decide how fast a projectile travels.
      */
 
     public Projectile(Point2D position, Image image, double speed, int damage)
@@ -22,9 +22,10 @@ public class Projectile extends DynamicGameObject
 
     /*
      *   Constructor that creates a Projectile object with a given damage value.
-     *  Position and dimensions are set according to the dimensions
-     *   of the image, speed and hitbox are set independantly. If you for instance want a hitbox of different size then
-     *   the Projectile image.
+     *   Dimensions are set according to the dimensions of the image.
+     *   Speed, position and hitbox are set independantly.
+     *   If you for instance want a hitbox of different size than the Projectile image.
+     *   speed is used to decide how fast a projectile travels.
      */
     public Projectile(Point2D position, Hitbox hitbox, Image image, double speed, int damage)
     {
