@@ -1,4 +1,6 @@
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.Group;
@@ -7,31 +9,26 @@ import javafx.animation.AnimationTimer;
 public class Main extends Application {
 
     final int WIDTH = 1280;
-    final int HEIGHT = WIDTH * 9/16;
+    final int HEIGHT = 720;
 
     public static void main(String[] args) {
         launch(args);
     }
 
     @Override
-    public void start(Stage primaryStage){
+    public void start(Stage primaryStage) throws Exception{
         primaryStage.setTitle("Fire Breathing Rubber Duckies");
         primaryStage.setWidth(WIDTH);
         primaryStage.setHeight(HEIGHT);
         primaryStage.centerOnScreen();
         primaryStage.setResizable(false);
 
-        Group root = new Group();
-        Scene titleScene = new Scene(root);
+        Parent startMenu = FXMLLoader.load(getClass().getResource("resources/Start.fxml"));
 
-        primaryStage.setScene(titleScene);
+        Scene scene = new Scene(startMenu);
+
+        primaryStage.setScene(scene);
         primaryStage.show();
-
-
-
-        //Hitbox h1 = new Hitbox(0,0, 10,10);
-        //Hitbox h2 = new Hitbox(11, 11, 10, 10);
-        //System.out.println(h2.intersects(h1));
 
         AnimationTimer animator = new AnimationTimer() {
             long lastTime = System.nanoTime(); //This is called once
