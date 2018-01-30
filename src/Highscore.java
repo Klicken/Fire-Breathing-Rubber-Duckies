@@ -1,4 +1,7 @@
-public class Highscore
+import java.io.Serializable;
+import java.util.Comparator;
+
+public class Highscore implements Serializable, Comparable<Highscore>
 {
     private int score;
     private String name;
@@ -9,18 +12,18 @@ public class Highscore
         this.name = name;
     }
 
-    public void sortHighscore(Highscore[] obj)
+    public int getScore()
     {
-
+        return this.score;
     }
 
-    public void writeToFile()
+    public String getName()
     {
-
+        return this.name;
     }
 
-    public void readFromFile()
-    {
-
+    @Override
+    public int compareTo(Highscore score1) {
+        return ((Integer)(score1.getScore())).compareTo(getScore());
     }
 }
