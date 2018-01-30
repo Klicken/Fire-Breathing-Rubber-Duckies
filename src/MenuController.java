@@ -1,6 +1,8 @@
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.stage.Stage;
 
 public class MenuController
@@ -14,7 +16,12 @@ public class MenuController
     public void menuButton(ActionEvent event) throws Exception
     {
         Node source = (Node) event.getSource();
-        source.getScene().setRoot(FXMLLoader.load(getClass().getResource("resources/"+ source.getId() +".fxml")));
+        Parent root = FXMLLoader.load(getClass().getResource("resources/"+ source.getId() +".fxml"));
+        source.getScene().setRoot(root);
+        root.requestFocus();
+        if(root instanceof Group){
+            ((Group) root).getChildren().add(Main.getCanvas());
+        }
     }
     /*
      *  quitButton is called when the quit button in the start menu is clicked.
