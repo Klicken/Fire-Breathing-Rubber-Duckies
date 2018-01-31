@@ -44,7 +44,7 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
 
-        Player player1 = new Player(new Image("resources/penguin.png"), 500, 400, 100);
+        Player player1 = new Player(new Image("resources/penguin.png"), 500, 400, 200);
 
         nodeList.add(player1);
 

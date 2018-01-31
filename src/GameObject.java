@@ -4,12 +4,12 @@ import javafx.scene.image.ImageView;
 
 public class GameObject extends ImageView
 {
-    private Hitbox hitbox;
+    protected Hitbox hitbox;
 
     /*
-    *   Constructor that creates a GameObject at given position, dimensions and hitbox are set according to
-    *   the dimensions of the image-file.
-    */
+     *  Constructor that creates an object at given position, dimensions and hitbox are set according to
+     *  the dimensions of the image-file.
+     */
 
     public GameObject(Image image, double x, double y)
     {
@@ -18,10 +18,14 @@ public class GameObject extends ImageView
         setPos(x, y);
     }
 
+    /*
+     *  Sets the position of the GameObject (The top-left corner).
+     */
+
     public void setPos(double x, double y)
     {
-        this.setX(x);
-        this.setY(y);
+        setX(x);
+        setY(y);
         hitbox.setPos(new Point2D(x, y));
     }
 }
