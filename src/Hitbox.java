@@ -16,30 +16,18 @@ import javafx.scene.image.Image;
 public class Hitbox
 {
     private Point2D position;
-    private int width;
-    private int height;
+    private double width;
+    private double height;
 
     /*
     *   Constructor that takes an x- and y-coordinate to set the top left corner position
     *   of the hitbox. width and height can be set manually.
     */
-    public Hitbox(Point2D position, int width, int height)
+    public Hitbox(Point2D position, double width, double height)
     {
         this.position = position;
         this.width = width;
         this.height = height;
-    }
-
-    /*
-     *   Constructor that takes an x- and y-coordinate to set the top left corner position
-     *   of the hitbox. width and height are set according to loaded image-file.
-     */
-
-    public Hitbox(Point2D position, Image img)
-    {
-        this.position = position;
-        this.width = (int)img.getWidth();
-        this.height = (int)img.getHeight();
     }
 
     /*
@@ -51,5 +39,10 @@ public class Hitbox
     {
         return (abs(position.getX() - other.position.getX()) * 2 < (width + other.width)) &&
                 (abs(position.getY() - other.position.getY()) * 2 < (height + other.height));
+    }
+
+    public void setPos(Point2D pos)
+    {
+        position = pos;
     }
 }

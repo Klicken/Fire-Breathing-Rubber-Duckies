@@ -19,9 +19,6 @@ public class MenuController
         Parent root = FXMLLoader.load(getClass().getResource("resources/"+ source.getId() +".fxml"));
         source.getScene().setRoot(root);
         root.requestFocus();
-        if(root instanceof Group){
-            ((Group) root).getChildren().add(Main.getCanvas());
-        }
     }
     /*
      *  quitButton is called when the quit button in the start menu is clicked.
