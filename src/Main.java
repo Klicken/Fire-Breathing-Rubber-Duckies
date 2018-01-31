@@ -44,7 +44,7 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
 
-        DynamicGameObject player1 = initPlayer();
+        Player player1 = new Player(new Image("resources/penguin.png"), 500, 400, 100);
 
         nodeList.add(player1);
 
@@ -99,34 +99,5 @@ public class Main extends Application {
             ((Group)getStage().getScene().getRoot()).getChildren().add(n);
         }
         initialized = true;
-    }
-
-    private DynamicGameObject initPlayer()
-    {
-        DynamicGameObject player = new DynamicGameObject(new Image("resources/penguin.png"), 1);
-        player.addEventHandler(KeyEvent.KEY_PRESSED,
-                event -> {
-                    switch (event.getCode())
-                    {
-                        case W: player.setDirectionY(-1); break;
-                        case S: player.setDirectionY(1); break;
-                        case A: player.setDirectionX(-1); break;
-                        case D: player.setDirectionX(1); break;
-                    }
-                }
-        );
-        player.addEventHandler(KeyEvent.KEY_RELEASED,
-                event -> {
-                    switch (event.getCode())
-                    {
-                        case W: player.setDirectionY(0); break;
-                        case S: player.setDirectionY(0); break;
-                        case A: player.setDirectionX(0); break;
-                        case D: player.setDirectionX(0); break;
-                    }
-                }
-        );
-
-        return player;
     }
 }

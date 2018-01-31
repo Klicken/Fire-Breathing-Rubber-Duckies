@@ -11,16 +11,17 @@ public class GameObject extends ImageView
     *   the dimensions of the image-file.
     */
 
-    public GameObject(Image image)
+    public GameObject(Image image, double x, double y)
     {
         super.setImage(image);
         hitbox = new Hitbox(new Point2D(this.getX(), this.getY()), image.getWidth(), image.getHeight());
+        setPos(x, y);
     }
 
-    public void setPos(Point2D pos)
+    public void setPos(double x, double y)
     {
-        this.setX(pos.getX());
-        this.setY(pos.getY());
-        hitbox.setPos(pos);
+        this.setX(x);
+        this.setY(y);
+        hitbox.setPos(new Point2D(x, y));
     }
 }
