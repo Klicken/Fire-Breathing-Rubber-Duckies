@@ -6,7 +6,7 @@ import javafx.stage.Stage;
 import java.util.ArrayList;
 
 public class GameHandler extends AnimationTimer {
-    long lastTime = System.nanoTime();
+    long lastTime;
     final int TARGET_FPS = 60;
     final long OPTIMAL_TIME = 1000000000 / TARGET_FPS;
     private Stage stage;
@@ -14,10 +14,13 @@ public class GameHandler extends AnimationTimer {
     private boolean initialized = false;
     private Player player;
     private ArrayList<Enemy> enemies;
+    private static ArrayList<Projectile> projectiles;
 
     public GameHandler(){
         stage = Main.getStage();
         enemies = new ArrayList<Enemy>();
+        projectiles = new ArrayList<Projectile>();
+        lastTime = System.nanoTime();
     }
 
 
@@ -74,5 +77,13 @@ public class GameHandler extends AnimationTimer {
         for (Enemy enemy: enemies) {
             enemy.update(time);
         }
+        for (Projectile projectile: projectiles) {
+            projectile.update(time);
+        }
+    }
+
+    public static ArrayList<Projectile> getProjectiles()
+    {
+        return projectiles;
     }
 }

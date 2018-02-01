@@ -1,10 +1,12 @@
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 
 public class InputController
@@ -21,10 +23,12 @@ public class InputController
         }
     }
     public void shoot(MouseEvent event) throws Exception{
-        System.out.println("MUSKLICK");
-        if(event.isPrimaryButtonDown())
+        if(event.getButton() == MouseButton.PRIMARY)
         {
-            new Projectile(new Image("resources/penguin.png"), Player.getInstance().getX(), Player.getInstance().getY(), 50,new Point2D(event.getX(),event.getY()));
+            System.out.println("PANG");
+            Projectile p = new Projectile(new Image("resources/penguin.png"), Player.getInstance().getX(), Player.getInstance().getY(), 50,new Point2D(event.getX(),event.getY()));
+            ((Group)Main.getStage().getScene().getRoot()).getChildren().add(p);
+            GameHandler.getProjectiles().add(p);
         }
     }
 }
