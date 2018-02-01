@@ -1,8 +1,6 @@
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 
-import java.awt.*;
-
 public class Enemy extends DynamicGameObject implements AI
 {
     private Point2D direction;
