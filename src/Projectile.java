@@ -6,26 +6,32 @@ public class Projectile extends DynamicGameObject
 
     private double angle;
     private Point2D mousePos;
+    private Point2D direction;
 
     public Projectile(Image image, double x, double y, double movementSpeed, Point2D mousePos)
     {
         super(image, x, y, movementSpeed);
         this.mousePos = mousePos;
+        direction = getDirection();
 
     }
 
-    public void angle()
+    public double getAngle()
     {
-        angle = Player.getInstance().getPoint().angle(mousePos);
+        return Player.getInstance().getPoint().angle(mousePos);
+    }
 
+    public Point2D getDirection()
+    {
+        return mousePos.subtract(Player.getInstance().getPoint()).normalize();
     }
 
     @Override
     public void update(double time)
     {
-        double direction = angle;
-        setPos(getX() +  direction * movementSpeed * time,
-                getY() +  direction * movementSpeed * time);
+        setPos(getX() +  direction.getX() * movementSpeed * time,
+                getY() +  direction.getY() * movementSpeed * time);
+
     }
 
 }

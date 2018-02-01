@@ -26,7 +26,7 @@ public class InputController
         if(event.getButton() == MouseButton.PRIMARY)
         {
             System.out.println("PANG");
-            Projectile p = new Projectile(new Image("resources/penguin.png"), Player.getInstance().getX(), Player.getInstance().getY(), 50,new Point2D(event.getX(),event.getY()));
+            Projectile p = new Projectile(new Image("resources/apple.png"), Player.getInstance().getX(), Player.getInstance().getY(), 400,new Point2D(event.getX(),event.getY()));
             ((Group)Main.getStage().getScene().getRoot()).getChildren().add(p);
             GameHandler.getProjectiles().add(p);
         }
