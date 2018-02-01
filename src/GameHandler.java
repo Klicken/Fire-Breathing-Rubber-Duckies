@@ -48,6 +48,7 @@ public class GameHandler extends AnimationTimer {
             // SLEEP
             try
             {
+                if(lastTime-System.nanoTime() + OPTIMAL_TIME >= 0)
                 Thread.sleep( (lastTime-System.nanoTime() + OPTIMAL_TIME)/1000000 );
             }
             catch (InterruptedException e)
@@ -76,6 +77,7 @@ public class GameHandler extends AnimationTimer {
 
         for (Enemy enemy: enemies) {
             enemy.update(time);
+            System.out.println(player.intersects(enemy.getBoundsInLocal()));
         }
         for (Projectile projectile: projectiles) {
             projectile.update(time);
