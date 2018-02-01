@@ -44,9 +44,12 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
 
-        Player player1 = new Player(new Image("resources/penguin.png"), 500, 400, 200);
+        Player player = Player.createInstance(new Image("resources/penguin.png"), 500, 400, 200);
+        Enemy enemy1 = new Enemy(new Image("resources/penguin.png"), 100, 200, 1);
 
-        nodeList.add(player1);
+        nodeList.add(player);
+        nodeList.add(enemy1);
+
 
         AnimationTimer animator = new AnimationTimer()
         {
@@ -69,8 +72,10 @@ public class Main extends Application {
                     //System.out.println("FPS: " + fps);
 
                     // UPDATE
-                    player1.requestFocus();
-                    player1.update(elapsedTime / 1000000000);
+                    player.requestFocus();
+                    player.update(elapsedTime / 1000000000);
+                    enemy1.update(elapsedTime / 1000000000);
+                    System.out.println(player.getHitbox().intersects(enemy1.getHitbox()));
 
                     // SLEEP
                     try

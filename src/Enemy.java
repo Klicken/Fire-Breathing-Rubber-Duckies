@@ -5,6 +5,7 @@ import java.awt.*;
 
 public class Enemy extends DynamicGameObject implements AI
 {
+    private Point2D direction;
 
     public Enemy(Image image, double x, double y, double movementSpeed)
     {
@@ -12,17 +13,17 @@ public class Enemy extends DynamicGameObject implements AI
     }
 
     @Override
-    public void updateEnemy(double time)
+    public void update(double time)
     {
-        Point2D direction = seekPlayer()
+        Point2D direction = seekPlayer();
+        setPos(getX() +  direction.getX() * movementSpeed * time,
+                getY() +  direction.getY() * movementSpeed * time);
     }
 
     @Override
-    public Point2D seekPlayer(Player player)
+    public Point2D seekPlayer()
     {
-        Point2D enemyPos = new Point2D(this.getX(), this.getY());
-        Point2D playerPos = new Point2D(player.getX(), player.getY());
-        Point2D direction = playerPos.subtract(enemyPos).normalize();
+        direction = Player.getInstance().getPoint().subtract(getPoint()).normalize();
         return direction;
     }
 

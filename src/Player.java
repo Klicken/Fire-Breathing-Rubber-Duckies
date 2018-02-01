@@ -7,13 +7,13 @@ public class Player extends DynamicGameObject
 {
     private static Player instance = null;
     private boolean up, down, left, right;
-    double dualKeyMovementSpeed = movementSpeed/1.5;
+    double dualKeyMovementSpeed = movementSpeed * 0.7;
 
     /*
      *  Constructor that creates a DynamicGameObject that has eventhandlers,
      *  which processes keyboard inputs for movement related actions.
      */
-    public Player(Image image, double x, double y, double movementSpeed)
+    private Player(Image image, double x, double y, double movementSpeed)
     {
         super(image, x, y, movementSpeed);
         up = false;
@@ -43,6 +43,19 @@ public class Player extends DynamicGameObject
                     }
                 }
         );
+    }
+
+    public static Player getInstance()
+    {
+        return instance;
+    }
+
+
+    public static Player createInstance(Image image, double x, double y, double movementSpeed)
+    {
+        if(instance == null)
+            instance = new Player(image, x, y, movementSpeed);
+        return instance;
     }
 
     /*
