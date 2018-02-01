@@ -5,6 +5,7 @@ import static java.lang.Math.abs;
 
 public class Player extends DynamicGameObject
 {
+    private static Player instance = null;
     private boolean up, down, left, right;
     double dualKeyMovementSpeed = movementSpeed/1.5;
 
