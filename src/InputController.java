@@ -1,8 +1,11 @@
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 
 public class InputController
 {
@@ -15,6 +18,13 @@ public class InputController
             Node source = (Node) event.getSource();
             Parent root = FXMLLoader.load(getClass().getResource("resources/Pause.fxml"));
             source.getScene().setRoot(root);
+        }
+    }
+    public void shoot(MouseEvent event) throws Exception{
+        System.out.println("MUSKLICK");
+        if(event.isPrimaryButtonDown())
+        {
+            new Projectile(new Image("resources/penguin.png"), Player.getInstance().getX(), Player.getInstance().getY(), 50,new Point2D(event.getX(),event.getY()));
         }
     }
 }

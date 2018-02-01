@@ -1,25 +1,31 @@
 import java.io.*;
 import java.util.*;
 
+/* This class will manage highscores. Its possible to read highscores
+    from a saved dat-file, add new scores, sort and print them out
+ */
 public class HighScoreManager {
-
+    //List of all highscores
     private ArrayList<Highscore> highscores;
+    //The name of the file we will save all highscores too
     private static final String HIGHSCORE_FILE = "highscore.dat";
-    //Initialising an in and outputStream for working with the file
+    //An in and outputstream
     ObjectOutputStream outputStream = null;
     ObjectInputStream inputStream = null;
 
     public HighScoreManager() {
-        //initialising the scores-arraylist
         highscores = new ArrayList<Highscore>();
     }
 
+    //This method will read from the dat-file, sort and return the saved highscores
     public ArrayList<Highscore> getScores() {
         readFromFile();
         Collections.sort(highscores);
         return highscores;
     }
 
+    /*This method will first read the already saved scores,
+    add a new highscore and write it to the file unsorted.*/
     public void addScore(String name, int score) {
         readFromFile();
         highscores.add(new Highscore(score, name));
@@ -27,7 +33,7 @@ public class HighScoreManager {
     }
 
 
-
+    //This method will write our highscore objects to a dat-file
     public void writeToFile()
     {
         try {
@@ -51,7 +57,7 @@ public class HighScoreManager {
 
     }
 
-
+    //This method will read objects from the saved dat-file
     public void readFromFile()
     {
 
@@ -65,7 +71,6 @@ public class HighScoreManager {
         } catch (IOException e) {
             System.out.println("Error initializing stream");
         } catch (ClassNotFoundException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         } finally {
             try {
@@ -79,6 +84,8 @@ public class HighScoreManager {
         }
 
     }
+
+    // This method will translate our highscore objects to Strings.
     public String getHighscoreString() {
         String highscoreString = "";
         int max = 10;
