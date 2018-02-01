@@ -1,7 +1,11 @@
+import GameObjects.Enemy;
+import GameObjects.Player;
+
 import javafx.animation.AnimationTimer;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+
 
 import java.util.ArrayList;
 
@@ -48,6 +52,7 @@ public class GameHandler extends AnimationTimer {
             // SLEEP
             try
             {
+                if(lastTime-System.nanoTime() + OPTIMAL_TIME >= 0)
                 Thread.sleep( (lastTime-System.nanoTime() + OPTIMAL_TIME)/1000000 );
             }
             catch (InterruptedException e)

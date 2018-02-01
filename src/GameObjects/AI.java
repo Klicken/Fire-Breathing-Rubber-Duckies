@@ -1,3 +1,5 @@
+package GameObjects;
+
 import javafx.geometry.Point2D;
 
 public interface AI

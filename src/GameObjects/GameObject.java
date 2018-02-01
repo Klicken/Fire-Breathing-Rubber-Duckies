@@ -1,10 +1,11 @@
+package GameObjects;
+
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class GameObject extends ImageView
 {
-    private Hitbox hitbox;
     private Point2D point;
 
     /*
@@ -18,7 +19,6 @@ public class GameObject extends ImageView
         setX(x);
         setY(y);
         point = new Point2D(x, y);
-        hitbox = new Hitbox(point, image.getWidth(), image.getHeight());
     }
 
     /*
@@ -30,12 +30,6 @@ public class GameObject extends ImageView
         setX(x);
         setY(y);
         point = new Point2D(x, y);
-        hitbox.setPos(point);
-    }
-
-    public Hitbox getHitbox()
-    {
-        return hitbox;
     }
 
     public Point2D getPoint()

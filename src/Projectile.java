@@ -1,6 +1,8 @@
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 
+import GameObjects.*;
+
 public class Projectile extends DynamicGameObject
 {
 

@@ -1,3 +1,5 @@
+import GameObjects.Player;
+
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
