@@ -1,5 +1,4 @@
-import GameObjects.Enemy;
-import GameObjects.Player;
+import GameObjects.*;
 
 import javafx.animation.AnimationTimer;
 import javafx.scene.Group;

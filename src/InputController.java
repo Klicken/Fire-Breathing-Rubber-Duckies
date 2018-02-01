@@ -1,3 +1,4 @@
+import GameObjects.Projectile;
 import GameObjects.Player;
 
 import javafx.fxml.FXMLLoader;
