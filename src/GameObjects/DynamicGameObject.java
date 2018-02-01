@@ -1,3 +1,5 @@
+package GameObjects;
+
 import javafx.scene.image.Image;
 
 public abstract class DynamicGameObject extends GameObject

@@ -1,7 +1,11 @@
+import GameObjects.Enemy;
+import GameObjects.Player;
+
 import javafx.animation.AnimationTimer;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+
 
 import java.util.ArrayList;
 
@@ -77,7 +81,6 @@ public class GameHandler extends AnimationTimer {
 
         for (Enemy enemy: enemies) {
             enemy.update(time);
-            System.out.println(player.intersects(enemy.getBoundsInLocal()));
         }
         for (Projectile projectile: projectiles) {
             projectile.update(time);
