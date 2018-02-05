@@ -24,8 +24,11 @@ public class GameHandler extends AnimationTimer {
         enemies = new ArrayList<Enemy>();
         projectiles = new ArrayList<Projectile>();
         lastTime = System.nanoTime();
-    }
 
+        player = Player.createInstance(new Image("resources/penguin.png"), 500, 400, 200);
+        Enemy enemy1 = new Enemy(new Image("resources/penguin.png"), 100, 200, 100);
+        enemies.add(enemy1);
+    }
 
     /*
      * This is the game loop.
@@ -33,16 +36,16 @@ public class GameHandler extends AnimationTimer {
     @Override
     public void handle(long now)
     {
+        // FPS COUNTER
+        double elapsedTime = now - lastTime;
+        lastTime = now;
+        double fps = 1000000000 / elapsedTime;
+        //System.out.println("FPS: " + fps);
+
         if(stage.getScene().getRoot() instanceof Group)
         {
             if(!initialized)
                 initGame();
-
-            // FPS COUNTER
-            double elapsedTime = now - lastTime;
-            lastTime = now;
-            double fps = 1000000000 / elapsedTime;
-            //System.out.println("FPS: " + fps);
 
             // UPDATE
             player.requestFocus();
@@ -52,24 +55,25 @@ public class GameHandler extends AnimationTimer {
             try
             {
                 if(lastTime-System.nanoTime() + OPTIMAL_TIME >= 0)
-                Thread.sleep( (lastTime-System.nanoTime() + OPTIMAL_TIME)/1000000 );
+                    Thread.sleep( (lastTime-System.nanoTime() + OPTIMAL_TIME)/1000000 );
             }
             catch (InterruptedException e)
             {
                 e.printStackTrace();
             }
         }
+        else
+            initialized = false;
     }
 
     private void initGame()
     {
-        player = Player.createInstance(new Image("resources/penguin.png"), 500, 400, 200);
-        Enemy enemy1 = new Enemy(new Image("resources/penguin.png"), 100, 200, 100);
-        enemies.add(enemy1);
-
         ((Group)stage.getScene().getRoot()).getChildren().add(player);
         for (Enemy enemy: enemies) {
             ((Group)stage.getScene().getRoot()).getChildren().add(enemy);
+        }
+        for (Projectile projectile: projectiles) {
+            ((Group)stage.getScene().getRoot()).getChildren().add(projectile);
         }
         initialized = true;
     }
