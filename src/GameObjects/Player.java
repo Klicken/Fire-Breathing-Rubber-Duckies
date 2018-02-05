@@ -1,16 +1,13 @@
 package GameObjects;
 
-import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
-
 import static java.lang.Math.abs;
 
 public class Player extends DynamicGameObject
 {
     private static Player instance = null;
-    private boolean up, down, left, right;
+    private static boolean up, down, left, right;
     double dualKeyMovementSpeed = movementSpeed * 0.7;
 
     /*
@@ -47,6 +44,14 @@ public class Player extends DynamicGameObject
                     }
                 }
         );
+    }
+
+    public static void stop()
+    {
+        up = false;
+        down = false;
+        left = false;
+        right = false;
     }
 
     public static Player getInstance()

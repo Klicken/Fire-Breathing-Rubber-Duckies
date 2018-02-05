@@ -68,6 +68,7 @@ public class GameHandler extends AnimationTimer {
 
     private void initGame()
     {
+        Player.stop();
         ((Group)stage.getScene().getRoot()).getChildren().add(player);
         for (Enemy enemy: enemies) {
             ((Group)stage.getScene().getRoot()).getChildren().add(enemy);
