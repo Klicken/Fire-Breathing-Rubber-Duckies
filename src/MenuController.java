@@ -19,6 +19,13 @@ public class MenuController
         source.getScene().setRoot(root);
         root.requestFocus();
     }
+
+    public void resetGame(ActionEvent event) throws Exception
+    {
+        GameHandler.initGame();
+        menuButton(event);
+    }
+
     /*
      *  quitButton is called when the quit button in the start menu is clicked.
      *  stage uses source to find the current scene and then finds the window to find the stage (primaryStage in Main.java).

@@ -22,7 +22,7 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="Game" mnemonicParsing="false" onAction="#menuButton" text="Play" GridPane.halignment="CENTER">
+            <Button fx:id="Game" mnemonicParsing="false" onAction="#resetGame" text="Play" GridPane.halignment="CENTER">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin></Button>

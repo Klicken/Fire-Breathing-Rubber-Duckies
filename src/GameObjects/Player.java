@@ -59,6 +59,10 @@ public class Player extends DynamicGameObject
         return instance;
     }
 
+    public static void nullInstance()
+    {
+        instance = null;
+    }
 
     public static Player createInstance(Image image, double x, double y, double movementSpeed)
     {

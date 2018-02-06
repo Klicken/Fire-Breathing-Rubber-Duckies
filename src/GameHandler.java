@@ -14,9 +14,9 @@ public class GameHandler extends AnimationTimer {
     final long OPTIMAL_TIME = 1000000000 / TARGET_FPS;
     private Stage stage;
 
-    private boolean initialized = false;
-    private Player player;
-    private ArrayList<Enemy> enemies;
+    private boolean resumed = false;
+    private static Player player;
+    private static ArrayList<Enemy> enemies;
     private static ArrayList<Projectile> projectiles;
 
     public GameHandler(){
@@ -24,10 +24,6 @@ public class GameHandler extends AnimationTimer {
         enemies = new ArrayList<Enemy>();
         projectiles = new ArrayList<Projectile>();
         lastTime = System.nanoTime();
-
-        player = Player.createInstance(new Image("resources/penguin.png"), 500, 400, 200);
-        Enemy enemy1 = new Enemy(new Image("resources/penguin.png"), 100, 200, 100);
-        enemies.add(enemy1);
     }
 
     /*
@@ -44,8 +40,8 @@ public class GameHandler extends AnimationTimer {
 
         if(stage.getScene().getRoot() instanceof Group)
         {
-            if(!initialized)
-                initGame();
+            if(!resumed)
+                resumeGame();
 
             // UPDATE
             player.requestFocus();
@@ -63,10 +59,30 @@ public class GameHandler extends AnimationTimer {
             }
         }
         else
-            initialized = false;
+            resumed = false;
+    }
+    /*
+     * Is called from MenuController
+     */
+    public static void initGame()
+    {
+        /*
+         * Start by removing old objects
+         */
+        Player.nullInstance();
+        enemies.clear();
+        projectiles.clear();
+
+        player = Player.createInstance(new Image("resources/penguin.png"), 500, 400, 200);
+        Enemy enemy1 = new Enemy(new Image("resources/penguin.png"), 100, 200, 100);
+        enemies.add(enemy1);
     }
 
-    private void initGame()
+    /*
+     * Stops the Player's movement to prevent movement without pressed keys after resuming.
+     * Adds the nodes(GameObjects) to the root of the scene.
+     */
+    private void resumeGame()
     {
         Player.stop();
         ((Group)stage.getScene().getRoot()).getChildren().add(player);
@@ -76,7 +92,7 @@ public class GameHandler extends AnimationTimer {
         for (Projectile projectile: projectiles) {
             ((Group)stage.getScene().getRoot()).getChildren().add(projectile);
         }
-        initialized = true;
+        resumed = true;
     }
 
     private void update(double time)

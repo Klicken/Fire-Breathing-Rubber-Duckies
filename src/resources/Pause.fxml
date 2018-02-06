@@ -21,7 +21,7 @@
                         <Font size="24.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="150.0" prefWidth="640.0" text="Restart">
+                  <Button fx:id="Game" mnemonicParsing="false" onAction="#resetGame" prefHeight="150.0" prefWidth="640.0" text="Restart">
                      <VBox.margin>
                         <Insets bottom="10.0" />
                      </VBox.margin>
@@ -37,7 +37,7 @@
                         <Font size="24.0" />
                      </font>
                   </Button>
-                  <Button fx:id="Start" mnemonicParsing="false" onAction="#menuButton" prefHeight="150.0" prefWidth="640.0" text="Quit">
+                  <Button fx:id="Start" mnemonicParsing="false" onAction="#resetGame" prefHeight="150.0" prefWidth="640.0" text="Exit">
                      <font>
                         <Font size="24.0" />
                      </font></Button>
