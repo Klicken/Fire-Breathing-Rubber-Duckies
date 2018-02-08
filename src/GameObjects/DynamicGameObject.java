@@ -1,11 +1,13 @@
 package GameObjects;
 
+import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 
 public abstract class DynamicGameObject extends GameObject
 {
-    protected double movementSpeed;
-    protected double vx, vy;
+    double movementSpeed;
+    Point2D direction;
+
 
     /*
      *  Constructor that creates a GameObject with movementSpeed and velocity vector(vx, vy);
@@ -15,8 +17,7 @@ public abstract class DynamicGameObject extends GameObject
     {
         super(image, x, y);
         this.movementSpeed = movementSpeed;
-        vx = 0;
-        vy = 0;
+        direction = new Point2D(0, 0);
     }
 
     public abstract void update(double time);

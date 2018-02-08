@@ -6,7 +6,7 @@ import javafx.scene.image.ImageView;
 
 public class GameObject extends ImageView
 {
-    private Point2D point;
+    Point2D point;
 
     /*
      *  Constructor that creates an object at given position, dimensions and hitbox are set according to

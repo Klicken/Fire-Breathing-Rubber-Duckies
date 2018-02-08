@@ -1,5 +1,6 @@
 package GameObjects;
 
+import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import static java.lang.Math.abs;
@@ -8,7 +9,7 @@ public class Player extends DynamicGameObject
 {
     private static Player instance = null;
     private static boolean up, down, left, right;
-    double dualKeyMovementSpeed = movementSpeed * 0.7;
+    private double dualKeyMovementSpeed = movementSpeed * 0.7;
 
     /*
      *  Constructor that creates a DynamicGameObject that has eventhandlers,
@@ -78,20 +79,21 @@ public class Player extends DynamicGameObject
     @Override
     public void update(double time)
     {
-        vx = 0;
-        vy = 0;
+        direction = new Point2D(0,0);
 
-        if(up) vy -= 1;
-        if(down) vy += 1;
-        if(left) vx -= 1;
-        if(right) vx += 1;
+        if(up) direction = direction.add(new Point2D(0,-1));
+        if(down) direction = direction.add(new Point2D(0,1));
+        if(left) direction = direction.add(new Point2D(-1,0));
+        if(right) direction = direction.add(new Point2D(1,0));
 
         /*
          *  Slows the players movement when moving diagonaly to compensate for multiple speed additions.
          */
-        if (abs(vx) + abs(vy) > 1)
-            setPos(getX() + vx * dualKeyMovementSpeed * time, getY() + vy * dualKeyMovementSpeed * time);
+        if (abs(direction.getX()) + abs(direction.getY()) > 1)
+            setPos(getX() + direction.getX() * dualKeyMovementSpeed * time, getY() + direction.getY() * dualKeyMovementSpeed * time);
         else
-            setPos(getX() + vx * movementSpeed * time, getY() + vy * movementSpeed * time);
+            setPos(getX() + direction.getX() * movementSpeed * time, getY() + direction.getY() * movementSpeed * time);
+
+        System.out.println(direction);
     }
 }

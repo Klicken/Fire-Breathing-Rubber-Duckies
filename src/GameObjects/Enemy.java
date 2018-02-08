@@ -5,7 +5,6 @@ import javafx.scene.image.Image;
 
 public class Enemy extends DynamicGameObject implements AI
 {
-    private Point2D direction;
 
     public Enemy(Image image, double x, double y, double movementSpeed)
     {
@@ -23,8 +22,7 @@ public class Enemy extends DynamicGameObject implements AI
     @Override
     public Point2D seekPlayer()
     {
-        direction = Player.getInstance().getPoint().subtract(getPoint()).normalize();
-        return direction;
+        return Player.getInstance().getPoint().subtract(getPoint()).normalize();
     }
 
 

@@ -7,7 +7,6 @@ import javafx.scene.image.Image;
 public class Projectile extends DynamicGameObject
 {
 
-    private double angle;
     private Point2D mousePos;
     private Point2D direction;
 
