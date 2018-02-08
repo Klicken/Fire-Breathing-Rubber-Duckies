@@ -74,7 +74,7 @@ public class GameHandler extends AnimationTimer {
         projectiles.clear();
 
         player = Player.createInstance(new Image("resources/penguin.png"), 500, 400, 200);
-        Enemy enemy1 = new Enemy(new Image("resources/penguin.png"), 100, 200, 100);
+        Enemy enemy1 = new Enemy(new Image("resources/penguin.png"), 600, 200, 0);
         enemies.add(enemy1);
     }
 
@@ -101,6 +101,7 @@ public class GameHandler extends AnimationTimer {
 
         for (Enemy enemy: enemies) {
             enemy.update(time);
+            player.collisionDetection(enemy);
         }
         for (Projectile projectile: projectiles) {
             projectile.update(time);

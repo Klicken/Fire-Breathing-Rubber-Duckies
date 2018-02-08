@@ -36,4 +36,9 @@ public class GameObject extends ImageView
     {
         return point;
     }
+
+    public Point2D getCenter()
+    {
+        return new Point2D(getX() + getImage().getWidth()/2, getY() + getImage().getWidth()/2);
+    }
 }

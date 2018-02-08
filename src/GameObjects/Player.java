@@ -34,6 +34,7 @@ public class Player extends DynamicGameObject
                     }
                 }
         );
+
         this.addEventHandler(KeyEvent.KEY_RELEASED,
                 event -> {
                     switch (event.getCode())
@@ -81,6 +82,8 @@ public class Player extends DynamicGameObject
     {
         direction = new Point2D(0,0);
 
+
+
         if(up) direction = direction.add(new Point2D(0,-1));
         if(down) direction = direction.add(new Point2D(0,1));
         if(left) direction = direction.add(new Point2D(-1,0));
@@ -89,11 +92,10 @@ public class Player extends DynamicGameObject
         /*
          *  Slows the players movement when moving diagonaly to compensate for multiple speed additions.
          */
+
         if (abs(direction.getX()) + abs(direction.getY()) > 1)
             setPos(getX() + direction.getX() * dualKeyMovementSpeed * time, getY() + direction.getY() * dualKeyMovementSpeed * time);
         else
             setPos(getX() + direction.getX() * movementSpeed * time, getY() + direction.getY() * movementSpeed * time);
-
-        System.out.println(direction);
-    }
+        }
 }
