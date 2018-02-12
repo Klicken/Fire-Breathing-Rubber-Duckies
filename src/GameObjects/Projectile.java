@@ -10,9 +10,9 @@ public class Projectile extends DynamicGameObject
     private Point2D mousePos;
     private Point2D direction;
 
-    public Projectile(Image image, double x, double y, double movementSpeed, Point2D mousePos, int health)
+    public Projectile(Image image, double x, double y, double movementSpeed, Point2D mousePos, int health, int damage)
     {
-        super(image, x, y, movementSpeed, health);
+        super(image, x, y, movementSpeed, health, damage);
         this.mousePos = mousePos;
         direction = getDirection();
 
@@ -33,6 +33,12 @@ public class Projectile extends DynamicGameObject
     {
         setPos(getX() +  direction.getX() * movementSpeed * time,
                 getY() +  direction.getY() * movementSpeed * time);
+
+    }
+
+    public boolean removeProjectile()
+    {
+        return (getX() > 1340 || getX() < -60 || getY() > 780 || getY() < -60);
 
     }
 

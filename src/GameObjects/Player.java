@@ -13,13 +13,14 @@ public class Player extends DynamicGameObject
     private static boolean up, down, left, right;
     private double dualKeyMovementSpeed = movementSpeed * 0.7;
     private Health playerHealth = new Health();
+    private int damage;
     /*
      *  Constructor that creates a DynamicGameObject that has eventhandlers,
      *  which processes keyboard inputs for movement related actions.
      */
-    private Player(Image image, double x, double y, double movementSpeed, int health)
+    private Player(Image image, double x, double y, double movementSpeed, int health, int damage)
     {
-        super(image, x, y, movementSpeed, health);
+        super(image, x, y, movementSpeed, health, damage);
         up = false;
         down = false;
         left = false;
@@ -68,10 +69,10 @@ public class Player extends DynamicGameObject
         instance = null;
     }
 
-    public static Player createInstance(Image image, double x, double y, double movementSpeed, int health)
+    public static Player createInstance(Image image, double x, double y, double movementSpeed, int health, int damage)
     {
         if(instance == null)
-            instance = new Player(image, x, y, movementSpeed, health);
+            instance = new Player(image, x, y, movementSpeed, health, damage);
         return instance;
     }
 

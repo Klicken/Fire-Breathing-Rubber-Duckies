@@ -6,9 +6,9 @@ import javafx.scene.image.Image;
 public class Enemy extends DynamicGameObject implements AI
 {
 
-    public Enemy(Image image, double x, double y, double movementSpeed, int health)
+    public Enemy(Image image, double x, double y, double movementSpeed, int health, int damage)
     {
-        super(image, x, y, movementSpeed, health);
+        super(image, x, y, movementSpeed, health, damage);
     }
 
     @Override

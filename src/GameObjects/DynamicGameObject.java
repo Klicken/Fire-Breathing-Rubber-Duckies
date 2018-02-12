@@ -10,18 +10,20 @@ public abstract class DynamicGameObject extends GameObject
     Point2D direction;
     private Health objectHealth;
     private boolean alive;
+    private int damage;
 
     /*
      *  Constructor that creates a GameObject with movementSpeed and velocity vector(vx, vy);
      */
 
-    public DynamicGameObject(Image image, double x, double y, double movementSpeed, int health) {
+    public DynamicGameObject(Image image, double x, double y, double movementSpeed, int health, int damage) {
         super(image, x, y);
         this.movementSpeed = movementSpeed;
         direction = new Point2D(0, 0);
         objectHealth = new Health();
         objectHealth.setHealth(health);
         alive = true;
+        this.damage = damage;
 
         objectHealth.healthProperty().addListener((ChangeListener<? super Number>) (value, oldValue, newValue) ->
         {
@@ -47,6 +49,7 @@ public abstract class DynamicGameObject extends GameObject
             point = point.add(direction);
             setPos(point.getX(), point.getY());
         }
+
     }
 
     /*
@@ -57,5 +60,19 @@ public abstract class DynamicGameObject extends GameObject
     {
         if (intersects(other))
             objectHealth.setHealth(objectHealth.getHealth() + healthValue);
+    }
+
+    public int getDamage()
+    {
+        return this.damage;
+    }
+
+    public boolean getAlive()
+    {
+        return this.alive;
+    }
+    public int getInstanceHealth()
+    {
+        return objectHealth.getHealth();
     }
 }
