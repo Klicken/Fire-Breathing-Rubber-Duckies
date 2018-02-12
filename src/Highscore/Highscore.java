@@ -1,5 +1,6 @@
+package Highscore;
+
 import java.io.Serializable;
-import java.util.Comparator;
 
 //A highscore class which creates an object of an int score and string name
 
