@@ -10,9 +10,9 @@ public class Projectile extends DynamicGameObject
     private Point2D mousePos;
     private Point2D direction;
 
-    public Projectile(Image image, double x, double y, double movementSpeed, Point2D mousePos)
+    public Projectile(Image image, double x, double y, double movementSpeed, Point2D mousePos, int health)
     {
-        super(image, x, y, movementSpeed);
+        super(image, x, y, movementSpeed, health);
         this.mousePos = mousePos;
         direction = getDirection();
 

@@ -1,5 +1,7 @@
 package GameObjects;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
@@ -10,14 +12,14 @@ public class Player extends DynamicGameObject
     private static Player instance = null;
     private static boolean up, down, left, right;
     private double dualKeyMovementSpeed = movementSpeed * 0.7;
-
+    private Health playerHealth = new Health();
     /*
      *  Constructor that creates a DynamicGameObject that has eventhandlers,
      *  which processes keyboard inputs for movement related actions.
      */
-    private Player(Image image, double x, double y, double movementSpeed)
+    private Player(Image image, double x, double y, double movementSpeed, int health)
     {
-        super(image, x, y, movementSpeed);
+        super(image, x, y, movementSpeed, health);
         up = false;
         down = false;
         left = false;
@@ -66,10 +68,10 @@ public class Player extends DynamicGameObject
         instance = null;
     }
 
-    public static Player createInstance(Image image, double x, double y, double movementSpeed)
+    public static Player createInstance(Image image, double x, double y, double movementSpeed, int health)
     {
         if(instance == null)
-            instance = new Player(image, x, y, movementSpeed);
+            instance = new Player(image, x, y, movementSpeed, health);
         return instance;
     }
 

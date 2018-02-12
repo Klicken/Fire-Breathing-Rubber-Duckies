@@ -73,9 +73,13 @@ public class GameHandler extends AnimationTimer {
         enemies.clear();
         projectiles.clear();
 
-        player = Player.createInstance(new Image("resources/penguin.png"), 500, 400, 200);
-        Enemy enemy1 = new Enemy(new Image("resources/penguin.png"), 600, 200, 0);
+        player = Player.createInstance(new Image("resources/penguin.png"), 500, 400, 400, 100);
+        Enemy enemy1 = new Enemy(new Image("resources/penguin.png"), 600, 200, 70, 10);
+        Enemy enemy2 = new Enemy(new Image("resources/penguin.png"), 200, 200, 80, 10);
+        Enemy enemy3 = new Enemy(new Image("resources/penguin.png"), 300, 200, 100, 10);
         enemies.add(enemy1);
+        enemies.add(enemy2);
+        enemies.add(enemy3);
     }
 
     /*
@@ -101,7 +105,12 @@ public class GameHandler extends AnimationTimer {
 
         for (Enemy enemy: enemies) {
             enemy.update(time);
-            player.collisionDetection(enemy);
+            player.collisionHandling(enemy);
+            for(Enemy otherEnemy: enemies) {
+                if(otherEnemy == enemy)
+                    continue;
+                otherEnemy.collisionHandling(enemy);
+            }
         }
         for (Projectile projectile: projectiles) {
             projectile.update(time);

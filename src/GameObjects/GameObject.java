@@ -41,4 +41,10 @@ public class GameObject extends ImageView
     {
         return new Point2D(getX() + getImage().getWidth()/2, getY() + getImage().getWidth()/2);
     }
+
+    public boolean intersects(GameObject other)
+    {
+        double distance = getCenter().distance(other.getCenter());
+        return (distance < getImage().getWidth()/2 + other.getImage().getWidth()/2) ;
+    }
 }
