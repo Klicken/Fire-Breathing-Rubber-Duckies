@@ -55,7 +55,7 @@ public class GameGenerator {
             for (int j = 0; j < 10; j++){
                 randomX = (int)(Math.random() * 2);
                 randomY = (int)(Math.random() * 2);
-                tmpArray.add(new Enemy(new Image("resources/penguin"+ i%4 +".png"), randomX * 1200, randomY * 680, 100, 100, -50));
+                tmpArray.add(new Enemy(new Image("resources/penguin"+ i%4 +".png"), randomX * 1200, randomY * 680, 100*(i+1)/2, 5, 10));
             }
 
             levelContent.put(i, tmpArray);

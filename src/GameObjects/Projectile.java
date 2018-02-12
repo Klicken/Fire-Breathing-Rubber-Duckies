@@ -28,7 +28,7 @@ public class Projectile extends DynamicGameObject {
 
     }
 
-    public boolean removeProjectile() {
+    public boolean outOfBounds() {
         return (getX() > 1340 || getX() < -60 || getY() > 780 || getY() < -60);
 
     }

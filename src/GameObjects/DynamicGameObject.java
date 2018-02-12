@@ -25,10 +25,9 @@ public abstract class DynamicGameObject extends GameObject {
 
         objectHealth.healthProperty().addListener((ChangeListener<? super Number>)
                 (value, oldValue, newValue) -> {
-                    System.out.println(oldValue);
-                    if ((int)newValue < 0) {
+                    //System.out.println(oldValue);
+                    if ((int)newValue <= 0) {
                         alive = false;
-                        System.out.println("You're dead");
                     }
                 });
     }
@@ -56,14 +55,14 @@ public abstract class DynamicGameObject extends GameObject {
     }
 
     public int getDamage() {
-        return this.damage;
+        return -damage;
     }
 
     public boolean getAlive() {
-        return this.alive;
+        return alive;
     }
 
-    public int getInstanceHealth() {
-        return objectHealth.getHealth();
+    public Health getInstanceHealth() {
+        return objectHealth;
     }
 }

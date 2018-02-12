@@ -19,6 +19,7 @@ public class GameHandler extends AnimationTimer {
     private static ArrayList<Projectile> projectiles;
     private static GameGenerator generator;
     private Group root;
+    private int score;
 
     public GameHandler() {
         stage = Main.getStage();
@@ -26,6 +27,7 @@ public class GameHandler extends AnimationTimer {
         projectiles = new ArrayList<Projectile>();
         lastTime = System.nanoTime();
         generator = new GameGenerator();
+        score = 1;
     }
 
     /*
@@ -42,7 +44,11 @@ public class GameHandler extends AnimationTimer {
         if (stage.getScene().getRoot() instanceof Group) {
             if (!resumed)
                 resumeGame();
-
+            if (score % 11 == 0 && score != 0) {
+                score++;
+                generator.startNextLevel();
+                generator.play();
+            }
             // UPDATE
             player.requestFocus();
             update(elapsedTime / 1000000000);
@@ -102,42 +108,63 @@ public class GameHandler extends AnimationTimer {
                 root.getChildren().add(projectile);
         }
     }
-
     private void update(double time) {
 
         player.update(time);
+        //if(!player.getAlive())
+
 
         int enemyIndex = enemies.size() - 1;
-        int projectileIndex = projectiles.size() - 1;
-        int otherEnemyIndex = enemies.size() - 1;
         for (int i = 0; i <= enemyIndex; enemyIndex--) {
 
             enemies.get(enemyIndex).update(time);
             player.collisionHandling(enemies.get(enemyIndex));
             player.changeHealth(enemies.get(enemyIndex), enemies.get(enemyIndex).getDamage());
 
+            // Checks the collision between enemies so they won't overlap
+            int otherEnemyIndex = enemies.size() - 1;
             for (int k = 0; k <= otherEnemyIndex; otherEnemyIndex--){
-
-                if (!(enemies.get(otherEnemyIndex)== enemies.get(enemyIndex)))
-                    enemies.get(otherEnemyIndex).collisionHandling(enemies.get(enemyIndex));
+                if (!(enemies.get(otherEnemyIndex) == enemies.get(enemyIndex)))
+                    enemies.get(enemyIndex).collisionHandling(enemies.get(otherEnemyIndex));
             }
+            /*
+             * Checks the collision between enemies and projectiles.
+             * Sets the health for projectiles to zero when they collide with an enemy
+             * Damages the enemy depending on the projectile damage.
+             */
+            int projectileIndex = projectiles.size() - 1;
+            for (int j = 0; j <= projectileIndex; projectileIndex--) {
+                if(enemies.get(enemyIndex).intersects(projectiles.get(projectileIndex))) {
+                    enemies.get(enemyIndex).changeHealth(projectiles.get(projectileIndex), projectiles.get(projectileIndex).getDamage());
+                    ((Group) Main.getStage().getScene().getRoot()).getChildren().remove(projectiles.get(projectileIndex));
+                    GameHandler.getProjectiles().remove(projectiles.get(projectileIndex));
 
+                }
+            }
+            /*
+             * Removes enemies when their alive boolean is false
+             */
             if (!enemies.get(enemyIndex).getAlive()) {
+                score++;
                 ((Group) Main.getStage().getScene().getRoot()).getChildren().remove(enemies.get(enemyIndex));
                 GameHandler.enemies.remove(enemies.get(enemyIndex));
             }
 
         }
-
+        /*
+         * Removes projectiles when their health reaches zero or they leave the screen.
+         */
+        int projectileIndex = projectiles.size() - 1;
         for (int j = 0; j <= projectileIndex; projectileIndex--) {
             projectiles.get(projectileIndex).update(time);
-            if (projectiles.get(projectileIndex).removeProjectile() || !projectiles.get(projectileIndex).getAlive()) {
+            if (projectiles.get(projectileIndex).outOfBounds() || !projectiles.get(projectileIndex).getAlive()) {
                 ((Group) Main.getStage().getScene().getRoot()).getChildren().remove(projectiles.get(projectileIndex));
                 GameHandler.getProjectiles().remove(projectiles.get(projectileIndex));
             }
         }
 
     }
+
 
     public static ArrayList<Projectile> getProjectiles () {
         return projectiles;
