@@ -4,8 +4,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 
-public abstract class DynamicGameObject extends GameObject
-{
+public abstract class DynamicGameObject extends GameObject {
     double movementSpeed;
     Point2D direction;
     private Health objectHealth;
@@ -15,7 +14,6 @@ public abstract class DynamicGameObject extends GameObject
     /*
      *  Constructor that creates a GameObject with movementSpeed and velocity vector(vx, vy);
      */
-
     public DynamicGameObject(Image image, double x, double y, double movementSpeed, int health, int damage) {
         super(image, x, y);
         this.movementSpeed = movementSpeed;
@@ -25,23 +23,20 @@ public abstract class DynamicGameObject extends GameObject
         alive = true;
         this.damage = damage;
 
-        objectHealth.healthProperty().addListener((ChangeListener<? super Number>) (value, oldValue, newValue) ->
-        {
-            System.out.println(oldValue);
-            if ((int)newValue < 0)
-            {
-                alive = false;
-                System.out.println("You're dead");
-            }
-        });
+        objectHealth.healthProperty().addListener((ChangeListener<? super Number>)
+                (value, oldValue, newValue) -> {
+                    System.out.println(oldValue);
+                    if ((int)newValue < 0) {
+                        alive = false;
+                        System.out.println("You're dead");
+                    }
+                });
     }
 
     public abstract void update(double time);
 
-    public void collisionHandling(GameObject other)
-    {
-        if(intersects(other))
-        {
+    public void collisionHandling(GameObject other) {
+        if(intersects(other)) {
             double distance = getCenter().distance(other.getCenter());
             double overlap = getImage().getWidth()/2 + other.getImage().getWidth()/2 - distance;
             direction = getCenter().subtract(other.getCenter());
@@ -49,30 +44,26 @@ public abstract class DynamicGameObject extends GameObject
             point = point.add(direction);
             setPos(point.getX(), point.getY());
         }
-
     }
 
     /*
-    *   Changes the health value of this object upon collison with another GameObject
-    *   The observable health value of this object will then be notified
-    */
-    public void changeHealth(GameObject other, int healthValue)
-    {
+     *   Changes the health value of this object upon collison with another GameObject
+     *   The observable health value of this object will then be notified
+     */
+    public void changeHealth(GameObject other, int healthValue) {
         if (intersects(other))
             objectHealth.setHealth(objectHealth.getHealth() + healthValue);
     }
 
-    public int getDamage()
-    {
+    public int getDamage() {
         return this.damage;
     }
 
-    public boolean getAlive()
-    {
+    public boolean getAlive() {
         return this.alive;
     }
-    public int getInstanceHealth()
-    {
+
+    public int getInstanceHealth() {
         return objectHealth.getHealth();
     }
 }

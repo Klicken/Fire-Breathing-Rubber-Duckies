@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MenuController">
+<VBox prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.MenuController">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
       <children>
@@ -21,7 +21,7 @@
                         <Font size="24.0" />
                      </font>
                   </Button>
-                  <Button fx:id="Game" mnemonicParsing="false" onAction="#resetGame" prefHeight="150.0" prefWidth="640.0" text="Restart">
+                  <Button fx:id="Game" mnemonicParsing="false" onAction="#startGame" prefHeight="150.0" prefWidth="640.0" text="Restart">
                      <VBox.margin>
                         <Insets bottom="10.0" />
                      </VBox.margin>
@@ -37,7 +37,7 @@
                         <Font size="24.0" />
                      </font>
                   </Button>
-                  <Button fx:id="Start" mnemonicParsing="false" onAction="#resetGame" prefHeight="150.0" prefWidth="640.0" text="Exit">
+                  <Button fx:id="Start" mnemonicParsing="false" onAction="#stopGame" prefHeight="150.0" prefWidth="640.0" text="Exit">
                      <font>
                         <Font size="24.0" />
                      </font></Button>

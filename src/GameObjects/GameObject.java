@@ -4,8 +4,7 @@ import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public class GameObject extends ImageView
-{
+public class GameObject extends ImageView {
     Point2D point;
 
     /*
@@ -13,8 +12,7 @@ public class GameObject extends ImageView
      *  the dimensions of the image-file.
      */
 
-    public GameObject(Image image, double x, double y)
-    {
+    public GameObject(Image image, double x, double y) {
         super.setImage(image);
         setX(x);
         setY(y);
@@ -25,25 +23,21 @@ public class GameObject extends ImageView
      *  Sets the position of the GameObject (The top-left corner).
      */
 
-    public void setPos(double x, double y)
-    {
+    public void setPos(double x, double y) {
         setX(x);
         setY(y);
         point = new Point2D(x, y);
     }
 
-    public Point2D getPoint()
-    {
+    public Point2D getPoint() {
         return point;
     }
 
-    public Point2D getCenter()
-    {
+    public Point2D getCenter() {
         return new Point2D(getX() + getImage().getWidth()/2, getY() + getImage().getWidth()/2);
     }
 
-    public boolean intersects(GameObject other)
-    {
+    public boolean intersects(GameObject other) {
         double distance = getCenter().distance(other.getCenter());
         return (distance < getImage().getWidth()/2 + other.getImage().getWidth()/2) ;
     }

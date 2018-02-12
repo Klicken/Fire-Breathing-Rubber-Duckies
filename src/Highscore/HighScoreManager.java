@@ -9,16 +9,13 @@ import java.util.*;
  */
 
 public class HighScoreManager {
-
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         Highscore score1 = new Highscore(777,"Oscar");
         HighScoreManager manager = new HighScoreManager();
         //manager.addHighscore(score1);
         ArrayList<Highscore> scores = new ArrayList<Highscore>();
         scores = manager.readHighscoreFromServer();
-        for(int i = 0; i < scores.size(); i++)
-        {
+        for(int i = 0; i < scores.size(); i++) {
             System.out.println("Name: " + scores.get(i).getName() + " Score: " + scores.get(i).getScore());
         }
     }
@@ -29,8 +26,7 @@ public class HighScoreManager {
     ObjectInputStream clientInputStream = null;
 
     // This method will open a socketconnection to a server with its IP adress and port.
-    private void connectToServer()
-    {
+    private void connectToServer() {
         try {
             socketConnection = new Socket("127.0.0.1", 11111);
 
@@ -40,8 +36,7 @@ public class HighScoreManager {
     }
 
     // This method will add a new highscore to the server through a socketconnection and objectoutputstream.
-    public void writeHighScoreToServer(Highscore score)
-    {
+    public void writeHighScoreToServer(Highscore score) {
         connectToServer();
         try {
             ObjectInputStream  clientInputStream = new ObjectInputStream(socketConnection.getInputStream());
@@ -55,7 +50,7 @@ public class HighScoreManager {
             e.printStackTrace();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             try {
                 if (clientOutputStream != null) {
                     clientOutputStream.flush();
@@ -72,15 +67,13 @@ public class HighScoreManager {
      * This method will get all highscores saved on the server, passing null to the outputstream to tell the server
      * to only read highscores and send them back, without adding a new highscore.
      */
-    public ArrayList<Highscore> readHighscoreFromServer()
-    {
+    public ArrayList<Highscore> readHighscoreFromServer() {
         connectToServer();
         try {
             clientInputStream = new ObjectInputStream(socketConnection.getInputStream());
             highscores = (ArrayList<Highscore>) clientInputStream.readObject();
             clientOutputStream = new ObjectOutputStream(socketConnection.getOutputStream());
             clientOutputStream.writeObject(null);
-
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
         } catch (IOException e) {
@@ -90,12 +83,10 @@ public class HighScoreManager {
         } finally {
             try {
                 if (clientInputStream != null) {
-
                     clientInputStream.close();
                     socketConnection.close();
                 }
-                if (clientOutputStream != null)
-                {
+                if (clientOutputStream != null) {
                     clientOutputStream.close();
                     socketConnection.close();
                 }
@@ -107,8 +98,7 @@ public class HighScoreManager {
     }
 
     // This method will translate our highscore objects to Strings.
-    public String getHighscoreString()
-    {
+    public String getHighscoreString() {
         String highscoreString = "";
         int max = 10;
 

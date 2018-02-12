@@ -2,7 +2,6 @@ package GameObjects;
 
 import javafx.geometry.Point2D;
 
-public interface AI
-{
+public interface AI {
     Point2D seekPlayer();
 }

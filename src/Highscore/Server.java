@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 /*
-    This class will manage a server with socketconnection available on its IP adress and port for a client to connect to.
-    The server can receive and send highscores to a client. If a client sends and highscore, it will be saved on a dat-file.
-    If the client requests all highscores, the server will send all highscores saved on the dat-file back sorted.
+ *  This class will manage a server with socketconnection available on its IP adress and port for a client to connect to.
+ *  The server can receive and send highscores to a client. If a client sends and highscore, it will be saved on a dat-file.
+ *  If the client requests all highscores, the server will send all highscores saved on the dat-file back sorted.
  */
 
 public class Server {
@@ -66,8 +66,7 @@ public class Server {
                         serverOutputStream.flush();
                         serverOutputStream.close();
                     }
-                    if(serverInputStream != null)
-                    {
+                    if(serverInputStream != null) {
                         serverInputStream.close();
                     }
                 } catch (IOException e) {
@@ -113,7 +112,6 @@ public class Server {
                 e.printStackTrace();
             }
         }
-
     }
 
     //This method will read objects from the saved dat-file
@@ -138,7 +136,5 @@ public class Server {
                 e.printStackTrace();
             }
         }
-
     }
-
 }

@@ -1,11 +1,10 @@
-import GameObjects.*;
+package Game;
 
+import GameObjects.*;
 import javafx.animation.AnimationTimer;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-
-
 import java.util.ArrayList;
 
 public class GameHandler extends AnimationTimer {
@@ -18,12 +17,15 @@ public class GameHandler extends AnimationTimer {
     private static Player player;
     private static ArrayList<Enemy> enemies;
     private static ArrayList<Projectile> projectiles;
+    private static GameGenerator generator;
+    private Group root;
 
     public GameHandler() {
         stage = Main.getStage();
         enemies = new ArrayList<Enemy>();
         projectiles = new ArrayList<Projectile>();
         lastTime = System.nanoTime();
+        generator = new GameGenerator();
     }
 
     /*
@@ -44,6 +46,7 @@ public class GameHandler extends AnimationTimer {
             // UPDATE
             player.requestFocus();
             update(elapsedTime / 1000000000);
+            addToRoot();
 
             // SLEEP
             try {
@@ -52,7 +55,8 @@ public class GameHandler extends AnimationTimer {
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-        } else
+        }
+        else
             resumed = false;
     }
 
@@ -60,20 +64,18 @@ public class GameHandler extends AnimationTimer {
      * Is called from MenuController
      */
     public static void initGame() {
+        endGame();
+        player = Player.createInstance(new Image("resources/penguin0.png"), 500, 400, 200, 100, -50);
+        generator.startLevel();
+    }
+
+    public static void endGame() {
         /*
-         * Start by removing old objects
+         * Removes old objects
          */
         Player.nullInstance();
         enemies.clear();
         projectiles.clear();
-
-        player = Player.createInstance(new Image("resources/penguin.png"), 500, 400, 400, 100, 0);
-        Enemy enemy1 = new Enemy(new Image("resources/penguin.png"), 600, 200, 70, 10, -1);
-        Enemy enemy2 = new Enemy(new Image("resources/penguin.png"), 200, 200, 80, 10, -1);
-        Enemy enemy3 = new Enemy(new Image("resources/penguin.png"), 300, 200, 100, 10, -1);
-        enemies.add(enemy1);
-        enemies.add(enemy2);
-        enemies.add(enemy3);
     }
 
     /*
@@ -82,21 +84,28 @@ public class GameHandler extends AnimationTimer {
      */
     private void resumeGame() {
         Player.stop();
-        ((Group) stage.getScene().getRoot()).getChildren().add(player);
-        for (Enemy enemy : enemies) {
-            ((Group) stage.getScene().getRoot()).getChildren().add(enemy);
-        }
-        for (Projectile projectile : projectiles) {
-            ((Group) stage.getScene().getRoot()).getChildren().add(projectile);
-        }
+        generator.play();
+        if(root != null)
+            root.getChildren().clear();
+        root = (Group)stage.getScene().getRoot();
+        root.getChildren().add(player);
         resumed = true;
+    }
+
+    private void addToRoot() {
+        for (Enemy enemy: enemies) {
+            if(enemy.getParent() == null)
+                root.getChildren().add(enemy);
+        }
+        for (Projectile projectile: projectiles) {
+            if(projectile.getParent() == null)
+                root.getChildren().add(projectile);
+        }
     }
 
     private void update(double time) {
 
         player.update(time);
-        //if(!player.getAlive())
-
 
         int enemyIndex = enemies.size() - 1;
         int projectileIndex = projectiles.size() - 1;
@@ -110,15 +119,13 @@ public class GameHandler extends AnimationTimer {
             for (int k = 0; k <= otherEnemyIndex; otherEnemyIndex--){
 
                 if (!(enemies.get(otherEnemyIndex)== enemies.get(enemyIndex)))
-                enemies.get(otherEnemyIndex).collisionHandling(enemies.get(enemyIndex));
+                    enemies.get(otherEnemyIndex).collisionHandling(enemies.get(enemyIndex));
             }
 
-                //System.out.println(enemies.get(enemyIndex).getAlive());
-                //System.out.print(enemies.get(enemyIndex).getInstanceHealth());
-                if (!enemies.get(enemyIndex).getAlive()) {
-                    ((Group) Main.getStage().getScene().getRoot()).getChildren().remove(enemies.get(enemyIndex));
-                    GameHandler.enemies.remove(enemies.get(enemyIndex));
-                }
+            if (!enemies.get(enemyIndex).getAlive()) {
+                ((Group) Main.getStage().getScene().getRoot()).getChildren().remove(enemies.get(enemyIndex));
+                GameHandler.enemies.remove(enemies.get(enemyIndex));
+            }
 
         }
 
@@ -132,10 +139,15 @@ public class GameHandler extends AnimationTimer {
 
     }
 
-        public static ArrayList<Projectile> getProjectiles ()
-        {
-            return projectiles;
-        }
+    public static ArrayList<Projectile> getProjectiles () {
+        return projectiles;
     }
 
+    public static ArrayList<Enemy> getEnemies() {
+        return enemies;
+    }
 
+    public GameGenerator getGenerator() {
+        return generator;
+    }
+}
