@@ -2,7 +2,9 @@ package Game;
 
 import GameObjects.*;
 import javafx.animation.AnimationTimer;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
+import javafx.scene.Parent;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import java.util.ArrayList;
@@ -20,6 +22,7 @@ public class GameHandler extends AnimationTimer {
     private static GameGenerator generator;
     private Group root;
     private static int score;
+    private Parent gameover;
 
     // UI elements
     private UI playerHealthUI;
@@ -57,6 +60,17 @@ public class GameHandler extends AnimationTimer {
             player.requestFocus();
             update(elapsedTime / 1000000000);
             addToRoot();
+
+            // Set the root to GameOver.fxml when Player is dead
+            if(!player.getAlive()){
+                try {
+                    generator.pause();
+                    gameover = FXMLLoader.load(getClass().getResource("/resources/GameOver.fxml"));
+                    stage.getScene().setRoot(gameover);
+                } catch (Exception e){
+                    System.err.println(e);
+                }
+            }
 
             // SLEEP
             try {
@@ -120,9 +134,6 @@ public class GameHandler extends AnimationTimer {
 
         player.update(time);
         player.constrainToWindow();
-        //if(!player.getAlive())
-          //  System.out.println(score);
-
 
         int enemyIndex = enemies.size() - 1;
         for (int i = 0; i <= enemyIndex; enemyIndex--) {

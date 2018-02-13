@@ -45,6 +45,11 @@ public class MenuController {
         menuButton(event);
     }
 
+
+    public void submitButton() {
+        System.out.println("Submit");
+    }
+
     /*
      *  quitButton is called when the quit button in the start menu is clicked.
      */
