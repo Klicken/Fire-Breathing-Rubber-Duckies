@@ -21,6 +21,9 @@ public class GameHandler extends AnimationTimer {
     private Group root;
     private static int score;
 
+    // UI elements
+    private UI playerHealthUI;
+
     public GameHandler() {
         stage = Main.getStage();
         enemies = new ArrayList<Enemy>();
@@ -70,10 +73,11 @@ public class GameHandler extends AnimationTimer {
     /*
      * Is called from MenuController
      */
-    public static void initGame() {
+    public void initGame() {
         endGame();
         player = Player.createInstance(new Image("resources/penguin0.png"), 500, 400, 200, 100, -50);
         generator.startLevel();
+        playerHealthUI = new UI(10, 15, "HP: " + UI.playerHealthString());
     }
 
     public static void endGame() {
@@ -98,6 +102,7 @@ public class GameHandler extends AnimationTimer {
             root.getChildren().clear();
         root = (Group)stage.getScene().getRoot();
         root.getChildren().add(player);
+        root.getChildren().add(playerHealthUI);
         resumed = true;
     }
 
@@ -126,6 +131,7 @@ public class GameHandler extends AnimationTimer {
             enemies.get(enemyIndex).update(time);
             player.collisionHandling(getEnemy);
             player.changeHealth(getEnemy, getEnemy.getDamage());
+            playerHealthUI.updateText("HP: " + UI.playerHealthString());
 
             // Checks the collision between enemies so they won't overlap
             int otherEnemyIndex = enemies.size() - 1;

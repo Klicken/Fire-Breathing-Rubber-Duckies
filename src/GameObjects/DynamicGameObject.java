@@ -74,4 +74,9 @@ public abstract class DynamicGameObject extends GameObject {
     public boolean getAlive() {
         return alive;
     }
+
+    public int getHealthValue()
+    {
+        return objectHealth.getHealth();
+    }
 }

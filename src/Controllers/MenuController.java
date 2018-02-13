@@ -2,6 +2,7 @@ package Controllers;
 
 import Game.GameHandler;
 import Highscore.HighScoreManager;
+import Game.Main;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -35,7 +36,7 @@ public class MenuController {
     }
 
     public void startGame(ActionEvent event) throws Exception {
-        GameHandler.initGame();
+        Main.getGameHandler().initGame();
         menuButton(event);
     }
 
