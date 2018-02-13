@@ -102,7 +102,7 @@ public class GameHandler extends AnimationTimer {
         enemies.clear();
         projectiles.clear();
         generator = new GameGenerator();
-
+        score = 1;
     }
 
     /*

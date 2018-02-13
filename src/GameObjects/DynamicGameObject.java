@@ -53,8 +53,8 @@ public abstract class DynamicGameObject extends GameObject {
             double overlap = getImage().getWidth()/2 + other.getImage().getWidth()/2 - distance;
             direction = getCenter().subtract(other.getCenter());
             direction = direction.normalize().multiply(overlap/2);
-            point = point.add(direction);
-            setPos(point.getX(), point.getY());
+            positon = positon.add(direction);
+            setPos(positon.getX(), positon.getY());
         }
     }
 

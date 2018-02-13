@@ -1,6 +1,8 @@
 package GameObjects;
 
+import Game.Main;
 import javafx.geometry.Point2D;
+import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import static java.lang.Math.abs;
@@ -32,6 +34,20 @@ public class Player extends DynamicGameObject {
                 }
         );
 
+        /*
+         *  Shooting with arrow keys
+         */
+        this.addEventHandler(KeyEvent.KEY_PRESSED,
+                event -> {
+                    switch (event.getCode()) {
+                        case UP: shoot(0,-1); break;
+                        case DOWN: shoot(0,1); break;
+                        case LEFT: shoot(-1,0); break;
+                        case RIGHT: shoot(1,0); break;
+                    }
+                }
+        );
+
         this.addEventHandler(KeyEvent.KEY_RELEASED,
                 event -> {
                     switch (event.getCode()) {
@@ -42,6 +58,15 @@ public class Player extends DynamicGameObject {
                     }
                 }
         );
+    }
+
+    /*
+     *  Shooting with arrow keys
+     */
+    private void shoot(int x, int y){
+        Projectile p = new Projectile(new Image("/resources/apple.png"), Player.getInstance().getX() + 17, Player.getInstance().getY() + 14, 400,new Point2D(Player.getInstance().getX() + x, Player.getInstance().getY() + y), 1, 1);
+        ((Group)Main.getStage().getScene().getRoot()).getChildren().add(p);
+        Main.getGameHandler().getProjectiles().add(p);
     }
 
     /*

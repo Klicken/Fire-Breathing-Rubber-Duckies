@@ -21,7 +21,7 @@ public class Projectile extends DynamicGameObject {
     *   and where the mouse was clicked.
     */
     private Point2D getDirection() {
-        return mousePos.subtract(Player.getInstance().getPoint()).normalize();
+        return mousePos.subtract(Player.getInstance().getPositon()).normalize();
     }
 
     /*

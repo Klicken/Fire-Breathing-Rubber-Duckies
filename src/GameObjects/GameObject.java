@@ -9,10 +9,10 @@ import javafx.scene.image.ImageView;
 *   Extends the ImageView class in order to make use of the JavaFX node system, the node system is then used to
 *   render and update all the objects in the main game-loop found in the GameHandler class.
 *
-*   A point is also added to the class to keep track of it's 2D position vector.
+*   A positon is also added to the class to keep track of it's 2D position vector.
 */
 public class GameObject extends ImageView {
-    Point2D point;
+    Point2D positon;
 
     /*
      *  Constructor that creates an object at given position, dimensions and hitbox are set according to
@@ -22,7 +22,7 @@ public class GameObject extends ImageView {
         super.setImage(image);
         setX(x);
         setY(y);
-        point = new Point2D(x, y);
+        positon = new Point2D(x, y);
     }
 
     /*
@@ -32,15 +32,15 @@ public class GameObject extends ImageView {
     void setPos(double x, double y) {
         setX(x);
         setY(y);
-        point = new Point2D(x, y);
+        positon = new Point2D(x, y);
     }
 
-    public Point2D getPoint() {
-        return point;
+    public Point2D getPositon() {
+        return positon;
     }
 
     /*
-    *   Calculates the center point of the Image assoiated with the GameObject
+    *   Calculates the center positon of the Image assoiated with the GameObject
     */
     public Point2D getCenter() {
         return new Point2D(getX() + getImage().getWidth()/2, getY() + getImage().getWidth()/2);

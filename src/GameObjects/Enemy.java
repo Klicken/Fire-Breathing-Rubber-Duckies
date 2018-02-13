@@ -25,6 +25,6 @@ public class Enemy extends DynamicGameObject implements AI {
     */
     @Override
     public Point2D seekPlayer() {
-        return Player.getInstance().getPoint().subtract(getPoint()).normalize();
+        return Player.getInstance().getPositon().subtract(getPositon()).normalize();
     }
 }
