@@ -115,20 +115,23 @@ public class GameHandler extends AnimationTimer {
         player.update(time);
         player.constrainToWindow();
         //if(!player.getAlive())
+          //  System.out.println(score);
 
 
         int enemyIndex = enemies.size() - 1;
         for (int i = 0; i <= enemyIndex; enemyIndex--) {
+            Enemy getEnemy = enemies.get(enemyIndex);
 
             enemies.get(enemyIndex).update(time);
-            player.collisionHandling(enemies.get(enemyIndex));
-            player.changeHealth(enemies.get(enemyIndex), enemies.get(enemyIndex).getDamage());
+            player.collisionHandling(getEnemy);
+            player.changeHealth(getEnemy, getEnemy.getDamage());
 
             // Checks the collision between enemies so they won't overlap
             int otherEnemyIndex = enemies.size() - 1;
             for (int k = 0; k <= otherEnemyIndex; otherEnemyIndex--){
-                if (!(enemies.get(otherEnemyIndex) == enemies.get(enemyIndex)))
-                    enemies.get(enemyIndex).collisionHandling(enemies.get(otherEnemyIndex));
+                Enemy getOtherEnemy = enemies.get(otherEnemyIndex);
+                if (!(getOtherEnemy == getEnemy))
+                    getEnemy.collisionHandling(getOtherEnemy);
             }
             /*
              * Checks the collision between enemies and projectiles.
@@ -137,20 +140,21 @@ public class GameHandler extends AnimationTimer {
              */
             int projectileIndex = projectiles.size() - 1;
             for (int j = 0; j <= projectileIndex; projectileIndex--) {
-                if(enemies.get(enemyIndex).intersects(projectiles.get(projectileIndex))) {
-                    enemies.get(enemyIndex).changeHealth(projectiles.get(projectileIndex), projectiles.get(projectileIndex).getDamage());
-                    ((Group) Main.getStage().getScene().getRoot()).getChildren().remove(projectiles.get(projectileIndex));
-                    GameHandler.getProjectiles().remove(projectiles.get(projectileIndex));
+                Projectile getProjectile = projectiles.get(projectileIndex);
+                if(getEnemy.intersects(getProjectile)) {
+                    getEnemy.changeHealth(getProjectile, getProjectile.getDamage());
+                    ((Group) Main.getStage().getScene().getRoot()).getChildren().remove(getProjectile);
+                    GameHandler.getProjectiles().remove(getProjectile);
 
                 }
             }
             /*
              * Removes enemies when their alive boolean is false
              */
-            if (!enemies.get(enemyIndex).getAlive()) {
+            if (!getEnemy.getAlive()) {
                 score++;
-                ((Group) Main.getStage().getScene().getRoot()).getChildren().remove(enemies.get(enemyIndex));
-                GameHandler.enemies.remove(enemies.get(enemyIndex));
+                ((Group) Main.getStage().getScene().getRoot()).getChildren().remove(getEnemy);
+                GameHandler.enemies.remove(getEnemy);
             }
 
         }
@@ -159,10 +163,11 @@ public class GameHandler extends AnimationTimer {
          */
         int projectileIndex = projectiles.size() - 1;
         for (int j = 0; j <= projectileIndex; projectileIndex--) {
-            projectiles.get(projectileIndex).update(time);
-            if (projectiles.get(projectileIndex).outOfBounds() || !projectiles.get(projectileIndex).getAlive()) {
-                ((Group) Main.getStage().getScene().getRoot()).getChildren().remove(projectiles.get(projectileIndex));
-                GameHandler.getProjectiles().remove(projectiles.get(projectileIndex));
+            Projectile getProjectile = projectiles.get(projectileIndex);
+            getProjectile.update(time);
+            if (getProjectile.outOfBounds() || !getProjectile.getAlive()) {
+                ((Group) Main.getStage().getScene().getRoot()).getChildren().remove(getProjectile);
+                GameHandler.getProjectiles().remove(getProjectile);
             }
         }
 
