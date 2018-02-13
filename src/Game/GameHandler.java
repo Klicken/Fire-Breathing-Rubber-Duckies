@@ -19,7 +19,7 @@ public class GameHandler extends AnimationTimer {
     private static ArrayList<Projectile> projectiles;
     private static GameGenerator generator;
     private Group root;
-    private int score;
+    private static int score;
 
     public GameHandler() {
         stage = Main.getStage();
@@ -44,7 +44,7 @@ public class GameHandler extends AnimationTimer {
         if (stage.getScene().getRoot() instanceof Group) {
             if (!resumed)
                 resumeGame();
-            if (score % 11 == 0 && score != 0) {
+            if (score % 10 == 0 && score != 0) {
                 score++;
                 generator.startNextLevel();
                 generator.play();
@@ -82,6 +82,8 @@ public class GameHandler extends AnimationTimer {
         Player.nullInstance();
         enemies.clear();
         projectiles.clear();
+        generator = new GameGenerator();
+        score = 0;
     }
 
     /*
