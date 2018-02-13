@@ -26,6 +26,10 @@ public class InputController {
             source.getScene().setRoot(root);
         }
     }
+
+    /*
+    *   Fires a projectile from the player when the mouse is pressed.
+    */
     public void shoot(MouseEvent event){
         if(event.getButton() == MouseButton.PRIMARY){
             Projectile p = new Projectile(new Image("/resources/apple.png"), Player.getInstance().getX(), Player.getInstance().getY(), 400,new Point2D(event.getX(),event.getY()), 1, 1);

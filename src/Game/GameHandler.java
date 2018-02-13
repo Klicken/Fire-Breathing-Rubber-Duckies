@@ -113,6 +113,7 @@ public class GameHandler extends AnimationTimer {
     private void update(double time) {
 
         player.update(time);
+        player.constrainToWindow();
         //if(!player.getAlive())
 
 

@@ -12,9 +12,9 @@ public abstract class DynamicGameObject extends GameObject {
     private int damage;
 
     /*
-     *  Constructor that creates a GameObject with movementSpeed and velocity vector(vx, vy);
+     *  Constructor that creates a GameObject with movementSpeed, direction vector, health and damage;
      */
-    public DynamicGameObject(Image image, double x, double y, double movementSpeed, int health, int damage) {
+    DynamicGameObject(Image image, double x, double y, double movementSpeed, int health, int damage) {
         super(image, x, y);
         this.movementSpeed = movementSpeed;
         direction = new Point2D(0, 0);
@@ -23,6 +23,11 @@ public abstract class DynamicGameObject extends GameObject {
         alive = true;
         this.damage = damage;
 
+        /*
+        *   Adds a changeListener to the integer value wrapped by the health class.
+        *   Changes the state of DynamicGameObjects to alive or not, this is used
+        *   to remove object instances from the screen.
+        */
         objectHealth.healthProperty().addListener((ChangeListener<? super Number>)
                 (value, oldValue, newValue) -> {
                     //System.out.println(oldValue);
@@ -32,8 +37,16 @@ public abstract class DynamicGameObject extends GameObject {
                 });
     }
 
+    /*
+    *   Abstract method implementesd in subclasses to determine how to update the Objects
+    *   in main game-loop.
+    */
     public abstract void update(double time);
 
+    /*
+    *   If a DynamicGameObject intersects another GameObject, the DGO is repelled back
+    *   to ensure objects don't overlap or pass straight through each other.
+    */
     public void collisionHandling(GameObject other) {
         if(intersects(other)) {
             double distance = getCenter().distance(other.getCenter());
@@ -60,9 +73,5 @@ public abstract class DynamicGameObject extends GameObject {
 
     public boolean getAlive() {
         return alive;
-    }
-
-    public Health getInstanceHealth() {
-        return objectHealth;
     }
 }

@@ -9,6 +9,9 @@ public class Enemy extends DynamicGameObject implements AI {
         super(image, x, y, movementSpeed, health, damage);
     }
 
+    /*
+    *   Updates the position of the enemy based on simple AI-behaviour.
+    */
     @Override
     public void update(double time) {
         Point2D direction = seekPlayer();
@@ -16,10 +19,12 @@ public class Enemy extends DynamicGameObject implements AI {
                 getY() +  direction.getY() * movementSpeed * time);
     }
 
+    /*
+    *   Calculates a direction vector for the Enemy to follow based on the players position.
+    *   The enemy then will seek out the player to damage it on physical contact.
+    */
     @Override
     public Point2D seekPlayer() {
         return Player.getInstance().getPoint().subtract(getPoint()).normalize();
     }
-
-
 }
