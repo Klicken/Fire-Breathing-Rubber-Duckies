@@ -42,9 +42,10 @@ public class GameHandler extends AnimationTimer {
         //System.out.println("FPS: " + fps);
 
         if (stage.getScene().getRoot() instanceof Group) {
-            if (!resumed)
+            if (!resumed) {
                 resumeGame();
-            if (score % 10 == 0 && score != 0) {
+            }
+            if (score % 11 == 0) {
                 score++;
                 generator.startNextLevel();
                 generator.play();
@@ -83,7 +84,7 @@ public class GameHandler extends AnimationTimer {
         enemies.clear();
         projectiles.clear();
         generator = new GameGenerator();
-        score = 0;
+
     }
 
     /*
