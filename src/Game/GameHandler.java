@@ -203,4 +203,6 @@ public class GameHandler extends AnimationTimer {
     public GameGenerator getGenerator() {
         return generator;
     }
+
+    public static int getScore() { return score; }
 }

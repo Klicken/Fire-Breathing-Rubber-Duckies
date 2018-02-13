@@ -39,7 +39,7 @@ public class Server {
     public void runServer() {
         while(true) {
             try {
-                ServerSocket socketConnection = new ServerSocket(3000);
+                ServerSocket socketConnection = new ServerSocket(11111);
                 System.out.println("Server Waiting");
                 Socket pipe = socketConnection.accept();
 

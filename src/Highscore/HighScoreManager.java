@@ -18,7 +18,7 @@ public class HighScoreManager {
     // This method will open a socketconnection to a server with its IP adress and port.
     private void connectToServer() {
         try {
-            socketConnection = new Socket("192.168.43.95", 3000);
+            socketConnection = new Socket("127.0.0.1", 11111);
 
         } catch (Exception e) {
             e.printStackTrace();

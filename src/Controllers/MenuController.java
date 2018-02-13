@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import Highscore.*;
@@ -46,8 +47,13 @@ public class MenuController {
     }
 
 
-    public void submitButton() {
-        System.out.println("Submit");
+    public void submitButton(ActionEvent event) throws Exception {
+        Node source = (Node) event.getSource();
+        Stage stage = (Stage) source.getScene().getWindow();
+        TextField getName = (TextField)(stage.getScene().lookup("#inputName"));
+        HighScoreManager h = new HighScoreManager();
+        h.writeHighScoreToServer(new Highscore(GameHandler.getScore(),getName.getText()));
+        menuButton(event);
     }
 
     /*
