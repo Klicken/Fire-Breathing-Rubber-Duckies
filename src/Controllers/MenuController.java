@@ -1,6 +1,7 @@
 package Controllers;
 
 import Game.GameHandler;
+import Highscore.HighScoreManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -8,6 +9,8 @@ import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import Highscore.*;
+import java.util.ArrayList;
 
 public class MenuController {
 
@@ -22,11 +25,11 @@ public class MenuController {
         Parent root = FXMLLoader.load(getClass().getResource("/resources/"+ source.getId() +".fxml"));
         source.getScene().setRoot(root);
         if(source.getId().equals("Scoreboard")){
-            ((GridPane)stage.getScene().lookup("#table")).add(new Label("test"), 1, 0);
-            ((GridPane)stage.getScene().lookup("#table")).add(new Label("test"), 1, 1);
-            ((GridPane)stage.getScene().lookup("#table")).add(new Label("test"), 1, 2);
-            ((GridPane)stage.getScene().lookup("#table")).add(new Label("test"), 1, 3);
-            ((GridPane)stage.getScene().lookup("#table")).add(new Label("test"), 1, 4);
+            ArrayList<Highscore> highscores = new HighScoreManager().readHighscoreFromServer();
+            for(int i = 0; i < highscores.size() ;i++){
+                ((GridPane)stage.getScene().lookup("#table")).add(new Label(highscores.get(i).getName()), 1, i);
+                ((GridPane)stage.getScene().lookup("#table")).add(new Label(Integer.toString(highscores.get(i).getScore())), 2, i);
+            }
         }
         root.requestFocus();
     }

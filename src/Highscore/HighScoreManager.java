@@ -9,16 +9,6 @@ import java.util.*;
  */
 
 public class HighScoreManager {
-    public static void main(String[] args) {
-        Highscore score1 = new Highscore(777,"Oscar");
-        HighScoreManager manager = new HighScoreManager();
-        //manager.addHighscore(score1);
-        ArrayList<Highscore> scores = new ArrayList<Highscore>();
-        scores = manager.readHighscoreFromServer();
-        for(int i = 0; i < scores.size(); i++) {
-            System.out.println("Name: " + scores.get(i).getName() + " Score: " + scores.get(i).getScore());
-        }
-    }
 
     private ArrayList<Highscore> highscores = new ArrayList<Highscore>();
     private Socket socketConnection;
@@ -28,7 +18,7 @@ public class HighScoreManager {
     // This method will open a socketconnection to a server with its IP adress and port.
     private void connectToServer() {
         try {
-            socketConnection = new Socket("127.0.0.1", 11111);
+            socketConnection = new Socket("192.168.43.95", 3000);
 
         } catch (Exception e) {
             e.printStackTrace();
