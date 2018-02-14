@@ -1,6 +1,5 @@
 package Controllers;
 
-import Game.GameHandler;
 import Highscore.HighScoreManager;
 import Game.Main;
 import javafx.event.ActionEvent;
@@ -42,7 +41,7 @@ public class MenuController {
     }
 
     public void stopGame(ActionEvent event) throws Exception {
-        GameHandler.endGame();
+        Main.getGameHandler().endGame();
         menuButton(event);
     }
 
@@ -52,7 +51,7 @@ public class MenuController {
         Stage stage = (Stage) source.getScene().getWindow();
         TextField getName = (TextField)(stage.getScene().lookup("#inputName"));
         HighScoreManager h = new HighScoreManager();
-        h.writeHighScoreToServer(new Highscore(GameHandler.getScore(),getName.getText()));
+        h.writeHighScoreToServer(new Highscore(Main.getGameHandler().getScore(),getName.getText()));
         menuButton(event);
     }
 

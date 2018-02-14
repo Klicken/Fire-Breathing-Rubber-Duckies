@@ -41,7 +41,7 @@ public class GameGenerator {
     }
 
     private void spawn() {
-        GameHandler.getEnemies().add(levelContent.get(level).get(count));
+        Main.getGameHandler().getEnemies().add(levelContent.get(level).get(count));
 
         count++;
         if(count == 10)

@@ -101,7 +101,7 @@ public class GameHandler extends AnimationTimer {
 
     }
 
-    public static void endGame() {
+    public void endGame() {
         /*
          * Removes old objects
          */
@@ -171,7 +171,7 @@ public class GameHandler extends AnimationTimer {
                 if(getEnemy.intersects(getProjectile)) {
                     getEnemy.changeHealth(getProjectile, getProjectile.getDamage());
                     ((Group) Main.getStage().getScene().getRoot()).getChildren().remove(getProjectile);
-                    GameHandler.getProjectiles().remove(getProjectile);
+                    getProjectiles().remove(getProjectile);
 
                 }
             }
@@ -194,18 +194,18 @@ public class GameHandler extends AnimationTimer {
             getProjectile.update(time);
             if (getProjectile.outOfBounds() || !getProjectile.getAlive()) {
                 ((Group) Main.getStage().getScene().getRoot()).getChildren().remove(getProjectile);
-                GameHandler.getProjectiles().remove(getProjectile);
+                getProjectiles().remove(getProjectile);
             }
         }
 
     }
 
 
-    public static ArrayList<Projectile> getProjectiles () {
+    public ArrayList<Projectile> getProjectiles () {
         return projectiles;
     }
 
-    public static ArrayList<Enemy> getEnemies() {
+    public ArrayList<Enemy> getEnemies() {
         return enemies;
     }
 
@@ -213,8 +213,9 @@ public class GameHandler extends AnimationTimer {
         return generator;
     }
 
-    public static int getScore() { return score; }
-
+    public int getScore() {
+        return score;
+    }
 
     /*
     * These three methods are for initializing, updateing and displaying the UI elements.
