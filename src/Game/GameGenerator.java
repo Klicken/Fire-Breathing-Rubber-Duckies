@@ -70,4 +70,8 @@ public class GameGenerator {
     public void play() {
         timeline.play();
     }
+
+    public int getLevel(){
+        return level;
+    }
 }

@@ -26,6 +26,8 @@ public class GameHandler extends AnimationTimer {
 
     // UI elements
     private UI playerHealthUI;
+    private UI playerLevelUI;
+    private UI playerScoreUI;
 
     public GameHandler() {
         stage = Main.getStage();
@@ -91,7 +93,10 @@ public class GameHandler extends AnimationTimer {
         endGame();
         player = Player.createInstance(new Image("resources/penguin0.png"), 500, 400, 200, 100, -50);
         generator.startLevel();
-        playerHealthUI = new UI(10, 15, "HP: " + UI.playerHealthString());
+
+        //Initiate UI elements
+        initUIelements();
+
     }
 
     public static void endGame() {
@@ -116,7 +121,7 @@ public class GameHandler extends AnimationTimer {
             root.getChildren().clear();
         root = (Group)stage.getScene().getRoot();
         root.getChildren().add(player);
-        root.getChildren().add(playerHealthUI);
+        addUIElementsToRoot();
         resumed = true;
     }
 
@@ -142,7 +147,9 @@ public class GameHandler extends AnimationTimer {
             enemies.get(enemyIndex).update(time);
             player.collisionHandling(getEnemy);
             player.changeHealth(getEnemy, getEnemy.getDamage());
-            playerHealthUI.updateText("HP: " + UI.playerHealthString());
+
+            // Update UI elements
+            updateUI();
 
             // Checks the collision between enemies so they won't overlap
             int otherEnemyIndex = enemies.size() - 1;
@@ -205,4 +212,27 @@ public class GameHandler extends AnimationTimer {
     }
 
     public static int getScore() { return score; }
+
+
+    /*
+    * These three methods are for initializing, updateing and displaying the UI elements.
+    */
+    private void initUIelements(){
+        int yOffset = 15;
+        playerHealthUI = new UI(10, yOffset, UI.playerHealthString());
+        playerLevelUI = new UI(60, yOffset, UI.currentLevelString());
+        playerScoreUI = new UI(120, yOffset, UI.playerScoreString());
+    }
+
+    private void updateUI(){
+        playerHealthUI.updateText(UI.playerHealthString());
+        playerLevelUI.updateText(UI.currentLevelString());
+        playerScoreUI.updateText(UI.playerScoreString());
+    }
+
+    private void addUIElementsToRoot(){
+        root.getChildren().add(playerHealthUI);
+        root.getChildren().add(playerLevelUI);
+        root.getChildren().add(playerScoreUI);
+    }
 }

@@ -10,11 +10,18 @@ public class UI extends Text {
     }
 
     public static String playerHealthString(){
-        return Integer.toString(Player.getInstance().getHealthValue());
+        return "HP:" + Integer.toString(Player.getInstance().getHealthValue());
     }
 
-    public void updateText(String newText)
-    {
+    public static String currentLevelString(){
+        return "Level: " + Integer.toString(Main.getGameHandler().getGenerator().getLevel());
+    }
+
+    public static String playerScoreString(){
+        return "Score: " + Integer.toString(Main.getGameHandler().getScore());
+    }
+
+    public void updateText(String newText) {
         setText(newText);
     }
 }
