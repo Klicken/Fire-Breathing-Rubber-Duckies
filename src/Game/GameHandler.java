@@ -5,6 +5,7 @@ import javafx.animation.AnimationTimer;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Parent;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import java.util.ArrayList;
@@ -69,6 +70,7 @@ public class GameHandler extends AnimationTimer {
                     generator.pause();
                     gameover = FXMLLoader.load(getClass().getResource("/resources/GameOver.fxml"));
                     stage.getScene().setRoot(gameover);
+                    ((Label)stage.getScene().lookup("#Score")).setText("Score: " + Integer.toString(score));
                 } catch (Exception e){
                     System.err.println(e);
                 }

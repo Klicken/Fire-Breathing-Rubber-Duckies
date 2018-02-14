@@ -19,7 +19,7 @@
            </font>
         </Button>
       <TextField fx:id="inputName" layoutX="480.0" layoutY="294.0" prefHeight="50.0" prefWidth="320.0" promptText="Input name:" />
-        <Label layoutX="479.0" layoutY="226.0" prefHeight="60.0" prefWidth="320.0" text="Score:">
+        <Label fx:id="Score" layoutX="479.0" layoutY="226.0" prefHeight="60.0" prefWidth="320.0" text="Score:">
            <font>
               <Font size="24.0" />
            </font>
