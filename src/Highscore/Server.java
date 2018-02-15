@@ -11,11 +11,17 @@ import java.util.Collections;
  *  If the client requests all highscores, the server will send all highscores saved on the dat-file back sorted.
  */
 
-public class Server {
+public class Server extends Thread{
 
-    public static void main(String[] args) {
-        new Server().runServer();
+    Socket s=null;
+
+    public Server(Socket s){
+        this.s=s;
     }
+
+   /* public static void main(String[] args) {
+        new Server().runServer();
+    }*/
 
     // A list for highscores
     ArrayList<Highscore> tmpList = new ArrayList<Highscore>();
@@ -37,18 +43,17 @@ public class Server {
      * wants to get all saved highscores, they will be retrieved from the dat-file, sorted and sent back to client.
      */
     public void runServer() {
-        while(true) {
             try {
-                ServerSocket socketConnection = new ServerSocket(11111);
+                /*ServerSocket socketConnection = new ServerSocket(11111);
                 System.out.println("Server Waiting");
-                Socket pipe = socketConnection.accept();
+                Socket pipe = socketConnection.accept();*/
 
                 serverOutputStream = new
-                        ObjectOutputStream(pipe.getOutputStream());
+                        ObjectOutputStream(s.getOutputStream());
                 serverOutputStream.writeObject(getScores());
 
                 serverInputStream = new
-                        ObjectInputStream(pipe.getInputStream());
+                        ObjectInputStream(s.getInputStream());
                 highscore = (Highscore) serverInputStream.readObject();
 
                 if (highscore != null)
@@ -74,7 +79,7 @@ public class Server {
                 }
             }
         }
-    }
+
 
     // This method will read all highscores from the dat-file and sort them.
     public ArrayList<Highscore> getScores() {
