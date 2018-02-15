@@ -55,7 +55,14 @@ public abstract class DynamicGameObject extends GameObject {
             direction = direction.normalize().multiply(overlap/2);
             positon = positon.add(direction);
             setPos(positon.getX(), positon.getY());
-        }
+            }
+    }
+
+    public void knockBack(GameObject other) {
+            direction = getCenter().subtract(other.getCenter());
+            direction = direction.normalize().multiply(25);
+            positon = positon.add(direction);
+            setPos(positon.getX(), positon.getY());
     }
 
     /*
@@ -63,8 +70,13 @@ public abstract class DynamicGameObject extends GameObject {
      *   The observable health value of this object will then be notified
      */
     public void changeHealth(GameObject other, int healthValue) {
-        if (intersects(other))
+        if (intersects(other)) {
             objectHealth.setHealth(objectHealth.getHealth() + healthValue);
+            if(this instanceof Player){
+                knockBack(other);
+            }
+        }
+
     }
 
     public int getDamage() {

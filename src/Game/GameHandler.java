@@ -146,7 +146,10 @@ public class GameHandler extends AnimationTimer {
         for (int i = 0; i <= enemyIndex; enemyIndex--) {
             Enemy getEnemy = enemies.get(enemyIndex);
 
+            //Update enemy positions
             enemies.get(enemyIndex).update(time);
+
+            //Check collisions between player and enemies, handle health accordingly
             player.collisionHandling(getEnemy);
             player.changeHealth(getEnemy, getEnemy.getDamage());
 
