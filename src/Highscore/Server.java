@@ -13,15 +13,6 @@ import java.util.Collections;
 
 public class Server extends Thread{
 
-    Socket s=null;
-
-    public Server(Socket s){
-        this.s=s;
-    }
-
-   /* public static void main(String[] args) {
-        new Server().runServer();
-    }*/
 
     // A list for highscores
     ArrayList<Highscore> tmpList = new ArrayList<Highscore>();
@@ -34,7 +25,12 @@ public class Server extends Thread{
     ObjectInputStream serverInputStream = null;
     // The name of the dat-file of saved highscores.
     private static final String HIGHSCORE_FILE = "highscore.dat";
+    // A socket of the connection with the client
+    private Socket s;
 
+    public Server(Socket s){
+        this.s=s;
+    }
 
     /*
      * This method will start the server, it will open a ServerSocket on decided port, to make the server available
@@ -44,10 +40,6 @@ public class Server extends Thread{
      */
     public void runServer() {
             try {
-                /*ServerSocket socketConnection = new ServerSocket(11111);
-                System.out.println("Server Waiting");
-                Socket pipe = socketConnection.accept();*/
-
                 serverOutputStream = new
                         ObjectOutputStream(s.getOutputStream());
                 serverOutputStream.writeObject(getScores());

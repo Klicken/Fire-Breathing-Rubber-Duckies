@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class MenuController {
 
     /*
-     *  source finds the source of the button that is clicked.
+     *  Source finds the source of the button that is clicked.
      *  With source it finds the scene and sets the root to a new Parent.(Parent is what's inside setRoot())
      *  The Parent uses the id of a button to choose the correct fxml file to load.
      */
@@ -27,9 +27,11 @@ public class MenuController {
         source.getScene().setRoot(root);
         if(source.getId().equals("Scoreboard")){
             ArrayList<Highscore> highscores = new HighScoreManager().readHighscoreFromServer();
-            for(int i = 0; i < highscores.size() ;i++){
-                ((GridPane)stage.getScene().lookup("#table")).add(new Label(highscores.get(i).getName()), 1, i);
-                ((GridPane)stage.getScene().lookup("#table")).add(new Label(Integer.toString(highscores.get(i).getScore())), 2, i);
+            for(int i = 0; i < highscores.size() && i < 10 ;i++){
+                GridPane gp = ((GridPane)stage.getScene().lookup("#table"));
+                Highscore score = highscores.get(i);
+                gp.add(new Label(score.getName()), 1, i);
+                gp.add(new Label(Integer.toString(score.getScore())), 2, i);
             }
         }
         root.requestFocus();

@@ -4,7 +4,8 @@ import java.io.*;
 import java.net.*;
 import java.util.*;
 
-/* This class will manage highscores. Its possible to read and add highscores
+/*
+ * This class will manage highscores. Its possible to read and add highscores
  * to a dat-file saved on a server.
  */
 
@@ -18,7 +19,7 @@ public class HighScoreManager {
     // This method will open a socketconnection to a server with its IP adress and port.
     private void connectToServer() {
         try {
-            socketConnection = new Socket("127.0.0.1", 11111);
+            socketConnection = new Socket("192.168.43.95", 3000);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -85,25 +86,5 @@ public class HighScoreManager {
             }
         }
         return highscores;
-    }
-
-    // This method will translate our highscore objects to Strings.
-    public String getHighscoreString() {
-        String highscoreString = "";
-        int max = 10;
-
-        ArrayList<Highscore> scores;
-        scores = readHighscoreFromServer();
-
-        int i = 0;
-        int x = scores.size();
-        if (x > max) {
-            x = max;
-        }
-        while (i < x) {
-            highscoreString += (i + 1) + ".\t" + scores.get(i).getName() + "\t\t" + scores.get(i).getScore() + "\n";
-            i++;
-        }
-        return highscoreString;
     }
 }
