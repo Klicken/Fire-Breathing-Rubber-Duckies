@@ -18,8 +18,11 @@ public class GameHandler extends AnimationTimer {
 
     private boolean resumed = false;
     private static Player player;
+
     private static ArrayList<Enemy> enemies;
     private static ArrayList<Projectile> projectiles;
+    private static ArrayList<PowerUp> powerUps;
+
     private static GameGenerator generator;
     private Group root;
     private static int score;
@@ -29,11 +32,13 @@ public class GameHandler extends AnimationTimer {
     private UI playerHealthUI;
     private UI playerLevelUI;
     private UI playerScoreUI;
+    private UI playerDamageUI;
 
     public GameHandler() {
         stage = Main.getStage();
         enemies = new ArrayList<Enemy>();
         projectiles = new ArrayList<Projectile>();
+        powerUps = new ArrayList<PowerUp>();
         lastTime = System.nanoTime();
         generator = new GameGenerator();
         score = 1;
@@ -93,7 +98,7 @@ public class GameHandler extends AnimationTimer {
      */
     public void initGame() {
         endGame();
-        player = Player.createInstance(new Image("resources/penguin0.png"), 500, 400, 200, 100, -50);
+        player = Player.createInstance(new Image("resources/penguin0.png"), 500, 400, 200, 100, 0);
         generator.startLevel();
 
         //Initiate UI elements
@@ -108,6 +113,7 @@ public class GameHandler extends AnimationTimer {
         Player.nullInstance();
         enemies.clear();
         projectiles.clear();
+        powerUps.clear();
         generator = new GameGenerator();
         score = 1;
     }
@@ -135,6 +141,10 @@ public class GameHandler extends AnimationTimer {
         for (Projectile projectile: projectiles) {
             if(projectile.getParent() == null)
                 root.getChildren().add(projectile);
+        }
+        for (PowerUp powerUp: powerUps){
+            if(powerUp.getParent() == null)
+                root.getChildren().add(powerUp);
         }
     }
     private void update(double time) {
@@ -172,7 +182,7 @@ public class GameHandler extends AnimationTimer {
             for (int j = 0; j <= projectileIndex; projectileIndex--) {
                 Projectile getProjectile = projectiles.get(projectileIndex);
                 if(getEnemy.intersects(getProjectile)) {
-                    getEnemy.changeHealth(getProjectile, getProjectile.getDamage());
+                    getEnemy.changeHealth(getProjectile, getProjectile.getDamage() + player.getDamage());
                     ((Group) Main.getStage().getScene().getRoot()).getChildren().remove(getProjectile);
                     getProjectiles().remove(getProjectile);
 
@@ -184,6 +194,11 @@ public class GameHandler extends AnimationTimer {
             if (!getEnemy.getAlive()) {
                 score++;
                 ((Group) Main.getStage().getScene().getRoot()).getChildren().remove(getEnemy);
+
+                // Chance of enemy dropping a PowerUp item
+                if(PowerUp.randomWithRange(1, 10) > 7) {
+                    GameHandler.powerUps.add(new PowerUp(null, getEnemy.getPositon().getX(), getEnemy.getPositon().getY()));
+                }
                 GameHandler.enemies.remove(getEnemy);
             }
 
@@ -201,6 +216,18 @@ public class GameHandler extends AnimationTimer {
             }
         }
 
+        /*
+        *   Checks if the player has collected a powerUp item. Powerup is then applied to the player
+        *   and removed from the screen and powerUp list.
+        */
+        int powerUpIndex = powerUps.size() - 1;
+        for (int k = 0; k <= powerUpIndex; powerUpIndex--){
+            PowerUp getPowerUp = powerUps.get(powerUpIndex);
+            if(getPowerUp.collectPowerUp()){
+                ((Group) Main.getStage().getScene().getRoot()).getChildren().remove(getPowerUp);
+                powerUps.remove(getPowerUp);
+            }
+        }
     }
 
 
@@ -221,24 +248,28 @@ public class GameHandler extends AnimationTimer {
     }
 
     /*
-    * These three methods are for initializing, updateing and displaying the UI elements.
+    * These three methods are for initializing, updating and displaying the UI elements.
     */
     private void initUIelements(){
+        int xOffset = 15;
         int yOffset = 15;
-        playerHealthUI = new UI(10, yOffset, UI.playerHealthString());
-        playerLevelUI = new UI(60, yOffset, UI.currentLevelString());
-        playerScoreUI = new UI(120, yOffset, UI.playerScoreString());
+        playerHealthUI = new UI(xOffset, yOffset * 1, UI.playerHealthString());
+        playerDamageUI = new UI(xOffset, yOffset * 2, UI.playerDamageString());
+        playerLevelUI = new UI(xOffset, yOffset * 3, UI.currentLevelString());
+        playerScoreUI = new UI(xOffset, yOffset * 4, UI.playerScoreString());
     }
 
     private void updateUI(){
         playerHealthUI.updateText(UI.playerHealthString());
         playerLevelUI.updateText(UI.currentLevelString());
         playerScoreUI.updateText(UI.playerScoreString());
+        playerDamageUI.updateText(UI.playerDamageString());
     }
 
     private void addUIElementsToRoot(){
         root.getChildren().add(playerHealthUI);
         root.getChildren().add(playerLevelUI);
         root.getChildren().add(playerScoreUI);
+        root.getChildren().add(playerDamageUI);
     }
 }

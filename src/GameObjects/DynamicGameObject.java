@@ -7,9 +7,9 @@ import javafx.scene.image.Image;
 public abstract class DynamicGameObject extends GameObject {
     double movementSpeed;
     Point2D direction;
-    private Health objectHealth;
+    Health objectHealth;
     private boolean alive;
-    private int damage;
+    int damage;
 
     /*
      *  Constructor that creates a GameObject with movementSpeed, direction vector, health and damage;

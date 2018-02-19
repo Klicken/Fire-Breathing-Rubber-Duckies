@@ -10,7 +10,7 @@ import static java.lang.Math.abs;
 public class Player extends DynamicGameObject {
     private static Player instance = null;
     private static boolean up, down, left, right;
-    private double dualKeyMovementSpeed = movementSpeed * 0.7;
+    int maxHealth = 100;
 
     /*
      *  Constructor that creates a DynamicGameObject that has eventhandlers,
@@ -84,6 +84,8 @@ public class Player extends DynamicGameObject {
         return instance;
     }
 
+    public int getMaxHealth(){ return maxHealth; }
+
     public static void nullInstance() {
         instance = null;
     }
@@ -115,9 +117,12 @@ public class Player extends DynamicGameObject {
          */
 
         if (abs(direction.getX()) + abs(direction.getY()) > 1)
-            setPos(getX() + direction.getX() * dualKeyMovementSpeed * time, getY() + direction.getY() * dualKeyMovementSpeed * time);
+            setPos(getX() + direction.getX() * movementSpeed * 0.7 * time, getY() + direction.getY() * movementSpeed * 0.7 * time);
         else
             setPos(getX() + direction.getX() * movementSpeed * time, getY() + direction.getY() * movementSpeed * time);
+
+        if(getHealthValue() > maxHealth)
+            objectHealth.setHealth(maxHealth);
     }
 
     /*
