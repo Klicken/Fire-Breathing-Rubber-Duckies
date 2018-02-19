@@ -2,12 +2,17 @@ package Game;
 
 import GameObjects.*;
 import javafx.animation.AnimationTimer;
+import javafx.animation.PauseTransition;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+
 import java.util.ArrayList;
 
 public class GameHandler extends AnimationTimer {
@@ -27,6 +32,8 @@ public class GameHandler extends AnimationTimer {
     private Group root;
     private static int score;
     private Parent gameover;
+    private int currentLvl;
+    private int previousLvl;
 
     // UI elements
     private UI playerHealthUI;
@@ -41,7 +48,9 @@ public class GameHandler extends AnimationTimer {
         powerUps = new ArrayList<PowerUp>();
         lastTime = System.nanoTime();
         generator = new GameGenerator();
-        score = 1;
+        score = 0;
+        currentLvl = 1;
+        previousLvl = 1;
     }
 
     /*
@@ -59,9 +68,19 @@ public class GameHandler extends AnimationTimer {
             if (!resumed) {
                 resumeGame();
             }
-            if (score % 11 == 0) {
-                score++;
+            if (currentLvl != previousLvl) {
+                previousLvl = currentLvl;
                 generator.startNextLevel();
+                Label levelLabel = (Label)(stage.getScene().lookup("#Level"));
+                levelLabel.setText("Level " + currentLvl);
+                levelLabel.setVisible(true);
+                PauseTransition visiblePause = new PauseTransition(
+                        Duration.seconds(3)
+                );
+                visiblePause.setOnFinished(
+                        event -> levelLabel.setVisible(false)
+                );
+                visiblePause.play();
                 generator.play();
             }
             // UPDATE
@@ -115,7 +134,9 @@ public class GameHandler extends AnimationTimer {
         projectiles.clear();
         powerUps.clear();
         generator = new GameGenerator();
-        score = 1;
+        score = 0;
+        currentLvl = 1;
+        previousLvl = 1;
     }
 
     /*
@@ -151,6 +172,8 @@ public class GameHandler extends AnimationTimer {
 
         player.update(time);
         player.constrainToWindow();
+        // Update UI elements
+        updateUI();
 
         int enemyIndex = enemies.size() - 1;
         for (int i = 0; i <= enemyIndex; enemyIndex--) {
@@ -163,8 +186,6 @@ public class GameHandler extends AnimationTimer {
             player.collisionHandling(getEnemy);
             player.changeHealth(getEnemy, getEnemy.getDamage());
 
-            // Update UI elements
-            updateUI();
 
             // Checks the collision between enemies so they won't overlap
             int otherEnemyIndex = enemies.size() - 1;
@@ -200,6 +221,8 @@ public class GameHandler extends AnimationTimer {
                     GameHandler.powerUps.add(new PowerUp(null, getEnemy.getPositon().getX(), getEnemy.getPositon().getY()));
                 }
                 GameHandler.enemies.remove(getEnemy);
+                if(score % 10 == 0)
+                    currentLvl++;
             }
 
         }
@@ -245,6 +268,10 @@ public class GameHandler extends AnimationTimer {
 
     public int getScore() {
         return score;
+    }
+
+    public int getCurrentLvl() {
+        return currentLvl;
     }
 
     /*

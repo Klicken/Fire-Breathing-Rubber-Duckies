@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.Group?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.text.Font?>
 
 <Group onKeyPressed="#pause" onMouseClicked="#shoot" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.InputController">
    <children>
@@ -11,5 +13,10 @@
             <Image url="@background.jpg" />
          </image>
       </ImageView>
+      <Label fx:id="Level" alignment="CENTER" contentDisplay="CENTER" layoutX="290.0" layoutY="110.0" prefHeight="500.0" prefWidth="700.0" text="Label" visible="false">
+         <font>
+            <Font name="Bauhaus 93" size="96.0" />
+         </font>
+      </Label>
    </children>
 </Group>

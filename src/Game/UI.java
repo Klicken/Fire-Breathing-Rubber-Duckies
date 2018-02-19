@@ -14,7 +14,7 @@ public class UI extends Text {
     }
 
     public static String currentLevelString(){
-        return "Level: " + Integer.toString(Main.getGameHandler().getGenerator().getLevel());
+        return "Level: " + Integer.toString(Main.getGameHandler().getCurrentLvl());
     }
 
     public static String playerScoreString(){
