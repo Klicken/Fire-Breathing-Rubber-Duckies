@@ -22,13 +22,11 @@ public class GameGenerator {
         count = 0;
         level = 0;
         tmpArray = new ArrayList<>();
-
         levelContent = new HashMap<>();
         fillLevelContent();
     }
 
     public void startLevel() {
-        System.out.println("====== LEVEL " + level + " ======");
         timeline = new Timeline(new KeyFrame(
                 Duration.millis(1000),
                 e -> spawn()));
@@ -42,7 +40,6 @@ public class GameGenerator {
 
     private void spawn() {
         Main.getGameHandler().getEnemies().add(levelContent.get(level).get(count));
-
         count++;
         if(count == 10)
         {
@@ -55,7 +52,7 @@ public class GameGenerator {
             for (int j = 0; j < 10; j++){
                 randomX = (int)(Math.random() * 2);
                 randomY = (int)(Math.random() * 2);
-                tmpArray.add(new Enemy(new Image("resources/penguin"+ i%4 +".png"), randomX * 1200, randomY * 680, 100*(i+1)/2, 5, 10));
+                tmpArray.add(new Enemy(new Image("resources/enemies/penguin"+ i%4 +".png"), randomX * 1200, randomY * 680, 100*(i+1)/2, 5, 10));
             }
 
             levelContent.put(i, tmpArray);

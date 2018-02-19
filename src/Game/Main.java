@@ -31,7 +31,7 @@ public class Main extends Application {
         //Stop the process when the window is closed
         primaryStage.setOnCloseRequest(e -> System.exit(0));
 
-        Parent startMenu = FXMLLoader.load(getClass().getResource("/resources/Start.fxml"));
+        Parent startMenu = FXMLLoader.load(getClass().getResource("/resources/fxml/Start.fxml"));
 
         Scene scene = new Scene(startMenu);
         scene.setCursor(Cursor.CROSSHAIR);

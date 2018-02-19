@@ -22,7 +22,7 @@ public class InputController {
         if(event.getCode() == KeyCode.ESCAPE){
             Main.getGameHandler().getGenerator().pause();
             Node source = (Node) event.getSource();
-            Parent root = FXMLLoader.load(getClass().getResource("/resources/Pause.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/resources/fxml/Pause.fxml"));
             source.getScene().setRoot(root);
         }
     }
@@ -32,7 +32,7 @@ public class InputController {
     */
     public void shoot(MouseEvent event){
         if(event.getButton() == MouseButton.PRIMARY){
-            Projectile p = new Projectile(new Image("/resources/apple.png"), Player.getInstance().getX(), Player.getInstance().getY(), 400,new Point2D(event.getX(),event.getY()), 1, 1);
+            Projectile p = new Projectile(new Image("/resources/animations/projectiles/ball.png"), Player.getInstance().getX() + 15, Player.getInstance().getY() + 15, 400,new Point2D(event.getX(),event.getY()), 1, 1);
             ((Group)Main.getStage().getScene().getRoot()).getChildren().add(p);
             Main.getGameHandler().getProjectiles().add(p);
         }

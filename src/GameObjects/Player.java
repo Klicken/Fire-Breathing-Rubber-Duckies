@@ -10,6 +10,7 @@ import static java.lang.Math.abs;
 public class Player extends DynamicGameObject {
     private static Player instance = null;
     private static boolean up, down, left, right;
+    private boolean facingRight;
     int maxHealth = 100;
 
     /*
@@ -22,14 +23,86 @@ public class Player extends DynamicGameObject {
         down = false;
         left = false;
         right = false;
+        Image runLeft = new Image("/resources/animations/left/run_left.gif", 60, 0,true, false);
+        Image runRight = new Image("/resources/animations/right/run_right.gif", 60, 0,true, false);
+        Image idleLeft = new Image("/resources/animations/left/idle_left.png", 60, 0,true, false);
+        Image idleRight = new Image("/resources/animations/right/idle_right.png", 60, 0,true, false);
+        facingRight = true;
 
         this.addEventHandler(KeyEvent.KEY_PRESSED,
                 event -> {
                     switch (event.getCode()) {
-                        case W: up = true; break;
-                        case S: down = true; break;
-                        case A: left = true; break;
-                        case D: right = true; break;
+                        case W: up = true;
+                                if (facingRight)
+                                    setImage(runRight);
+                                else
+                                    setImage(runLeft);
+                                break;
+                        case S: down = true;
+                                if (facingRight)
+                                    setImage(runRight);
+                                else
+                                    setImage(runLeft);
+                                break;
+                        case A: left = true;
+                                if (right)
+                                    setImage(idleRight);
+                                else {
+                                    facingRight = false;
+                                    setImage(runLeft);
+                                }
+                                break;
+                        case D: right = true;
+                                if (left)
+                                    setImage(idleLeft);
+                                else {
+                                    facingRight = true;
+                                    setImage(runRight);
+                                }
+                                break;
+                    }
+                }
+        );
+
+        this.addEventHandler(KeyEvent.KEY_RELEASED,
+                event -> {
+                    switch (event.getCode()) {
+                        case W: up = false;
+                                if (!down && !left && !right) {
+                                    if (facingRight)
+                                        setImage(idleRight);
+                                    else
+                                        setImage(idleLeft);
+                                }
+                                break;
+                        case S: down = false;
+                                if (!up && !left && !right) {
+                                    if (facingRight)
+                                        setImage(idleRight);
+                                    else
+                                        setImage(idleLeft);
+                                }
+                                break;
+                        case A: left = false;
+                                if (!up && !down && !right) {
+                                    if (facingRight)
+                                        setImage(idleRight);
+                                    else
+                                        setImage(idleLeft);
+                                }
+                                if (right)
+                                    setImage(runRight);
+                                break;
+                        case D: right = false;
+                                if (!up && !down && !left) {
+                                    if (facingRight)
+                                        setImage(idleRight);
+                                    else
+                                        setImage(idleLeft);
+                                }
+                                if (left)
+                                    setImage(runLeft);
+                                break;
                     }
                 }
         );
@@ -47,24 +120,13 @@ public class Player extends DynamicGameObject {
                     }
                 }
         );
-
-        this.addEventHandler(KeyEvent.KEY_RELEASED,
-                event -> {
-                    switch (event.getCode()) {
-                        case W: up = false; break;
-                        case S: down = false; break;
-                        case A: left = false; break;
-                        case D: right = false; break;
-                    }
-                }
-        );
     }
 
     /*
      *  Shooting with arrow keys
      */
     private void shoot(int x, int y){
-        Projectile p = new Projectile(new Image("/resources/apple.png"), Player.getInstance().getX() + 17, Player.getInstance().getY() + 14, 400,new Point2D(Player.getInstance().getX() + x, Player.getInstance().getY() + y), 1, 1);
+        Projectile p = new Projectile(new Image("/resources/animations/projectiles/ball.png"), Player.getInstance().getX() + 15, Player.getInstance().getY() + 15, 400,new Point2D(Player.getInstance().getX() + x, Player.getInstance().getY() + y), 1, 1);
         ((Group)Main.getStage().getScene().getRoot()).getChildren().add(p);
         Main.getGameHandler().getProjectiles().add(p);
     }

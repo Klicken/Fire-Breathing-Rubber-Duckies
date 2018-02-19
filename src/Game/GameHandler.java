@@ -5,10 +5,8 @@ import javafx.animation.AnimationTimer;
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -92,7 +90,7 @@ public class GameHandler extends AnimationTimer {
             if(!player.getAlive()){
                 try {
                     generator.pause();
-                    gameover = FXMLLoader.load(getClass().getResource("/resources/GameOver.fxml"));
+                    gameover = FXMLLoader.load(getClass().getResource("/resources/fxml/GameOver.fxml"));
                     stage.getScene().setRoot(gameover);
                     ((Label)stage.getScene().lookup("#Score")).setText("Score: " + Integer.toString(score));
                 } catch (Exception e){
@@ -117,7 +115,7 @@ public class GameHandler extends AnimationTimer {
      */
     public void initGame() {
         endGame();
-        player = Player.createInstance(new Image("resources/penguin0.png"), 500, 400, 200, 100, 0);
+        player = Player.createInstance(new Image("/resources/animations/right/idle_right.png", 60, 0,true, false), 500, 400, 200, 100, 0);
         generator.startLevel();
 
         //Initiate UI elements

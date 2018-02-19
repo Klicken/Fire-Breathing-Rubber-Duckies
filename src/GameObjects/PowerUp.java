@@ -26,18 +26,18 @@ public class PowerUp extends GameObject{
         super(image, x, y);
         upgradeType = randomWithRange(0, 3);
         switch(upgradeType) {
-            case 0: setImage(new Image("resources/Healing.png"));
+            case 0: setImage(new Image("resources/powerups/Healing.png"));
                     upgradeValue = 20;
                     break;
-            case 1: setImage(new Image("resources/maxHealth.png"));
+            case 1: setImage(new Image("resources/powerups/maxHealth.png"));
                 upgradeValue = 20;
                 break;
 
-            case 2: setImage(new Image("resources/damageUp.png"));
+            case 2: setImage(new Image("resources/powerups/damageUp.png"));
                 upgradeValue = 1;
                 break;
 
-            case 3: setImage(new Image("resources/speedUp.png"));
+            case 3: setImage(new Image("resources/powerups/speedUp.png"));
                 upgradeValue = 20;
                 break;
         }

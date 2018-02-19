@@ -1,7 +1,7 @@
 package Controllers;
 
-import Highscore.HighScoreManager;
 import Game.Main;
+import Highscore.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -10,7 +10,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import Highscore.*;
 import java.util.ArrayList;
 
 public class MenuController {
@@ -23,7 +22,7 @@ public class MenuController {
     public void menuButton(ActionEvent event) throws Exception {
         Node source = (Node) event.getSource();
         Stage stage = (Stage) source.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("/resources/"+ source.getId() +".fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/resources/fxml/"+ source.getId() +".fxml"));
         source.getScene().setRoot(root);
         if(source.getId().equals("Scoreboard")){
             ArrayList<Highscore> highscores = new HighScoreManager().readHighscoreFromServer();
