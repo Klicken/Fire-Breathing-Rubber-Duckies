@@ -52,7 +52,7 @@ public class GameGenerator {
             for (int j = 0; j < 10; j++){
                 randomX = (int)(Math.random() * 2);
                 randomY = (int)(Math.random() * 2);
-                tmpArray.add(new Enemy(new Image("resources/enemies/penguin"+ i%4 +".png"), randomX * 1200, randomY * 680, 100*(i+1)/2, 5, 10));
+                tmpArray.add(new Enemy(new Image("resources/enemies/blob"+ i%10 +".gif", 40 + Math.random() * 20, 0, true,false), randomX * 1200, randomY * 680, 100*(i+1)/2, 5, 10));
             }
 
             levelContent.put(i, tmpArray);
