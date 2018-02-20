@@ -5,7 +5,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 /**
- * The top class of the GameObject hierarchy. GameObject -> DynamicGameObject -> (Player, Enemy, Projectile).
+ * The top class of the GameObject hierarchy.
  * Extends the ImageView class in order to make use of the JavaFX node system, the node system is then used to
  * render and update all the objects in the main game-loop found in the GameHandler class.
  *

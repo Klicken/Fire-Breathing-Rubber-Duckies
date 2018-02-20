@@ -86,7 +86,8 @@ public abstract class DynamicGameObject extends GameObject {
     /**
      * Knocks this object back by n pixels in relation to the direction it was hit from.
      *
-     * @param other The other GameObject used for determining the direction of knockback.
+     * @param other The other GameObject used for determining the direction of knockback
+     * @param n     The number of pixels to knock this object back
      */
     public void knockBack(GameObject other, int n) {
             direction = getCenter().subtract(other.getCenter());

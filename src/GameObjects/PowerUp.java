@@ -2,7 +2,7 @@ package GameObjects;
 
 import javafx.scene.image.Image;
 
-/**
+/*
  *   Attributes that can be upgraded, associated value for random generation:
  *
  *   Health - 0
@@ -15,6 +15,12 @@ import javafx.scene.image.Image;
  *   Invincibility, kill enemies on impact
  */
 
+/**
+ * This class is used for creating powerup items that can be collected by the player upon collision.
+ * Upgrades are applied to the player to increase different power related attributes.
+ *
+ * @see Player
+ */
 public class PowerUp extends GameObject{
     private int upgradeValue;
     private int upgradeType;

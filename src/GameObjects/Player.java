@@ -179,6 +179,14 @@ public class Player extends DynamicGameObject {
 
     /**
      * Singleton constructor for the Player class.
+     *
+     * @param image         Image to load into the ImageView
+     * @param x             x coordinate
+     * @param y             y coordinate
+     * @param movementSpeed The speed at which this object moves
+     * @param health        The health value to initiallize this object with
+     * @param damage        The damage value to initiallize this object with
+     * @return The singleton instance variable of this class
      */
     public static Player createInstance(Image image, double x, double y, double movementSpeed, int health, int damage) {
         if(instance == null)
