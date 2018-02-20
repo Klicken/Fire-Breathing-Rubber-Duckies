@@ -2,26 +2,30 @@ package GameObjects;
 
 import javafx.scene.image.Image;
 
-/*
-*   Attributes that can be upgraded, associated value for random generation:
-*
-*   Health - 0
-*   Max Health - 1
-*   Damage - 2
-*   Movement speed - 3
-*   Projectile Speed
-*   Reduce Player Size
-*   Shield
-*   Invincibility, kill enemies on impact
-*/
+/**
+ *   Attributes that can be upgraded, associated value for random generation:
+ *
+ *   Health - 0
+ *   Max Health - 1
+ *   Damage - 2
+ *   Movement speed - 3
+ *   Projectile Speed
+ *   Reduce Player Size
+ *   Shield
+ *   Invincibility, kill enemies on impact
+ */
 
 public class PowerUp extends GameObject{
     private int upgradeValue;
     private int upgradeType;
 
-    /*
-    *   Constructs a random PowerUp object.
-    */
+    /**
+     *   Constructs a random PowerUp object.
+     *
+     *   @param image the image of the power up
+     *   @param x x position of the power up
+     *   @param y y position of the power up
+     */
     public PowerUp(Image image, double x, double y) {
         super(image, x, y);
         upgradeType = randomWithRange(0, 3);
@@ -43,17 +47,23 @@ public class PowerUp extends GameObject{
         }
     }
 
-    /*
-    *   Returns a random int in a range between min and max
-    */
+    /**
+     * Generate a random number between the range of the parameters
+     *
+     * @param max max value of the range to be generated between
+     * @param min min value of the range to be generated between
+     * @return a random int in a range between min and max
+     */
     public static int randomWithRange(int min, int max) {
         int range = (max - min) + 1;
         return (int)(Math.random() * range) + min;
     }
 
-    /*
-    *   Returns true if a Player intersects this PowerUp object, PowerUp is also applied to the player.
-    */
+    /**
+     * Check if the player intersects with power up and apply it to the player
+     *
+     * @return true if a Player intersects this PowerUp object
+     */
     public boolean collectPowerUp() {
         if(intersects(Player.getInstance())){
             switch(upgradeType){
