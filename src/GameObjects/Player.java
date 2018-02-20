@@ -7,15 +7,27 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import static java.lang.Math.abs;
 
+/**
+ * Extends the DynamicGameObject class. This is a singleton class used to for managing the main character
+ * controlled by the player.
+ */
 public class Player extends DynamicGameObject {
     private static Player instance = null;
     private static boolean up, down, left, right;
     private boolean facingRight;
     int maxHealth = 100;
 
-    /*
-     *  Constructor that creates a DynamicGameObject that has eventhandlers,
-     *  which processes keyboard inputs for movement related actions.
+    /**
+     * Allocates a new Player object which processes keyboard inputs for movement related actions.
+     * Also handles animations for the player character.
+     *
+     * @param image         Image to load into the ImageView
+     * @param x             x coordinate
+     * @param y             y coordinate
+     * @param movementSpeed The speed at which this object moves
+     * @param health        The health value to initiallize this object with
+     * @param damage        The damage value to initiallize this object with
+     * @see DynamicGameObject
      */
     private Player(Image image, double x, double y, double movementSpeed, int health, int damage) {
         super(image, x, y, movementSpeed, health, damage);
@@ -131,10 +143,10 @@ public class Player extends DynamicGameObject {
         Main.getGameHandler().getProjectiles().add(p);
     }
 
-    /*
-    *   Used in the game's pause function to make sure the player doesn't continue moving upon
-    *   resuming the game if a button was pressed but not released during the pause operation
-    */
+    /**
+     * Used in the game's pause function to make sure the player doesn't continue moving upon
+     * resuming the game if a button was pressed but not released during the pause operation.
+     */
     public static void stop() {
         up = false;
         down = false;
@@ -142,29 +154,43 @@ public class Player extends DynamicGameObject {
         right = false;
     }
 
+    /**
+     * Gets the singleton instance of this class.
+     *
+     * @return The singleton instance of this class
+     */
     public static Player getInstance() {
         return instance;
     }
 
+    /**
+     * Gets the maxHealth of the object instance.
+     *
+     * @return The value of the maxHealth variable
+     */
     public int getMaxHealth(){ return maxHealth; }
 
+    /**
+     * Sets the singleton instance of this class to null.
+     */
     public static void nullInstance() {
         instance = null;
     }
 
-    /*
-    *   Singleton constructor for the Player class
-    */
+    /**
+     * Singleton constructor for the Player class.
+     */
     public static Player createInstance(Image image, double x, double y, double movementSpeed, int health, int damage) {
         if(instance == null)
             instance = new Player(image, x, y, movementSpeed, health, damage);
         return instance;
     }
 
-    /*
-     *  Updates the position of the Player.
+    /**
+     * Updates the current position of the player based on keyboard input or collisions with other GameObjects.
+     *
+     * @param time the time between the current and previos frame
      */
-
     @Override
     public void update(double time) {
         direction = new Point2D(0,0);
@@ -187,9 +213,9 @@ public class Player extends DynamicGameObject {
             objectHealth.setHealth(maxHealth);
     }
 
-    /*
-    *   Constrains the player object to the size of the window, so you can't leave the screen.
-    */
+    /**
+     * Constrains the player object to the size of the window, so it can't leave the screen.
+     */
     public void constrainToWindow(){
         if(getX() < 0) setPos(0, getY());
         if(getX() > 1280 - getImage().getWidth()) setPos(1280 - getImage().getWidth(), getY());
