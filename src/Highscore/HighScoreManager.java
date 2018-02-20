@@ -4,7 +4,7 @@ import java.io.*;
 import java.net.*;
 import java.util.*;
 
-/*
+/**
  * This class will manage highscores. Its possible to read and add highscores
  * to a dat-file saved on a server.
  */
@@ -16,7 +16,9 @@ public class HighScoreManager {
     ObjectOutputStream clientOutputStream = null;
     ObjectInputStream clientInputStream = null;
 
-    // This method will open a socketconnection to a server with its IP adress and port.
+    /**
+     *  Open a socketconnection to a server with its IP adress and port.
+     */
     private void connectToServer() {
         try {
             socketConnection = new Socket("192.168.43.95", 3000);
@@ -26,7 +28,11 @@ public class HighScoreManager {
         }
     }
 
-    // This method will add a new highscore to the server through a socketconnection and objectoutputstream.
+    /**
+     * This method will add a new highscore to the server through a socketconnection and objectoutputstream.
+     *
+     * @param score the score to be sent to server
+     */
     public void writeHighScoreToServer(Highscore score) {
         connectToServer();
         try {
@@ -54,9 +60,11 @@ public class HighScoreManager {
         }
     }
 
-    /*
-     * This method will get all highscores saved on the server, passing null to the outputstream to tell the server
+    /**
+     * Get all highscores saved on the server, passing null to the outputstream to tell the server
      * to only read highscores and send them back, without adding a new highscore.
+     *
+     * @return an arraylist of all saved highscores
      */
     public ArrayList<Highscore> readHighscoreFromServer() {
         connectToServer();

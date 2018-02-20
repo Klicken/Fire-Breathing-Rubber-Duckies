@@ -5,8 +5,9 @@ import java.net.*;
 import java.util.ArrayList;
 import java.util.Collections;
 
-/*
- *  This class will manage a server with socketconnection available on its IP adress and port for a client to connect to.
+/**
+ *  Manage a server with socketconnection available on its IP adress and port for a client to connect to.
+ *  Will start a new thread when called upon.
  *  The server can receive and send highscores to a client. If a client sends and highscore, it will be saved on a dat-file.
  *  If the client requests all highscores, the server will send all highscores saved on the dat-file back sorted.
  */
@@ -14,7 +15,7 @@ import java.util.Collections;
 public class Server extends Thread{
 
 
-    // A list for highscores
+    // A temporary list for highscores
     ArrayList<Highscore> tmpList = new ArrayList<Highscore>();
     Highscore highscore = null;
     // An in and outputstream for objects, to read and write to a dat-file.
@@ -28,13 +29,17 @@ public class Server extends Thread{
     // A socket of the connection with the client
     private Socket s;
 
+    /**
+     * Constructor of server, will take a socket which contains a connection from client.
+     *
+     * @param s the socket connection from client
+     */
     public Server(Socket s){
         this.s=s;
     }
 
-    /*
-     * This method will start the server, it will open a ServerSocket on decided port, to make the server available
-     * to connect to. It will then open an ObjectOutputStream and ObjectInputStream to read and write highscore objects
+    /**
+     * It will open an ObjectOutputStream and ObjectInputStream to read and write highscore objects
      * between the connected client. If the client sends a highscore, it will be added to the dat-file. If the client
      * wants to get all saved highscores, they will be retrieved from the dat-file, sorted and sent back to client.
      */
@@ -73,15 +78,22 @@ public class Server extends Thread{
         }
 
 
-    // This method will read all highscores from the dat-file and sort them.
+    /**
+     *  Get all highscores from the dat-file and sort them.
+     *
+     *  @return a sorted arraylist with all saved highscores
+     */
     public ArrayList<Highscore> getScores() {
         readFromFile();
         Collections.sort(tmpList);
         return tmpList;
     }
 
-    /*This method will first read the already saved scores,
-    add a new highscore and write it to the file unsorted.*/
+    /**
+     * Read the already saved scores, add a new highscore and write it to the file unsorted.
+     *
+     * @param score the score to be saved on the server
+     */
     public void addScore(Highscore score) {
         readFromFile();
         tmpList.add(score);
@@ -89,7 +101,9 @@ public class Server extends Thread{
     }
 
 
-    //This method will write our highscore objects to a dat-file
+    /**
+     * Write highscore objects to the higscore-file
+     */
     public void writeToFile() {
         try {
             outputStream = new ObjectOutputStream(new FileOutputStream(HIGHSCORE_FILE));
@@ -111,7 +125,9 @@ public class Server extends Thread{
         }
     }
 
-    //This method will read objects from the saved dat-file
+    /**
+     * Read all highscores from the saved highscore-file and save them in an arraylist
+     */
     public void readFromFile() {
         try {
             inputStream = new ObjectInputStream(new FileInputStream(HIGHSCORE_FILE));
