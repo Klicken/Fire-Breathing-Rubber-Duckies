@@ -13,6 +13,9 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 
+/**
+ * A class used to handle the press of the ESCAPE-key and primary mouse button when in the "Game" screen.
+ */
 public class InputController {
 
     /**

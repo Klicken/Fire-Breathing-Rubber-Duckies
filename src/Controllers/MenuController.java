@@ -10,19 +10,29 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ *  A class used to handle what menu buttons does.
+ */
 public class MenuController {
 
-    /*
-     *  Source finds the source of the button that is clicked.
-     *  With source it finds the scene and sets the root to a new Parent.(Parent is what's inside setRoot())
-     *  The Parent uses the id of a button to choose the correct fxml file to load.
+    /**
+     * Sets the root of the scene to the corresponding ID of the menu button.
+     *
+     * @param event ActionEvent generated when pressing a menu button
      */
-    public void menuButton(ActionEvent event) throws Exception {
+    public void menuButton(ActionEvent event) {
+
         Node source = (Node) event.getSource();
         Stage stage = (Stage) source.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("/resources/fxml/"+ source.getId() +".fxml"));
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource("/resources/fxml/"+ source.getId() +".fxml"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         source.getScene().setRoot(root);
         if(source.getId().equals("Scoreboard")){
             ArrayList<Highscore> highscores = new HighScoreManager().readHighscoreFromServer();
@@ -36,18 +46,32 @@ public class MenuController {
         root.requestFocus();
     }
 
-    public void startGame(ActionEvent event) throws Exception {
+    /**
+     * Initializes a new game session and calls for the method menuButton with the parameter event.
+     *
+     * @param event ActionEvent generated when pressing a menu button
+     */
+    public void startGame(ActionEvent event) {
         Main.getGameHandler().initGame();
         menuButton(event);
     }
 
-    public void stopGame(ActionEvent event) throws Exception {
+    /**
+     * Ends the current game session and calls for the method menuButton with the parameter event.
+     *
+     * @param event ActionEvent generated when pressing a menu button
+     */
+    public void stopGame(ActionEvent event) {
         Main.getGameHandler().endGame();
         menuButton(event);
     }
 
-
-    public void submitButton(ActionEvent event) throws Exception {
+    /**
+     * Sends the name and score from the "Game Over" screen to the highscore server.
+     *
+     * @param event ActionEvent generated when pressing a menu button
+     */
+    public void submitButton(ActionEvent event) {
         Node source = (Node) event.getSource();
         Stage stage = (Stage) source.getScene().getWindow();
         TextField getName = (TextField)(stage.getScene().lookup("#inputName"));
@@ -56,7 +80,8 @@ public class MenuController {
         menuButton(event);
     }
 
-    /*
+    /**
+     *  Terminates the currently running Java Virtual Machine.
      *  quitButton is called when the quit button in the start menu is clicked.
      */
     public void quitButton() {
