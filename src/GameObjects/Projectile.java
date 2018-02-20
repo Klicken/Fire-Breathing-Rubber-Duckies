@@ -3,9 +3,10 @@ package GameObjects;
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 
+
 /**
  * Extends the DynamicGameObject class.
- * Creates a projectile object and calculates it's trajectory using the getDirection() method.
+ * Creates a projectile object and calculates it's trajectory using the getDirection() method
  */
 
 public class Projectile extends DynamicGameObject {
@@ -14,13 +15,14 @@ public class Projectile extends DynamicGameObject {
 
     /**
      *
-     * @param image
-     * @param x
-     * @param y
-     * @param movementSpeed
-     * @param mousePos
-     * @param health
-     * @param damage
+     * @param image         Image to load into the ImageView
+     * @param x             x coordinate
+     * @param y             y coordinate
+     * @param movementSpeed The speed at which this object moves
+     * @param mousePos      A vector for the position of the mouse when a projectile is created
+     * @param health        The health value to initiallize this object with
+     * @param damage        The damage value to initiallize this object with
+     * @see DynamicGameObject
      */
 
     public Projectile(Image image, double x, double y, double movementSpeed, Point2D mousePos, int health, int damage) {
@@ -43,7 +45,7 @@ public class Projectile extends DynamicGameObject {
     /**
      * Updates the position of the projectile based on it's speed and direction vector after
      * being fired by the player/monster.
-     * @param time
+     * @param time the time between the current and previous frame
      */
     @Override
     public void update(double time) {
