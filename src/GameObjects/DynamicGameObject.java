@@ -4,6 +4,10 @@ import javafx.beans.value.ChangeListener;
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 
+/**
+ * Extends the GameObject class. Used to define GameObjects with dynamic properties
+ * to enable movement
+ */
 public abstract class DynamicGameObject extends GameObject {
     double movementSpeed;
     Point2D direction;
@@ -11,8 +15,14 @@ public abstract class DynamicGameObject extends GameObject {
     private boolean alive;
     int damage;
 
-    /*
-     *  Constructor that creates a GameObject with movementSpeed, direction vector, health and damage;
+    /**
+     *
+     * @param image
+     * @param x
+     * @param y
+     * @param movementSpeed
+     * @param health
+     * @param damage
      */
     DynamicGameObject(Image image, double x, double y, double movementSpeed, int health, int damage) {
         super(image, x, y);

@@ -15,8 +15,11 @@ import javafx.scene.input.MouseEvent;
 
 public class InputController {
 
-    /*
-     *  pauses the game on the press of the ESCAPE-key by loading in the Pause.fxml and using it as root for the scene.
+    /**
+     * Pauses the game on the press of the ESCAPE-key by loading in the Pause.fxml and using it as root for the scene.
+     *
+     * @param event The key event generated, used for identifying which key was pressed.
+     * @see KeyEvent
      */
     public void pause(KeyEvent event) throws Exception{
         if(event.getCode() == KeyCode.ESCAPE){
@@ -27,9 +30,14 @@ public class InputController {
         }
     }
 
-    /*
-    *   Fires a projectile from the player when the mouse is pressed.
-    */
+    /**
+     * Fires a projectile from the player when the mouse is pressed.
+     *
+     * @param event The mouse event generated, used to find the mouse position to calculate
+     *              the projectile trajectory between the player who fired the projectile and
+     *              the location of the mouse press
+     * @see MouseEvent
+     */
     public void shoot(MouseEvent event){
         if(event.getButton() == MouseButton.PRIMARY){
             Projectile p = new Projectile(new Image("/resources/animations/projectiles/ball.png"), Player.getInstance().getX() + 15, Player.getInstance().getY() + 15, 400,new Point2D(event.getX(),event.getY()), 1, 1);
