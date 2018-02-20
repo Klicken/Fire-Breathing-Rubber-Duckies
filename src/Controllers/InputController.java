@@ -32,7 +32,7 @@ public class InputController {
     */
     public void shoot(MouseEvent event){
         if(event.getButton() == MouseButton.PRIMARY){
-            Projectile p = new Projectile(new Image("/resources/animations/projectiles/ball.png"), Player.getInstance().getX() + 15, Player.getInstance().getY() + 15, 400,new Point2D(event.getX(),event.getY()), 1, 1);
+            Projectile p = new Projectile(new Image("/resources/animations/projectiles/ball.png",25,0,true,false), Player.getInstance().getX() + 15, Player.getInstance().getY() + 15, 400,new Point2D(event.getX() - 25,event.getY() - 25), 1, 1);
             ((Group)Main.getStage().getScene().getRoot()).getChildren().add(p);
             Main.getGameHandler().getProjectiles().add(p);
         }
