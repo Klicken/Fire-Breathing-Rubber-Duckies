@@ -4,6 +4,9 @@ import java.io.Serializable;
 
 /**
  * A highscore class which creates an object of an int score and string name
+ *
+ * @author Oscar Nilsson
+ * @version 2018-02-21
  */
 public class Highscore implements Serializable, Comparable<Highscore> {
     private int score;

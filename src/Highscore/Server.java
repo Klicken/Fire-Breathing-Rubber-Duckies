@@ -8,6 +8,9 @@ import java.util.Collections;
 /**
  *  This class extends thread and manage a server with socket connection available on its IP adress and port for a client
  *  to connect to. The server can receive, send, sort and save highscores.
+ *
+ * @author Oscar Nilsson
+ * @version 2018-02-21
  */
 
 public class Server extends Thread{
