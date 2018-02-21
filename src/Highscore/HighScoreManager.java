@@ -6,6 +6,9 @@ import java.util.*;
 
 /**
  * This class will manage highscores, makes it possible to read and add highscores to a dat-file saved on a server.
+ *
+ * @author Oscar Nilsson
+ * @version 2018-02-21
  */
 
 public class HighScoreManager {
