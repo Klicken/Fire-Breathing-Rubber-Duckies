@@ -2,7 +2,9 @@ package Game;
 
 import GameObjects.*;
 import javafx.animation.AnimationTimer;
+import javafx.animation.KeyFrame;
 import javafx.animation.PauseTransition;
+import javafx.animation.Timeline;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Parent;
@@ -18,6 +20,9 @@ public class GameHandler extends AnimationTimer {
     final int TARGET_FPS = 60;
     final long OPTIMAL_TIME = 1000000000 / TARGET_FPS;
     private Stage stage;
+
+    private Timeline timeline;
+    private ArrayList<Timeline> pUpTimers;
 
     private boolean resumed = false;
     private static Player player;
@@ -46,6 +51,7 @@ public class GameHandler extends AnimationTimer {
         powerUps = new ArrayList<PowerUp>();
         lastTime = System.nanoTime();
         generator = new GameGenerator();
+        pUpTimers = new ArrayList<>();
         score = 0;
         currentLvl = 1;
         previousLvl = 1;
@@ -90,6 +96,9 @@ public class GameHandler extends AnimationTimer {
             if(!player.getAlive()){
                 try {
                     generator.pause();
+                    for(Timeline t : pUpTimers) {
+                        t.pause();
+                    }
                     gameover = FXMLLoader.load(getClass().getResource("/resources/fxml/GameOver.fxml"));
                     stage.getScene().setRoot(gameover);
                     ((Label)stage.getScene().lookup("#Score")).setText("Score: " + Integer.toString(score));
@@ -144,6 +153,8 @@ public class GameHandler extends AnimationTimer {
     private void resumeGame() {
         Player.stop();
         generator.play();
+        for(Timeline t : pUpTimers)
+            t.play();
         if(root != null)
             root.getChildren().clear();
         root = (Group)stage.getScene().getRoot();
@@ -244,9 +255,13 @@ public class GameHandler extends AnimationTimer {
         int powerUpIndex = powerUps.size() - 1;
         for (int k = 0; k <= powerUpIndex; powerUpIndex--){
             PowerUp getPowerUp = powerUps.get(powerUpIndex);
+            timeline = new Timeline(new KeyFrame(
+                    Duration.millis(10000),
+                    e -> removePowerUp(getPowerUp)));
+            pUpTimers.add(timeline);
+            timeline.play();
             if(getPowerUp.collectPowerUp()){
-                ((Group) Main.getStage().getScene().getRoot()).getChildren().remove(getPowerUp);
-                powerUps.remove(getPowerUp);
+                removePowerUp(getPowerUp);
             }
         }
     }
@@ -272,6 +287,14 @@ public class GameHandler extends AnimationTimer {
         return currentLvl;
     }
 
+    public ArrayList<Timeline> getpUpTimers() {
+        return pUpTimers;
+    }
+
+    public void removePowerUp(PowerUp p) {
+        ((Group) Main.getStage().getScene().getRoot()).getChildren().remove(p);
+        powerUps.remove(p);
+    }
     /*
     * These three methods are for initializing, updating and displaying the UI elements.
     */

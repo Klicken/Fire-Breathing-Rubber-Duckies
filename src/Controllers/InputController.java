@@ -2,6 +2,7 @@ package Controllers;
 
 import Game.*;
 import GameObjects.*;
+import javafx.animation.Timeline;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
@@ -30,6 +31,9 @@ public class InputController {
         try {
             if (event.getCode() == KeyCode.ESCAPE) {
                 Main.getGameHandler().getGenerator().pause();
+                for(Timeline t : Main.getGameHandler().getpUpTimers()){
+                    t.pause();
+                }
                 Node source = (Node) event.getSource();
                 Parent root = FXMLLoader.load(getClass().getResource("/resources/fxml/Pause.fxml"));
                 source.getScene().setRoot(root);

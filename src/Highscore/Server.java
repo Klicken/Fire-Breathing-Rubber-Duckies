@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 /**
- *  This class extends thread. Manage a server with socket connection available on its IP adress and port for a client
+ *  This class extends thread and manage a server with socket connection available on its IP adress and port for a client
  *  to connect to. The server can receive, send, sort and save highscores.
  */
 
@@ -14,7 +14,7 @@ public class Server extends Thread{
 
 
     /** A temporary list for highscores */
-    ArrayList<Highscore> tmpList = new ArrayList<Highscore>();
+    ArrayList<Highscore> highscores = new ArrayList<Highscore>();
     Highscore highscore = null;
     // An in and outputstream for objects, to read and write to a dat-file.
     ObjectOutputStream outputStream = null;
@@ -83,8 +83,8 @@ public class Server extends Thread{
      */
     public ArrayList<Highscore> getScores() {
         readFromFile();
-        Collections.sort(tmpList);
-        return tmpList;
+        Collections.sort(highscores);
+        return highscores;
     }
 
     /**
@@ -94,7 +94,7 @@ public class Server extends Thread{
      */
     public void addScore(Highscore score) {
         readFromFile();
-        tmpList.add(score);
+        highscores.add(score);
         writeToFile();
     }
 
@@ -105,7 +105,7 @@ public class Server extends Thread{
     public void writeToFile() {
         try {
             outputStream = new ObjectOutputStream(new FileOutputStream(HIGHSCORE_FILE));
-            outputStream.writeObject(tmpList);
+            outputStream.writeObject(highscores);
 
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
@@ -129,7 +129,7 @@ public class Server extends Thread{
     public void readFromFile() {
         try {
             inputStream = new ObjectInputStream(new FileInputStream(HIGHSCORE_FILE));
-            tmpList = (ArrayList<Highscore>) inputStream.readObject();
+            highscores = (ArrayList<Highscore>) inputStream.readObject();
 
         } catch (FileNotFoundException e) {
             System.out.println("File not found");
