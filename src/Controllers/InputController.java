@@ -13,6 +13,8 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 
+import java.io.IOException;
+
 /**
  * A class used to handle the press of the ESCAPE-key and primary mouse button when in the "Game" screen.
  */
@@ -24,14 +26,18 @@ public class InputController {
      * @param event The key event generated, used for identifying which key was pressed.
      * @see KeyEvent
      */
-    public void pause(KeyEvent event) throws Exception{
-        if(event.getCode() == KeyCode.ESCAPE){
-            Main.getGameHandler().getGenerator().pause();
-            Node source = (Node) event.getSource();
-            Parent root = FXMLLoader.load(getClass().getResource("/resources/fxml/Pause.fxml"));
-            source.getScene().setRoot(root);
+    public void pause(KeyEvent event){
+        try {
+            if (event.getCode() == KeyCode.ESCAPE) {
+                Main.getGameHandler().getGenerator().pause();
+                Node source = (Node) event.getSource();
+                Parent root = FXMLLoader.load(getClass().getResource("/resources/fxml/Pause.fxml"));
+                source.getScene().setRoot(root);
+            }
+        }catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-    }
 
     /**
      * Fires a projectile from the player when the mouse is pressed.

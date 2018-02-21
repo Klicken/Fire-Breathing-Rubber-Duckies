@@ -6,16 +6,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 /**
- *  Manage a server with socketconnection available on its IP adress and port for a client to connect to.
- *  Will start a new thread when called upon.
- *  The server can receive and send highscores to a client. If a client sends and highscore, it will be saved on a dat-file.
- *  If the client requests all highscores, the server will send all highscores saved on the dat-file back sorted.
+ *  This class extends thread. Manage a server with socket connection available on its IP adress and port for a client
+ *  to connect to. The server can receive, send, sort and save highscores.
  */
 
 public class Server extends Thread{
 
 
-    // A temporary list for highscores
+    /** A temporary list for highscores */
     ArrayList<Highscore> tmpList = new ArrayList<Highscore>();
     Highscore highscore = null;
     // An in and outputstream for objects, to read and write to a dat-file.
