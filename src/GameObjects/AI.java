@@ -6,6 +6,9 @@ import javafx.geometry.Point2D;
  * Abstract methods in this class are used to implement simple AI-behaviour in the Enemy class.
  *
  * @see Enemy
+ *
+ * @author Tobias Rosengren
+ * @version 2018-02-21
  */
 public interface AI {
     /**

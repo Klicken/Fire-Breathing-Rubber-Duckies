@@ -18,6 +18,9 @@ import java.io.IOException;
 
 /**
  * A class used to handle the press of the ESCAPE-key and primary mouse button when in the "Game" screen.
+ *
+ * @author Martin Karlsson
+ * @version 2018-02-21
  */
 public class InputController {
 

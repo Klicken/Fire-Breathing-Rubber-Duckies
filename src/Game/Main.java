@@ -10,6 +10,9 @@ import java.io.IOException;
 
 /**
  * The starting point of the program.
+ *
+ * @author Martin Karlsson
+ * @version 2018-02-21
  */
 public class Main extends Application {
 

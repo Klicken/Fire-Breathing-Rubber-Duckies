@@ -13,6 +13,9 @@ import javafx.scene.image.ImageView;
  *
  * @see ImageView
  * @see Point2D
+ *
+ * @author Tobias Rosengren
+ * @version 2018-02-21
  */
 public class GameObject extends ImageView {
     Point2D positon;

@@ -20,6 +20,9 @@ import javafx.scene.image.Image;
  * Upgrades are applied to the player to increase different power related attributes.
  *
  * @see Player
+ *
+ * @author Tobias Rosengren
+ * @version 2018-02-21
  */
 public class PowerUp extends GameObject{
     private int upgradeValue;

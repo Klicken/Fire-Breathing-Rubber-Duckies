@@ -10,6 +10,9 @@ import static java.lang.Math.abs;
 /**
  * Extends the DynamicGameObject class. This is a singleton class used to for managing the main character
  * controlled by the player.
+ *
+ * @author Martin Karlsson
+ * @version 2018-02-21
  */
 public class Player extends DynamicGameObject {
     private static Player instance = null;

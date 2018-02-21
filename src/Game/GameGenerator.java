@@ -10,6 +10,9 @@ import java.util.HashMap;
 
 /**
  * A class to generate a new game with enemies, new levels, start and pause the game
+ *
+ * @author Martin Karlsson
+ * @version 2018-02-21
  */
 
 public class GameGenerator {

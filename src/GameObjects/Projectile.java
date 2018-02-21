@@ -6,7 +6,10 @@ import javafx.scene.image.Image;
 
 /**
  * Extends the DynamicGameObject class.
- * Creates a projectile object and calculates it's trajectory using the getDirection() method
+ * Creates a projectile object and calculates it's trajectory using the getDirection() method.
+ *
+ * @author Anton Wester
+ * @version 2018-02-21
  */
 
 public class Projectile extends DynamicGameObject {
@@ -15,7 +18,8 @@ public class Projectile extends DynamicGameObject {
 
     /**
      * Creates a new Projectile which calculates a vector between the player and the mouse position
-     * to move in a certain direction  
+     * to move in a certain direction
+     *
      * @param image         Image to load into the ImageView
      * @param x             x coordinate
      * @param y             y coordinate
@@ -34,7 +38,8 @@ public class Projectile extends DynamicGameObject {
     /**
      * Calculates a direction-vector for the projectile to travel based on the players current position
      * and where the mouse was clicked.
-     * @return the aforementioned vector.
+     *
+     * @return The aforementioned vector.
      */
     private Point2D getDirection() {
         return mousePos.subtract(Player.getInstance().getPositon()).normalize();
@@ -43,7 +48,8 @@ public class Projectile extends DynamicGameObject {
     /**
      * Updates the position of the projectile based on it's speed and direction vector after
      * being fired by the player/monster.
-     * @param time the time between the current and previous frame
+     *
+     * @param time The time between the current and previous frame
      */
     @Override
     public void update(double time) {
@@ -54,6 +60,7 @@ public class Projectile extends DynamicGameObject {
 
     /**
      * Calculates a boolean depending on if the projectile is located outside of the screen.
+     *
      * @return True if the projectile is located outside of the screen and otherwise false.
      */
     public boolean outOfBounds() {

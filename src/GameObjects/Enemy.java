@@ -6,6 +6,11 @@ import javafx.scene.image.Image;
 /**
  * Extends the DynamicGameObject class.
  * Creates an Enemy object and calculates it's direction based on a vector from the seekPlayer() method.
+ *
+ * @see DynamicGameObject
+ *
+ * @author Tobias Rosengren
+ * @version 2018-02-21
  */
 
 public class Enemy extends DynamicGameObject implements AI {

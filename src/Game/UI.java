@@ -8,6 +8,9 @@ import javafx.scene.text.Text;
  * main game window. Extends the Text class.
  *
  * @see Text
+ *
+ * @author Tobias Rosengren
+ * @version 2018-02-21
  */
 public class UI extends Text {
 

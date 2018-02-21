@@ -12,6 +12,9 @@ import javafx.scene.image.Image;
  *
  * @see Health
  * @see GameObject
+ *
+ * @author Tobias Rosengren
+ * @version 2018-02-21
  */
 public abstract class DynamicGameObject extends GameObject {
     double movementSpeed;
