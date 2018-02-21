@@ -1,7 +1,10 @@
 package Game;
 
 import GameObjects.Player;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
+
+import java.awt.*;
 
 /**
  * Class used to create and display simple text based UI-elements onto the
@@ -24,6 +27,7 @@ public class UI extends Text {
      */
     public UI(double x, double y, String text){
         super(x, y, text);
+        this.setFill(Color.WHITE);
     }
 
     /**
