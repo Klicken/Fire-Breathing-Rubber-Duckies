@@ -40,7 +40,7 @@ public class PowerUp extends GameObject{
         upgradeType = randomWithRange(0, 3);
         switch(upgradeType) {
             case 0: setImage(new Image("resources/powerups/Healing.png"));
-                    upgradeValue = 20;
+                    upgradeValue = 40;
                     break;
             case 1: setImage(new Image("resources/powerups/maxHealth.png"));
                 upgradeValue = 20;

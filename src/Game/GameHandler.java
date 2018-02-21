@@ -15,6 +15,12 @@ import javafx.util.Duration;
 
 import java.util.ArrayList;
 
+/**
+ * A class to handle the main game loop.
+ *
+ * @Author Martin Karlsson, Anton Wester, Oscar Nilsson & Tobias Rosengren.
+ */
+
 public class GameHandler extends AnimationTimer {
     long lastTime;
     final int TARGET_FPS = 60;
@@ -44,6 +50,11 @@ public class GameHandler extends AnimationTimer {
     private UI playerScoreUI;
     private UI playerDamageUI;
 
+    /**
+     * The constructor for the GameHandler.
+     * Initializes the window, lists for gameobjects, timers and variables for keeping track of level handling.
+     */
+
     public GameHandler() {
         stage = Main.getStage();
         enemies = new ArrayList<Enemy>();
@@ -57,8 +68,10 @@ public class GameHandler extends AnimationTimer {
         previousLvl = 1;
     }
 
-    /*
-     * This is the game loop.
+    /**
+     * The main game loop.
+     *
+     * @param now The current time
      */
     @Override
     public void handle(long now) {
@@ -122,6 +135,10 @@ public class GameHandler extends AnimationTimer {
     /*
      * Is called from MenuController
      */
+
+    /**
+     * Initializes the game.
+     */
     public void initGame() {
         endGame();
         player = Player.createInstance(new Image("/resources/animations/right/idle_right.png", 60, 0,true, false), 500, 400, 200, 100, 0);
@@ -132,6 +149,9 @@ public class GameHandler extends AnimationTimer {
 
     }
 
+    /**
+     * Removes old objects when game is ended and resets certain variables.
+     */
     public void endGame() {
         /*
          * Removes old objects
@@ -150,6 +170,11 @@ public class GameHandler extends AnimationTimer {
      * Stops the Player's movement to prevent movement without pressed keys after resuming.
      * Adds the nodes(GameObjects) to the root of the scene.
      */
+
+    /**
+     * Resumes the timers for powerups and the generator.
+     * Resets the root.
+     */
     private void resumeGame() {
         Player.stop();
         generator.play();
@@ -163,6 +188,9 @@ public class GameHandler extends AnimationTimer {
         resumed = true;
     }
 
+    /**
+     * Adds gameobjects from lists filled with gameobjects to the root of the game screen.
+     */
     private void addToRoot() {
         for (Enemy enemy: enemies) {
             if(enemy.getParent() == null)
@@ -177,6 +205,14 @@ public class GameHandler extends AnimationTimer {
                 root.getChildren().add(powerUp);
         }
     }
+
+    /**
+     * Updates the Player and all the lists with projectiles, enemies, powerups and timers.
+     * Handles collision between gameobjects and constrains the player to the window.
+     * Adds and removes gameobjects from their respective list.
+     *
+     * @param time the time between the current and previous frame.
+     */
     private void update(double time) {
 
         player.update(time);
@@ -256,7 +292,7 @@ public class GameHandler extends AnimationTimer {
         for (int k = 0; k <= powerUpIndex; powerUpIndex--){
             PowerUp getPowerUp = powerUps.get(powerUpIndex);
             timeline = new Timeline(new KeyFrame(
-                    Duration.millis(10000),
+                    Duration.millis(6000),
                     e -> removePowerUp(getPowerUp)));
             pUpTimers.add(timeline);
             timeline.play();
@@ -265,32 +301,64 @@ public class GameHandler extends AnimationTimer {
             }
         }
     }
-
-
+    /**
+     * Returns the active list of projectiles.
+     *
+     * @return the list of active projectiles
+     */
     public ArrayList<Projectile> getProjectiles () {
         return projectiles;
     }
-
+    /**
+     * Returns the active list of enemies.
+     *
+     * @return the list of active enemies.
+     */
     public ArrayList<Enemy> getEnemies() {
         return enemies;
     }
 
+    /**
+     * Returns the generator.
+     *
+     * @return the generator.
+     */
     public GameGenerator getGenerator() {
         return generator;
     }
 
+    /**
+     * Returns the score varaible.
+     *
+     * @return the score variable.
+     */
     public int getScore() {
         return score;
     }
 
+    /**
+     * Returns the current level.
+     *
+     * @return The current level.
+     */
     public int getCurrentLvl() {
         return currentLvl;
     }
 
+    /**
+     * Returns the timers used to remove the PowerUps.
+     *
+     * @return timers for removing PowerUps.
+     */
     public ArrayList<Timeline> getpUpTimers() {
         return pUpTimers;
     }
 
+    /**
+     * Removes PowerUps.
+     *
+     * @param p is the PowerUp that's removed.
+     */
     public void removePowerUp(PowerUp p) {
         ((Group) Main.getStage().getScene().getRoot()).getChildren().remove(p);
         powerUps.remove(p);
@@ -298,6 +366,10 @@ public class GameHandler extends AnimationTimer {
     /*
     * These three methods are for initializing, updating and displaying the UI elements.
     */
+
+    /**
+     * Initializes UI elements.
+     */
     private void initUIelements(){
         int xOffset = 15;
         int yOffset = 15;
@@ -307,6 +379,9 @@ public class GameHandler extends AnimationTimer {
         playerScoreUI = new UI(xOffset, yOffset * 4, UI.playerScoreString());
     }
 
+    /**
+     * Updates the UI elements.
+     */
     private void updateUI(){
         playerHealthUI.updateText(UI.playerHealthString());
         playerLevelUI.updateText(UI.currentLevelString());
@@ -314,6 +389,9 @@ public class GameHandler extends AnimationTimer {
         playerDamageUI.updateText(UI.playerDamageString());
     }
 
+    /**
+     * Adds UI elements to root.
+     */
     private void addUIElementsToRoot(){
         root.getChildren().add(playerHealthUI);
         root.getChildren().add(playerLevelUI);
