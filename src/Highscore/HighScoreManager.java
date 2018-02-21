@@ -21,7 +21,6 @@ public class HighScoreManager {
     private void connectToServer() {
         try {
             socketConnection = new Socket("192.168.43.95", 3000);
-
         } catch (Exception e) {
             e.printStackTrace();
         }

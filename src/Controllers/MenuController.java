@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- *  A class used to handle what menu buttons does.
+ *  A class used to handle what menu buttons do.
  */
 public class MenuController {
 

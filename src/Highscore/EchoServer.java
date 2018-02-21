@@ -6,7 +6,7 @@ import java.net.Socket;
 
 /**
  * This class will create new connections to the server when a client try to connect to the correct IP adress
- *  and port, by creating new Server objects which creates a new thread for every connected client.
+ * and port, by creating new Server objects which creates a new thread for every connected client.
  */
 
 public class EchoServer {

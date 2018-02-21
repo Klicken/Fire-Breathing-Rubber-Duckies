@@ -24,13 +24,11 @@ public class Projectile extends DynamicGameObject {
      * @param damage        The damage value to initiallize this object with
      * @see DynamicGameObject
      */
-
     public Projectile(Image image, double x, double y, double movementSpeed, Point2D mousePos, int health, int damage) {
         super(image, x, y, movementSpeed, health, damage);
         this.mousePos = mousePos;
         direction = getDirection();
     }
-
 
     /**
      * Calculates a direction-vector for the projectile to travel based on the players current position
@@ -40,8 +38,7 @@ public class Projectile extends DynamicGameObject {
     private Point2D getDirection() {
         return mousePos.subtract(Player.getInstance().getPositon()).normalize();
     }
-
-
+    
     /**
      * Updates the position of the projectile based on it's speed and direction vector after
      * being fired by the player/monster.
