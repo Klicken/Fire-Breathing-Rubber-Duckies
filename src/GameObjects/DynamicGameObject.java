@@ -143,4 +143,11 @@ public abstract class DynamicGameObject extends GameObject {
     {
         return objectHealth.getHealth();
     }
+
+    /**
+     * @return The movementSpeed variable
+     */
+    public double getMovementSpeed() {
+        return movementSpeed;
+    }
 }

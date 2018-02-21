@@ -1,10 +1,16 @@
 package GameObjects;
 
 import Game.Main;
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
+import javafx.util.Duration;
+
 import static java.lang.Math.abs;
 
 /**
@@ -141,7 +147,7 @@ public class Player extends DynamicGameObject {
      *  Shooting with arrow keys
      */
     private void shoot(int x, int y){
-        Projectile p = new Projectile(new Image("/resources/animations/projectiles/ball.png",25,0,true,false), Player.getInstance().getX() + 15, Player.getInstance().getY() + 15, 400,new Point2D(Player.getInstance().getX() + x, Player.getInstance().getY() + y), 1, 1);
+        Projectile p = new Projectile(new Image("/resources/animations/projectiles/ball.png",25,0,true,false), Player.getInstance().getX() + 15, Player.getInstance().getY() + 15, movementSpeed + 300,new Point2D(Player.getInstance().getX() + x, Player.getInstance().getY() + y), 1, 1);
         ((Group)Main.getStage().getScene().getRoot()).getChildren().add(p);
         Main.getGameHandler().getProjectiles().add(p);
     }
