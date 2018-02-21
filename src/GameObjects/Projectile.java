@@ -14,7 +14,8 @@ public class Projectile extends DynamicGameObject {
     private Point2D direction;
 
     /**
-     *
+     * Creates a new Projectile which calculates a vector between the player and the mouse position
+     * to move in a certain direction  
      * @param image         Image to load into the ImageView
      * @param x             x coordinate
      * @param y             y coordinate

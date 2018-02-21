@@ -11,7 +11,7 @@ import javafx.scene.image.Image;
 public class Enemy extends DynamicGameObject implements AI {
 
     /**
-     *
+     * Creates a new enemy which calculates a vector between the player and this enemy for movement related actions
      * @param image         Image to load into the ImageView
      * @param x             x coordinate
      * @param y             y coordinate
