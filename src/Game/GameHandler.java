@@ -218,7 +218,6 @@ public class GameHandler extends AnimationTimer {
      */
     private void update(double time) {
         player.update(time);
-        player.constrainToWindow();
         // Update UI elements
         updateUI();
 
