@@ -10,9 +10,11 @@ import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.media.AudioClip;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -50,10 +52,12 @@ public class GameHandler extends AnimationTimer {
     private UI playerScoreUI;
     private UI playerDamageUI;
 
+
     /**
      * The constructor for the GameHandler.
      * Initializes the window, lists for gameobjects, timers and variables for keeping track of level handling.
      */
+
 
     public GameHandler() {
         stage = Main.getStage();
@@ -146,7 +150,6 @@ public class GameHandler extends AnimationTimer {
 
         //Initiate UI elements
         initUIelements();
-
     }
 
     /**
@@ -214,7 +217,6 @@ public class GameHandler extends AnimationTimer {
      * @param time the time between the current and previous frame.
      */
     private void update(double time) {
-
         player.update(time);
         player.constrainToWindow();
         // Update UI elements
@@ -372,7 +374,7 @@ public class GameHandler extends AnimationTimer {
      */
     private void initUIelements(){
         int xOffset = 15;
-        int yOffset = 15;
+        int yOffset = 20;
         playerHealthUI = new UI(xOffset, yOffset * 1, UI.playerHealthString());
         playerDamageUI = new UI(xOffset, yOffset * 2, UI.playerDamageString());
         playerLevelUI = new UI(xOffset, yOffset * 3, UI.currentLevelString());
