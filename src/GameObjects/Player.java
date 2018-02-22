@@ -1,10 +1,13 @@
 package GameObjects;
 
 import Game.Main;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.geometry.Point2D;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
+import javafx.util.Duration;
 import static java.lang.Math.abs;
 
 /**
@@ -18,11 +21,15 @@ public class Player extends DynamicGameObject {
     private static Player instance = null;
     private static boolean up, down, left, right;
     private boolean facingRight;
-    int maxHealth = 100;
+    int maxHealth;
+    private Timeline timeline;
+    private boolean allowShooting;
+    private int shootX;
+    private int shootY;
 
     /**
      * Allocates a new Player object which processes keyboard inputs for movement related actions.
-     * Also handles animations for the player character.
+     * Also handles animations for the player character and shooting with arrow keys.
      *
      * @param image         Image to load into the ImageView
      * @param x             x coordinate
@@ -34,6 +41,7 @@ public class Player extends DynamicGameObject {
      */
     private Player(Image image, double x, double y, double movementSpeed, int health, int damage) {
         super(image, x, y, movementSpeed, health, damage);
+        maxHealth = health;
         up = false;
         down = false;
         left = false;
@@ -43,38 +51,47 @@ public class Player extends DynamicGameObject {
         Image idleLeft = new Image("/resources/animations/left/idle_left.png", 60, 0,true, false);
         Image idleRight = new Image("/resources/animations/right/idle_right.png", 60, 0,true, false);
         facingRight = true;
+        allowShooting = true;
+        shootX = 0;
+        shootY = 0;
 
         this.addEventHandler(KeyEvent.KEY_PRESSED,
                 event -> {
                     switch (event.getCode()) {
                         case W: up = true;
-                                if (facingRight)
+                            if (facingRight) {
                                     setImage(runRight);
-                                else
+                                }
+                                else {
                                     setImage(runLeft);
-                                break;
+                                }
+                            break;
                         case S: down = true;
-                                if (facingRight)
+                            if (facingRight) {
                                     setImage(runRight);
-                                else
+                                }
+                                else {
                                     setImage(runLeft);
-                                break;
+                                }
+                            break;
                         case A: left = true;
-                                if (right)
+                            if (right) {
                                     setImage(idleRight);
+                                }
                                 else {
                                     facingRight = false;
                                     setImage(runLeft);
                                 }
-                                break;
+                            break;
                         case D: right = true;
-                                if (left)
+                            if (left) {
                                     setImage(idleLeft);
+                                }
                                 else {
                                     facingRight = true;
                                     setImage(runRight);
                                 }
-                                break;
+                            break;
                     }
                 }
         );
@@ -83,41 +100,51 @@ public class Player extends DynamicGameObject {
                 event -> {
                     switch (event.getCode()) {
                         case W: up = false;
-                                if (!down && !left && !right) {
-                                    if (facingRight)
+                            if (!down && !left && !right) {
+                                    if (facingRight) {
                                         setImage(idleRight);
-                                    else
+                                    }
+                                    else {
                                         setImage(idleLeft);
+                                    }
                                 }
-                                break;
+                            break;
                         case S: down = false;
-                                if (!up && !left && !right) {
-                                    if (facingRight)
+                            if (!up && !left && !right) {
+                                    if (facingRight) {
                                         setImage(idleRight);
-                                    else
+                                    }
+                                    else {
                                         setImage(idleLeft);
+                                    }
                                 }
-                                break;
+                            break;
                         case A: left = false;
-                                if (!up && !down && !right) {
-                                    if (facingRight)
+                            if (!up && !down && !right) {
+                                    if (facingRight) {
                                         setImage(idleRight);
-                                    else
+                                    }
+                                    else {
                                         setImage(idleLeft);
+                                    }
                                 }
-                                if (right)
+                            if (right) {
                                     setImage(runRight);
-                                break;
-                        case D: right = false;
-                                if (!up && !down && !left) {
-                                    if (facingRight)
-                                        setImage(idleRight);
-                                    else
-                                        setImage(idleLeft);
                                 }
-                                if (left)
+                            break;
+                        case D: right = false;
+                            if (!up && !down && !left) {
+                                    if (facingRight) {
+                                        setImage(idleRight);
+                                    }
+                                    else {
+                                        setImage(idleLeft);
+                                    }
+                                }
+                            if (left) {
                                     setImage(runLeft);
-                                break;
+                                }
+                            break;
                     }
                 }
         );
@@ -128,22 +155,41 @@ public class Player extends DynamicGameObject {
         this.addEventHandler(KeyEvent.KEY_PRESSED,
                 event -> {
                     switch (event.getCode()) {
-                        case UP: shoot(0,-1); break;
-                        case DOWN: shoot(0,1); break;
-                        case LEFT: shoot(-1,0); break;
-                        case RIGHT: shoot(1,0); break;
+                        case UP: shootY = -1; break;
+                        case DOWN: shootY = 1; break;
+                        case LEFT: shootX = -1; break;
+                        case RIGHT: shootX = 1; break;
+                    }
+                }
+        );
+
+        this.addEventHandler(KeyEvent.KEY_RELEASED,
+                event -> {
+                    switch (event.getCode()) {
+                        case UP: shootY = 0; break;
+                        case DOWN: shootY = 0; break;
+                        case LEFT: shootX = 0; break;
+                        case RIGHT: shootX = 0; break;
                     }
                 }
         );
     }
 
-    /*
-     *  Shooting with arrow keys
+    /**
+     * Shoots a projectile from the Player and disables shooting with arrow keys for a very short duration.
+     *
+     * @param x The x-axis direction of the projectile
+     * @param y The y-axis direction of the projectile
      */
     private void shoot(int x, int y){
-        Projectile p = new Projectile(new Image("/resources/animations/projectiles/ball.png",25,0,true,false), Player.getInstance().getX() + 15, Player.getInstance().getY() + 15, movementSpeed + 300,new Point2D(Player.getInstance().getX() + x, Player.getInstance().getY() + y), 1, 1);
-        ((Group)Main.getStage().getScene().getRoot()).getChildren().add(p);
+        Projectile p = new Projectile(new Image("/resources/animations/projectiles/ball.png", 25, 0, true, false), Player.getInstance().getX() + 15, Player.getInstance().getY() + 15, movementSpeed + 300, new Point2D(Player.getInstance().getX() + x, Player.getInstance().getY() + y), 1, 1);
+        ((Group) Main.getStage().getScene().getRoot()).getChildren().add(p);
         Main.getGameHandler().getProjectiles().add(p);
+        allowShooting = false;
+        timeline = new Timeline(new KeyFrame(
+                Duration.millis(300),
+                e -> allowShooting = true));
+        timeline.play();
     }
 
     /**
@@ -199,6 +245,7 @@ public class Player extends DynamicGameObject {
 
     /**
      * Updates the current position of the player based on keyboard input or collisions with other GameObjects.
+     * Shoots a projectile from the Player if any arrow key is pressed or held down.
      *
      * @param time the time between the current and previos frame
      */
@@ -222,6 +269,9 @@ public class Player extends DynamicGameObject {
 
         if(getHealthValue() > maxHealth)
             objectHealth.setHealth(maxHealth);
+
+        if (!(shootX == 0 && shootY == 0) && allowShooting)
+            shoot(shootX, shootY);
     }
 
     /**
