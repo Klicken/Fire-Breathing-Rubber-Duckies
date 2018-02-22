@@ -21,6 +21,7 @@ public class GameGenerator {
     private int randomY;
     private int level;
     private int count;
+    private boolean nextLevel;
 
     /**
      * Constructor of gamegenerator, initializes levelContent, count and level.
@@ -29,6 +30,10 @@ public class GameGenerator {
         levelContent = new ArrayList<>();
         count = 0;
         level = 0;
+        timeline = new Timeline(new KeyFrame(
+                Duration.millis(1000),
+                e -> spawn()));
+        timeline.setCycleCount(10);
     }
 
     /**
@@ -51,10 +56,8 @@ public class GameGenerator {
      */
     public void startLevel() {
         fillLevelContent();
-        timeline = new Timeline(new KeyFrame(
-                Duration.millis(1000),
-                e -> spawn()));
-        timeline.setCycleCount(10);
+        timeline.playFromStart();
+        nextLevel = false;
     }
 
     /**
@@ -74,6 +77,7 @@ public class GameGenerator {
         count++;
         if(count == 10)
         {
+            nextLevel = true;
             count = 0;
         }
     }
@@ -88,7 +92,8 @@ public class GameGenerator {
     /**
      * Start the timeline for spawn of enemies
      */
-    public void play() {
-        timeline.play();
+    public void resume() {
+        if (!nextLevel)
+            timeline.play();
     }
 }

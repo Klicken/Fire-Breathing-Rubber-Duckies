@@ -187,7 +187,7 @@ public class Player extends DynamicGameObject {
         Main.getGameHandler().getProjectiles().add(p);
         allowShooting = false;
         timeline = new Timeline(new KeyFrame(
-                Duration.millis(300),
+                Duration.millis(200),
                 e -> allowShooting = true));
         timeline.play();
     }

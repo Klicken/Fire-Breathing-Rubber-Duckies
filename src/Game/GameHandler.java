@@ -10,6 +10,7 @@ import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.media.AudioClip;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -102,7 +103,6 @@ public class GameHandler extends AnimationTimer {
                         event -> levelLabel.setVisible(false)
                 );
                 visiblePause.play();
-                generator.play();
             }
             // UPDATE
             player.requestFocus();
@@ -145,7 +145,7 @@ public class GameHandler extends AnimationTimer {
      */
     public void initGame() {
         endGame();
-        player = Player.createInstance(new Image("/resources/animations/right/idle_right.png", 60, 0,true, false), 500, 400, 200, 100, 0);
+        player = Player.createInstance(new Image("/resources/animations/right/idle_right.png", 60, 0,true, false), 500, 400, 200, 100000000, 0);
         generator.startLevel();
 
         //Initiate UI elements
@@ -180,7 +180,7 @@ public class GameHandler extends AnimationTimer {
      */
     private void resumeGame() {
         Player.stop();
-        generator.play();
+        generator.resume();
         for(Timeline t : pUpTimers)
             t.play();
         if(root != null)
@@ -223,22 +223,22 @@ public class GameHandler extends AnimationTimer {
 
         int enemyIndex = enemies.size() - 1;
         for (int i = 0; i <= enemyIndex; enemyIndex--) {
-            Enemy getEnemy = enemies.get(enemyIndex);
+            Enemy enemy = enemies.get(enemyIndex);
 
             //Update enemy positions
             enemies.get(enemyIndex).update(time);
 
             //Check collisions between player and enemies, handle health accordingly
-            player.collisionHandling(getEnemy);
-            player.changeHealth(getEnemy, getEnemy.getDamage());
+            player.collisionHandling(enemy);
+            player.changeHealth(enemy, enemy.getDamage());
 
 
             // Checks the collision between enemies so they won't overlap
             int otherEnemyIndex = enemies.size() - 1;
             for (int k = 0; k <= otherEnemyIndex; otherEnemyIndex--){
-                Enemy getOtherEnemy = enemies.get(otherEnemyIndex);
-                if (!(getOtherEnemy == getEnemy))
-                    getEnemy.collisionHandling(getOtherEnemy);
+                Enemy otherEnemy = enemies.get(otherEnemyIndex);
+                if (!(otherEnemy == enemy))
+                    enemy.collisionHandling(otherEnemy);
             }
             /*
              * Checks the collision between enemies and projectiles.
@@ -247,41 +247,39 @@ public class GameHandler extends AnimationTimer {
              */
             int projectileIndex = projectiles.size() - 1;
             for (int j = 0; j <= projectileIndex; projectileIndex--) {
-                Projectile getProjectile = projectiles.get(projectileIndex);
-                if(getEnemy.intersects(getProjectile)) {
-                    getEnemy.changeHealth(getProjectile, getProjectile.getDamage() + player.getDamage());
-                    ((Group) Main.getStage().getScene().getRoot()).getChildren().remove(getProjectile);
-                    getProjectiles().remove(getProjectile);
-
+                Projectile projectile = projectiles.get(projectileIndex);
+                if(enemy.intersects(projectile)) {
+                    enemy.changeHealth(projectile, projectile.getDamage() + player.getDamage());
+                    root.getChildren().remove(projectile);
+                    projectiles.remove(projectile);
                 }
             }
             /*
              * Removes enemies when their alive boolean is false
              */
-            if (!getEnemy.getAlive()) {
+            if (!enemy.getAlive()) {
+                root.getChildren().remove(enemy);
+                enemies.remove(enemy);
                 score++;
-                ((Group) Main.getStage().getScene().getRoot()).getChildren().remove(getEnemy);
 
                 // Chance of enemy dropping a PowerUp item
                 if(PowerUp.randomWithRange(1, 10) > 7) {
-                    GameHandler.powerUps.add(new PowerUp(null, getEnemy.getPositon().getX(), getEnemy.getPositon().getY()));
+                    powerUps.add(new PowerUp(null, enemy.getPositon().getX(), enemy.getPositon().getY()));
                 }
-                GameHandler.enemies.remove(getEnemy);
                 if(score % 10 == 0)
                     currentLvl++;
             }
-
         }
         /*
          * Removes projectiles when their health reaches zero or they leave the screen.
          */
         int projectileIndex = projectiles.size() - 1;
         for (int j = 0; j <= projectileIndex; projectileIndex--) {
-            Projectile getProjectile = projectiles.get(projectileIndex);
-            getProjectile.update(time);
-            if (getProjectile.outOfBounds() || !getProjectile.getAlive()) {
-                ((Group) Main.getStage().getScene().getRoot()).getChildren().remove(getProjectile);
-                getProjectiles().remove(getProjectile);
+            Projectile projectile = projectiles.get(projectileIndex);
+            projectile.update(time);
+            if (projectile.outOfBounds() || !projectile.getAlive()) {
+                root.getChildren().remove(projectile);
+                projectiles.remove(projectile);
             }
         }
 
