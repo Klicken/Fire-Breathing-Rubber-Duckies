@@ -29,7 +29,7 @@
                         <Font size="24.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="150.0" prefWidth="640.0" text="Toggle Sound">
+                  <Button fx:id="Game" mnemonicParsing="false" onAction="#toggleSound" prefHeight="150.0" prefWidth="640.0" text="Toggle Sound">
                      <VBox.margin>
                         <Insets bottom="10.0" />
                      </VBox.margin>

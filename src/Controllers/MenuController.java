@@ -1,6 +1,7 @@
 package Controllers;
 
 import Game.Main;
+import Game.Sound;
 import Highscore.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -81,6 +82,15 @@ public class MenuController {
         HighScoreManager h = new HighScoreManager();
         h.writeHighScoreToServer(new Highscore(Main.getGameHandler().getScore(),getName.getText()));
         menuButton(event);
+    }
+
+    public void toggleSound(ActionEvent event) {
+        if(Sound.getMute() == true)
+        {
+            Sound.setMute(false);
+        }
+        else
+        Sound.setMute(true);
     }
 
     /**

@@ -1,5 +1,6 @@
 package GameObjects;
 
+import Game.Sound;
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 
@@ -33,6 +34,8 @@ public class Projectile extends DynamicGameObject {
         super(image, x, y, movementSpeed, health, damage);
         this.mousePos = mousePos;
         direction = getDirection();
+        if(Sound.getMute() == false)
+            new Sound("shot.mp3", 1.0, 1, 1);
     }
 
     /**
