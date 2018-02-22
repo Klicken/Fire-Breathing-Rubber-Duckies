@@ -2,6 +2,7 @@ package Game;
 
 import GameObjects.Player;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
 import java.awt.*;
@@ -27,7 +28,8 @@ public class UI extends Text {
      */
     public UI(double x, double y, String text){
         super(x, y, text);
-        this.setFill(Color.WHITE);
+        setFill(Color.WHITE);
+        setFont(Font.font("Verdana", 20));
     }
 
     /**

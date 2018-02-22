@@ -258,6 +258,8 @@ public class Player extends DynamicGameObject {
         if(left) direction = direction.add(new Point2D(-1,0));
         if(right) direction = direction.add(new Point2D(1,0));
 
+        constrainToWindow();
+
         /*
          *  Slows the players movement when moving diagonaly to compensate for multiple speed additions.
          */
@@ -277,7 +279,7 @@ public class Player extends DynamicGameObject {
     /**
      * Constrains the player object to the size of the window, so it can't leave the screen.
      */
-    public void constrainToWindow(){
+    private void constrainToWindow(){
         if(getX() < 0) setPos(0, getY());
         if(getX() > 1280 - getImage().getWidth()) setPos(1280 - getImage().getWidth(), getY());
         if(getY() < 0) setPos(getX(), 0);
