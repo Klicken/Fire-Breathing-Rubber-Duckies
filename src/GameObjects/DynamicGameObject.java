@@ -1,5 +1,6 @@
 package GameObjects;
 
+import Game.Sound;
 import javafx.beans.value.ChangeListener;
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
@@ -112,6 +113,8 @@ public abstract class DynamicGameObject extends GameObject {
             objectHealth.setHealth(objectHealth.getHealth() + healthValue);
             if(this instanceof Player){
                 knockBack(other, 25);
+                if(Sound.getMute() == false)
+                    new Sound("hurt.mp3", 1.0, 1, 1);
             }
         }
     }
