@@ -10,12 +10,8 @@ import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.media.AudioClip;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-
-import java.io.File;
 import java.util.ArrayList;
 
 /**
@@ -145,7 +141,7 @@ public class GameHandler extends AnimationTimer {
      */
     public void initGame() {
         endGame();
-        player = Player.createInstance(new Image("/resources/animations/right/idle_right.png", 60, 0,true, false), 500, 400, 200, 100000000, 0);
+        player = Player.createInstance(new Image("/resources/animations/right/idle_right.png", 60, 0,true, false), 500, 400, 200, 100, 0);
         generator.startLevel();
 
         //Initiate UI elements
