@@ -84,13 +84,21 @@ public class MenuController {
         menuButton(event);
     }
 
-    public void toggleSound(ActionEvent event) {
+    /**
+     * Toggle the sound between ON/OFF when toggle sound button is pressed
+     */
+    public void toggleSound() {
         if(Sound.getMute() == true)
         {
             Sound.setMute(false);
         }
         else
         Sound.setMute(true);
+        Sound gameSound = Main.getGameHandler().getBackgroundMusic();
+        if(!gameSound.soundPlaying())
+            gameSound.play();
+        else
+            gameSound.stop();
     }
 
     /**

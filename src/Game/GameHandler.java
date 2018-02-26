@@ -10,6 +10,7 @@ import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.media.AudioClip;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import java.util.ArrayList;
@@ -49,6 +50,8 @@ public class GameHandler extends AnimationTimer {
     private UI playerScoreUI;
     private UI playerDamageUI;
 
+    private Sound bgMusic;
+
 
     /**
      * The constructor for the GameHandler.
@@ -67,6 +70,7 @@ public class GameHandler extends AnimationTimer {
         score = 0;
         currentLvl = 1;
         previousLvl = 1;
+        bgMusic = null;
     }
 
     /**
@@ -146,6 +150,10 @@ public class GameHandler extends AnimationTimer {
 
         //Initiate UI elements
         initUIelements();
+
+        //Initiate gamesound
+        if(bgMusic == null)
+            bgMusic = new Sound("gamemusic.wav", 1.0, 10, AudioClip.INDEFINITE);
     }
 
     /**
@@ -358,6 +366,16 @@ public class GameHandler extends AnimationTimer {
         ((Group) Main.getStage().getScene().getRoot()).getChildren().remove(p);
         powerUps.remove(p);
     }
+
+    /**
+     * Get the background music
+     *
+     * @return the background music
+     */
+    public Sound getBackgroundMusic(){
+        return bgMusic;
+    }
+
     /*
     * These three methods are for initializing, updating and displaying the UI elements.
     */

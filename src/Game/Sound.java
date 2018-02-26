@@ -31,4 +31,16 @@ public class Sound {
         mute = b;
     }
 
+    public void stop(){
+        sound.stop();
+    }
+
+    public void play(){
+        sound.play();
+    }
+
+    public boolean soundPlaying(){
+        return sound.isPlaying();
+    }
+
 }
