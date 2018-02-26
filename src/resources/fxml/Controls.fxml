@@ -29,7 +29,6 @@
             <Label text="S - Down" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
             <Label text="D - Right" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
             <Label text="LMB - Attack" GridPane.halignment="CENTER" GridPane.rowIndex="4" />
-            <Label text="RMB - Alt. Attack" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
             <Label text="ESC - Pause" GridPane.halignment="CENTER" GridPane.rowIndex="6" />
          </children>
       </GridPane>
