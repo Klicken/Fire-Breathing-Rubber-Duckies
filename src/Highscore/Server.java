@@ -17,14 +17,14 @@ public class Server {
 
         Socket s=null;
         ServerSocket ss=null;
-        System.out.println("ServerThread Waiting");
+        System.out.println("Server Waiting");
 
         try {
             ss = new ServerSocket(3000);
             }
         catch(IOException e){
             e.printStackTrace();
-            System.out.println("ServerThread error");
+            System.out.println("Server error");
             }
 
         while(true){
