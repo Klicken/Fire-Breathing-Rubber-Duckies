@@ -34,7 +34,7 @@ public class Projectile extends DynamicGameObject {
         super(image, x, y, movementSpeed, health, damage);
         this.mousePos = mousePos;
         direction = getDirection();
-        new Sound("shot.mp3", 0.5, 1, 1);
+        new Sound("shot.mp3", 0.15, 1, 1);
     }
 
     /**

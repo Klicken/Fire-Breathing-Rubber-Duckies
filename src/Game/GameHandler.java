@@ -18,7 +18,8 @@ import java.util.ArrayList;
 /**
  * A class to handle the main game loop.
  *
- * @Author Martin Karlsson, Anton Wester, Oscar Nilsson & Tobias Rosengren.
+ * @author Martin Karlsson, Tobias Rosengren, Oscar Nilsson, Tobias Rosengren
+ * @version 2018-02-27
  */
 
 public class GameHandler extends AnimationTimer {

@@ -4,6 +4,9 @@ import javafx.scene.media.AudioClip;
 
 /**
  * A class to manage sound.
+ *
+ * @author Oscar Nilsson
+ * @version 2018-02-21
  */
 public class Sound {
 

@@ -42,7 +42,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         stage = primaryStage;
 
-        primaryStage.setTitle("Fire Breathing Rubber Duckies");
+        primaryStage.setTitle("Dolan: The Dancing Duckfish");
         primaryStage.setWidth(WIDTH);
         primaryStage.setHeight(HEIGHT);
         primaryStage.centerOnScreen();

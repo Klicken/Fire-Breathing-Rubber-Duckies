@@ -47,7 +47,7 @@ public class GameGenerator {
             randomX = (int)(Math.random() * 3);
             randomY = (int)(Math.random() * 2);
             levelContent.add(new Enemy(new Image("resources/enemies/blob"+ level%10 +".gif", 40 + Math.random() * 20, 0, true,false),
-                                          (randomX * 700) - 60, (randomY * 800) - 60, 150 + level * 10, 3 + level, 10 + level));
+                                          (randomX * 700) - 60, (randomY * 800) - 60, 150 + level * 10, 2 + level * 2, 10 + level));
         }
     }
 
