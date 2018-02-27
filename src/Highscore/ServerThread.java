@@ -16,15 +16,15 @@ import java.util.Collections;
 public class ServerThread extends Thread{
 
 
-    /** A temporary list for highscores */
-    ArrayList<Highscore> highscores = new ArrayList<Highscore>();
-    Highscore highscore = null;
+    // A temporary list for highscores
+    private ArrayList<Highscore> highscores = new ArrayList<Highscore>();
+    private Highscore highscore = null;
     // An in and outputstream for objects, to read and write to a dat-file.
-    ObjectOutputStream outputStream = null;
-    ObjectInputStream inputStream = null;
+    private ObjectOutputStream outputStream = null;
+    private ObjectInputStream inputStream = null;
     // An in and outputstream for objects, to read and send objects between server and client.
-    ObjectOutputStream serverOutputStream = null;
-    ObjectInputStream serverInputStream = null;
+    private ObjectOutputStream serverOutputStream = null;
+    private ObjectInputStream serverInputStream = null;
     // The name of the dat-file of saved highscores.
     private static final String HIGHSCORE_FILE = "highscore.dat";
     // A socket of the connection with the client

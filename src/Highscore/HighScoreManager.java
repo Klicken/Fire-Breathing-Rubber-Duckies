@@ -13,10 +13,13 @@ import java.util.*;
 
 public class HighScoreManager {
 
+    // A temporary list to handle highscores
     private ArrayList<Highscore> highscores = new ArrayList<Highscore>();
-    private Socket socketConnection;
-    ObjectOutputStream clientOutputStream = null;
-    ObjectInputStream clientInputStream = null;
+    // A socket to handle connection between client/server
+    private Socket socketConnection = null;
+    // An objectinputstream and objectoutputstream to receive and send highscores between client/server.
+    private ObjectOutputStream clientOutputStream = null;
+    private ObjectInputStream clientInputStream = null;
 
     /**
      *  Open a socketconnection to a server with its IP adress and port.
