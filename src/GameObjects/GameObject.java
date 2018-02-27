@@ -18,6 +18,7 @@ import javafx.scene.image.ImageView;
  * @version 2018-02-21
  */
 public class GameObject extends ImageView {
+    /** The top left corner position vector of this object*/
     Point2D positon;
 
     /**

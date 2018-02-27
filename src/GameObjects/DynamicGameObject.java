@@ -18,10 +18,14 @@ import javafx.scene.image.Image;
  * @version 2018-02-21
  */
 public abstract class DynamicGameObject extends GameObject {
+    /** The movement speed of this object*/
     double movementSpeed;
+    /** The direction vector of this object*/
     Point2D direction;
+    /** The Health of this object*/
     Health objectHealth;
     private boolean alive;
+    /** The damage value of this object*/
     int damage;
 
     /**

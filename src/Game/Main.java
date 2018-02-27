@@ -16,8 +16,8 @@ import java.io.IOException;
  */
 public class Main extends Application {
 
-    final int WIDTH = 1280;
-    final int HEIGHT = 720;
+    private final int WIDTH = 1280;
+    private final int HEIGHT = 720;
     private static Stage stage;
     private static GameHandler game;
 

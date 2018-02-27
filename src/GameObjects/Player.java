@@ -21,11 +21,13 @@ public class Player extends DynamicGameObject {
     private static Player instance = null;
     private static boolean up, down, left, right;
     private boolean facingRight;
-    int maxHealth;
     private Timeline timeline;
     private boolean allowShooting;
     private int shootX;
     private int shootY;
+
+    /** The maxmiumum health value of this object*/
+    int maxHealth;
 
     /**
      * Allocates a new Player object which processes keyboard inputs for movement related actions.
