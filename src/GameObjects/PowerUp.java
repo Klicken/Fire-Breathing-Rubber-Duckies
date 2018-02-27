@@ -1,5 +1,6 @@
 package GameObjects;
 
+import Game.Sound;
 import javafx.scene.image.Image;
 
 /*
@@ -75,6 +76,7 @@ public class PowerUp extends GameObject{
      */
     public boolean collectPowerUp() {
         if(intersects(Player.getInstance())){
+            new Sound("powerup.mp3", 0.5, 1, 1);
             switch(upgradeType){
                 case 0: Player.getInstance().objectHealth.setHealth(Player.getInstance().objectHealth.getHealth() + upgradeValue);
                         break;

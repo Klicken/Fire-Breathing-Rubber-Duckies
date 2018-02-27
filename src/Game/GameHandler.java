@@ -154,7 +154,7 @@ public class GameHandler extends AnimationTimer {
 
         //Initiate gamesound
         if(bgMusic == null)
-            bgMusic = new Sound("gamemusic.wav", 1.0, 10, AudioClip.INDEFINITE);
+            bgMusic = new Sound("gamemusic.mp3", 1.0, 10, AudioClip.INDEFINITE);
     }
 
     /**
@@ -265,7 +265,9 @@ public class GameHandler extends AnimationTimer {
             if (!enemy.getAlive()) {
                 root.getChildren().remove(enemy);
                 enemies.remove(enemy);
+                new Sound("enemydead.mp3", 0.5, 1, 1);
                 score++;
+
 
                 // Chance of enemy dropping a PowerUp item
                 if(PowerUp.randomWithRange(1, 10) > 7) {
