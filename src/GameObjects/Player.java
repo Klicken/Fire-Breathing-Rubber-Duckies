@@ -153,7 +153,6 @@ public class Player extends DynamicGameObject {
 
         /*
          *  Shooting with arrow keys
-         */
         this.addEventHandler(KeyEvent.KEY_PRESSED,
                 event -> {
                     switch (event.getCode()) {
@@ -175,14 +174,14 @@ public class Player extends DynamicGameObject {
                     }
                 }
         );
+        */
     }
 
-    /**
+    /*
      * Shoots a projectile from the Player and disables shooting with arrow keys for a very short duration.
      *
      * @param x The x-axis direction of the projectile
      * @param y The y-axis direction of the projectile
-     */
     private void shoot(int x, int y){
         Projectile p = new Projectile(new Image("/resources/animations/projectiles/ball.png", 25, 0, true, false), Player.getInstance().getX() + 15, Player.getInstance().getY() + 15, movementSpeed + 300, new Point2D(Player.getInstance().getX() + x, Player.getInstance().getY() + y), 1, 1);
         ((Group) Main.getStage().getScene().getRoot()).getChildren().add(p);
@@ -193,6 +192,7 @@ public class Player extends DynamicGameObject {
                 e -> allowShooting = true));
         timeline.play();
     }
+    */
 
     /**
      * Used in the game's pause function to make sure the player doesn't continue moving upon
@@ -247,7 +247,6 @@ public class Player extends DynamicGameObject {
 
     /**
      * Updates the current position of the player based on keyboard input or collisions with other GameObjects.
-     * Shoots a projectile from the Player if any arrow key is pressed or held down.
      *
      * @param time the time between the current and previos frame
      */
@@ -262,10 +261,10 @@ public class Player extends DynamicGameObject {
 
         constrainToWindow();
 
+
         /*
          *  Slows the players movement when moving diagonaly to compensate for multiple speed additions.
          */
-
         if (abs(direction.getX()) + abs(direction.getY()) > 1)
             setPos(getX() + direction.getX() * movementSpeed * 0.7 * time, getY() + direction.getY() * movementSpeed * 0.7 * time);
         else
@@ -274,8 +273,10 @@ public class Player extends DynamicGameObject {
         if(getHealthValue() > maxHealth)
             objectHealth.setHealth(maxHealth);
 
+        /*Shoots a projectile from the Player if any arrow key is pressed or held down.
         if (!(shootX == 0 && shootY == 0) && allowShooting)
             shoot(shootX, shootY);
+         */
     }
 
     /**
